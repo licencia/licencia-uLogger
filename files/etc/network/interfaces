@@ -1,0 +1,17 @@
+auto lo
+iface lo inet loopback
+
+allow-hotplug wlan0
+iface wlan0 inet manual
+wpa-roam /etc/wpa_supplicant/wpa_supplicant.conf
+iface default inet dhcp
+
+# uLogger
+auto eth0
+source /home/ulogger/interfaces.d
+
+# Extra IP for management
+auto eth0:1
+iface eth0:1 inet static
+address 172.16.16.16
+netmask 255.255.255.0

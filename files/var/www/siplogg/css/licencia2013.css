@@ -1,0 +1,1686 @@
+/**
+ * Från licencia2013 7.x-0.6
+ * - normalize.css
+ * - responsive-sidebars.css
+ * - navigation.css
+ * - pages.css
+ * - module/system/system.messages.css
+ */
+
+/* =============================================================================
+   HTML5 display definitions
+   ========================================================================== */
+
+/*
+ * Corrects block display not defined in IE6/7/8/9 & FF3
+ */
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section,
+summary {
+  display: block;
+}
+
+/*
+ * Corrects inline-block display not defined in IE6/7/8/9 & FF3
+ */
+
+audio,
+canvas,
+video {
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+}
+
+/*
+ * Prevents modern browsers from displaying 'audio' without controls
+ * Remove excess height in iOS5 devices
+ */
+
+audio:not([controls]) {
+  display: none;
+  height: 0;
+}
+
+/*
+ * Addresses styling for 'hidden' attribute not present in IE7/8/9, FF3, S4
+ * Known issue: no IE6 support
+ */
+
+[hidden] {
+  display: none;
+}
+
+
+/* =============================================================================
+   Base
+   ========================================================================== */
+
+/* Instead of relying on the fonts that are available on a user's computer, you
+   can use web fonts which, like images, are resources downloaded to the user's
+   browser. Because of the bandwidth and rendering resources required, web fonts
+   should be used with care.
+
+   Numerous resources for web fonts can be found on Google. Here are a few
+   websites where you can find Open Source fonts to download:
+   - http://www.fontsquirrel.com/fontface
+   - http://www.theleagueofmoveabletype.com
+
+   In order to use these fonts, you will need to convert them into formats
+   suitable for web fonts. We recommend the free-to-use Font Squirrel's
+   Font-Face Generator:
+     http://www.fontsquirrel.com/fontface/generator
+
+   The following is an example @font-face declaration. This font can then be
+   used in any ruleset using a property like this:  font-family: Example, serif;
+
+   Since we're using Sass, you'll need to declare your font faces here, then you
+   can add them to the font variables in the _base.scss partial.
+*/
+
+/*
+@font-face {
+  font-family: 'Example';
+  src: url('../fonts/example.eot');
+  src: url('../fonts/example.eot?iefix') format('eot'),
+    url('../fonts/example.woff') format('woff'),
+    url('../fonts/example.ttf') format('truetype'),
+    url('../fonts/example.svg#webfontOkOndcij') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+*/
+
+/*
+ * 1. Corrects text resizing oddly in IE6/7 when body font-size is set using em units
+ *    http://clagnut.com/blog/348/#c790
+ * 2. Prevents iOS text size adjust after orientation change, without disabling user zoom
+ *    www.456bereastreet.com/archive/201012/controlling_text_size_in_safari_for_ios_without_disabling_user_zoom/
+ */
+
+html {
+  /*
+   * To use a 14px font size on the page, delete the 16px and 12px declarations.
+   * To use a 12px font size on the page, delete the 16px and 14px declarations.
+   */
+
+  /* Use a 12px base font size */
+  font-size: 75%; /* 16px x 75% = 12px */
+
+
+  -webkit-text-size-adjust: 100%; /* 2 */
+  -ms-text-size-adjust: 100%; /* 2 */
+
+  /* Establish a vertical rhythm. */
+  line-height: 1.5em;
+}
+
+/*
+ * Instead of relying on the fonts that are available on a user's computer, you
+ * can use web fonts which, like images, are resources downloaded to the user's
+ * browser. Because of the bandwidth and rendering resources required, web fonts
+ * should be used with care.
+ *
+ * Numerous resources for web fonts can be found on Google. Here are a few
+ * websites where you can find Open Source fonts to download:
+ * - http://www.fontsquirrel.com/fontface
+ * - http://www.theleagueofmoveabletype.com
+ *
+ * In order to use these fonts, you will need to convert them into formats
+ * suitable for web fonts. We recommend the free-to-use Font Squirrel's
+ * Font-Face Generator:
+ *   http://www.fontsquirrel.com/fontface/generator
+ *
+ * The following is an example @font-face declaration. This font can then be
+ * used in any ruleset using a property like this:  font-family: Example, serif;
+
+@font-face {
+  font-family: 'Example';
+  src: url('../fonts/example.eot');
+  src: url('../fonts/example.eot?iefix') format('eot'),
+    url('../fonts/example.woff') format('woff'),
+    url('../fonts/example.ttf') format('truetype'),
+    url('../fonts/example.svg#webfontOkOndcij') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+ */
+
+/*
+ * Addresses font-family inconsistency between 'textarea' and other form elements.
+ */
+
+html,
+button,
+input,
+select,
+textarea {
+  /* The following font family declarations are based on the Microsoft core web
+   * fonts which are common fonts available on most computer systems. The DejaVu
+   * and Nimbus Sans fonts are commonly available on Linux systems where the MS
+   * fonts are less common. Tahoma and Helvetica are also widely available.
+   *
+   * A user's web browser will look at the comma-separated list and will
+   * attempt to use each font in turn until it finds one that is available
+   * on the user's computer. The final "generic" font (sans-serif, serif or
+   * monospace) hints at what type of font to use if the web browser doesn't
+   * find any of the fonts in the list.
+
+  font-family: "Times New Roman", Times, Georgia, "DejaVu Serif", serif;
+  font-family: Times, "Times New Roman", Georgia, "DejaVu Serif", serif;
+  font-family: Georgia, "Times New Roman", "DejaVu Serif", serif;
+
+  font-family: Verdana, Tahoma, "DejaVu Sans", sans-serif;
+  font-family: Tahoma, Verdana, "DejaVu Sans", sans-serif;
+  font-family: Helvetica, Arial, "Nimbus Sans L", sans-serif;
+  font-family: Arial, Helvetica, "Nimbus Sans L", sans-serif;
+
+  font-family: "Courier New", "DejaVu Sans Mono", monospace;
+
+   */
+
+  font-family: Verdana, Tahoma, "DejaVu Sans", sans-serif;
+}
+
+/*
+ * Addresses margins handled incorrectly in IE6/7
+ */
+
+body {
+  margin: 0;
+}
+
+
+/* =============================================================================
+   Links
+   ========================================================================== */
+
+/*
+ * The order of link states are based on Eric Meyer's article:
+ * http://meyerweb.com/eric/thoughts/2007/06/11/who-ordered-the-link-states
+ */
+
+a {
+  color:#4484C5;
+  text-decoration:none;
+}
+
+ a:link {
+  color:#4484C5;
+  text-decoration:none;
+}
+
+a:visited {
+}
+
+a:hover,
+a:focus {
+  text-decoration: underline;
+}
+
+a:active {
+}
+
+/*
+ * Addresses outline displayed oddly in Chrome
+ */
+
+a:focus {
+  outline: thin dotted;
+}
+
+/*
+ * Improves readability when focused and also mouse hovered in all browsers
+ * people.opera.com/patrickl/experiments/keyboard/test
+ */
+
+a:hover,
+a:active {
+  outline: 0;
+}
+
+
+/* =============================================================================
+   Typography
+
+   To achieve a pleasant vertical rhythm, we use Compass' Vertical Rhythm mixins
+   so that the line height of our base font becomes the basic unit of vertical
+   measurement. We use multiples of that unit to set the top and bottom margins
+   for our block level elements and to set the line heights of any fonts.
+   For more information, see http://24ways.org/2006/compose-to-a-vertical-rhythm
+   ========================================================================== */
+
+/*
+ * Addresses font sizes and margins set differently in IE6/7
+ * Addresses font sizes within 'section' and 'article' in FF4+, Chrome, S5
+ */
+
+h1 {
+  font-size: 2em;
+  /* Sets the line height to 2 units of vertical rhythm */
+  line-height: 1.5em; /* 3rem / 2em = 1.5em */
+  /* Sets 1 unit of vertical rhythm on the top and bottom margins. */
+  margin-top: 0.75em; /* 1.5rem / 2em = .75em */
+  margin-bottom: 0.75em;
+}
+
+h1.pane-title {
+  margin-top: 0;
+}
+
+h2 {
+  font-size: 1.5em;
+  line-height: 1.5em; /* 3rem / 1.5em = 2em */
+  margin-top: 1em; /* 1.5rem / 1.5em = 1em */
+  margin-bottom: 1em;
+}
+
+/*h2.title, h2.node-title {
+  line-height: 2em;
+}*/
+
+h3 {
+  font-size: 1.17em;
+  /* line-height: 1.282em;  1.5rem / 1.17em = 1.282em */
+  line-height: 1.5em;
+  margin-top: 1.282em;
+  margin-bottom: 1.282em;
+}
+
+h4 {
+  font-size: 1em;
+  line-height: 1.5em; /* 1.5rem / 1em = 1.5em */
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+
+h5 {
+  font-size: 0.83em;
+  line-height: 1.807em; /* 1.5rem / 0.83em = 1.807em */
+  margin-top: 1.807em;
+  margin-bottom: 1.807em;
+}
+
+h6 {
+  font-size: 0.75em;
+  line-height: 2em; /* 1.5rem / .75em = 2em */
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+h1, h2, h3, h4, h5 {
+  margin-bottom: 0.5em;
+}
+
+h2, h3 {
+  margin-top: 1.5em;
+}
+
+h4 {
+  text-decoration: underline;
+  font-weight: normal;
+}
+
+/* Thematic break */
+hr {
+  height: 1px;
+  border: 1px solid #666;
+  padding-bottom: -1px;
+  margin: 1.5em 0;
+}
+
+/*
+ * Addresses styling not present in IE7/8/9, S5, Chrome
+ */
+
+abbr[title] {
+  border-bottom: 1px dotted;
+  cursor: help;
+  white-space: nowrap;
+}
+
+/*
+ * Addresses style set to 'bolder' in FF3+, S4/5, Chrome
+*/
+
+b,
+strong {
+  font-weight: bold;
+}
+
+blockquote {
+  /* Sets 1 unit of vertical rhythm on the top and bottom margin. */
+  background: url("../images/blockquote.png") no-repeat scroll left top transparent;
+  font-size: 14px;
+  font-style: italic;
+  margin: 0 0 15px;
+  padding-top: 15px;
+  text-indent: 34px;
+}
+
+
+
+/*
+ * Addresses styling not present in S5, Chrome
+ */
+
+dfn {
+  font-style: italic;
+}
+
+/*
+ * Addresses styling not present in IE6/7/8/9
+ */
+
+mark {
+  background-color: #FF0;
+  color: #000;
+}
+
+/*
+ * Addresses margins set differently in IE6/7
+ */
+
+p,
+pre {
+  /* Sets 1 unit of vertical rhythm on the top and bottom margin. */
+  /*margin: 1.5em 0;*/
+  margin: 0 0 8px;
+}
+
+/*
+ * Corrects font family set oddly in IE6, S4/5, Chrome
+ * en.wikipedia.org/wiki/User:Davidgothberg/Test59
+ */
+
+pre,
+code,
+kbd,
+samp,
+tt,
+var {
+  font-family: consolas, monospace, "Courier New", "DejaVu Sans Mono", sans-serif;
+  _font-family: consolas, monospace, 'courier new';
+  font-size: 1em;
+  line-height: 1.5em;
+}
+
+/*
+ * Improves readability of pre-formatted text in all browsers
+ */
+
+pre {
+  white-space: pre;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+code {
+  background-color: #F7F7F7;
+  border: 1px solid #CCCCCC;
+  display: inline-block;
+  padding: 10px;
+  margin-top: 5px;
+  min-width: 300px;
+}
+
+/*
+ * 1. Addresses CSS quotes not supported in IE6/7
+ * 2. Addresses quote property not supported in S4
+ */
+
+/* 1 */
+
+q {
+  quotes: none;
+}
+
+/* 2 */
+
+q:before,
+q:after {
+  content: '';
+  content: none;
+}
+
+/* @todo Determine how big element affects vertical rhythm. */
+small {
+  font-size: 75%;
+}
+
+/*
+ * Prevents sub and sup affecting line-height in all browsers
+ * gist.github.com/413930
+ */
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sup {
+  top: -0.5em;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+
+/* =============================================================================
+   Lists
+   ========================================================================== */
+
+/*
+ * Addresses margins set differently in IE6/7
+ */
+
+dl,
+menu,
+ol,
+ul,
+.item-list ul /* Drupal override */ {
+  /* Sets 1 unit of vertical rhythm on the top and bottom margin. */
+  margin: 8px/*1.5em*/ 0;
+}
+
+.item-list ul li { /* Drupal override */
+  margin: 0 0 0.25em; /*0;*/
+}
+
+dd {
+  margin: 0 0 0 30px; /* LTR */
+}
+
+ul ul, ul ol,
+ol ul, ol ol,
+.item-list ul ul, .item-list ul ol,
+.item-list ol ul, .item-list ol ol {
+  margin: 0; /* Turn off margins on nested lists. */
+}
+
+/*
+ * Addresses paddings set differently in IE6/7
+ */
+
+menu,
+ol,
+ul,
+.item-list ul /* Drupal override */ {
+  padding: 0 0 0 30px; /* LTR */
+}
+
+/*
+ * Corrects list images handled incorrectly in IE7
+ */
+
+nav ul,
+nav ol {
+  list-style: none;
+  list-style-image: none;
+}
+
+
+/* =============================================================================
+   Embedded content
+   ========================================================================== */
+
+/*
+ * 1. Removes border when inside 'a' element in IE6/7/8/9, FF3
+ * 2. Improves image quality when scaled in IE7
+ *    code.flickr.com/blog/2008/11/12/on-ui-quality-the-little-things-client-side-image-resizing/
+ */
+
+img {
+  border: 0; /* 1 */
+  -ms-interpolation-mode: bicubic; /* 2 */
+
+  /* vertical-align: bottom; */ /* Suppress the space beneath the baseline */
+
+  /* Responsive images */
+  /* @todo Add responsive embedded video. */
+  max-width: 100%;
+  height: auto;
+}
+
+/*
+ * Corrects overflow displayed oddly in IE9
+ */
+
+svg:not(:root) {
+  overflow: hidden;
+}
+
+
+/* =============================================================================
+   Figures
+   ========================================================================== */
+
+/*
+ * Addresses margin not present in IE6/7/8/9, S5, O11
+ */
+
+figure {
+  margin: 0;
+}
+
+
+/* =============================================================================
+   Forms
+   ========================================================================== */
+
+/*
+ * Corrects margin displayed oddly in IE6/7
+ */
+
+form {
+  margin: 0;
+}
+
+/*
+ * Define consistent border, margin, and padding
+ */
+
+fieldset {
+  border: 1px solid #c0c0c0;
+  margin: 0 2px;
+  padding: 0.5em 0.625em 1em;
+}
+
+/*
+ * 1. Corrects color not being inherited in IE6/7/8/9
+ * 2. Corrects text not wrapping in FF3
+ * 3. Corrects alignment displayed oddly in IE6/7
+ */
+
+legend {
+  border: 0; /* 1 */
+  padding: 0;
+  white-space: normal; /* 2 */
+  *margin-left: -7px; /* 3 */ /* LTR */
+}
+
+/*
+ * 1. Corrects font size not being inherited in all browsers
+ * 2. Addresses margins set differently in IE6/7, FF3+, S5, Chrome
+ * 3. Improves appearance and consistency in all browsers
+ */
+
+button,
+input,
+select,
+textarea {
+  font-size: 100%; /* 1 */
+  margin: 0; /* 2 */
+  vertical-align: baseline; /* 3 */
+  *vertical-align: middle; /* 3 */
+}
+
+/*
+ * Addresses FF3/4 setting line-height on 'input' using !important in the UA stylesheet
+ */
+
+button,
+input {
+  line-height: normal; /* 1 */
+}
+
+/*
+ * 1. Improves usability and consistency of cursor style between image-type 'input' and others
+ * 2. Corrects inability to style clickable 'input' types in iOS
+ * 3. Removes inner spacing in IE7 without affecting normal text inputs
+ *    Known issue: inner spacing remains in IE6
+ */
+
+button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  cursor: pointer; /* 1 */
+  -webkit-appearance: button; /* 2 */
+  *overflow: visible;  /* 3 */
+}
+
+/*
+ * Re-set default cursor for disabled elements
+ */
+
+button[disabled],
+input[disabled] {
+  cursor: default;
+}
+
+/*
+ * 1. Addresses box sizing set to content-box in IE8/9
+ * 2. Removes excess padding in IE8/9
+ * 3. Removes excess padding in IE7
+      Known issue: excess padding remains in IE6
+ */
+
+input[type="checkbox"],
+input[type="radio"] {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; /* 1 */
+  padding: 0; /* 2 */
+  *height: 13px; /* 3 */
+  *width: 13px; /* 3 */
+}
+
+/*
+ * 1. Addresses appearance set to searchfield in S5, Chrome
+ * 2. Addresses box-sizing set to border-box in S5, Chrome (include -moz to future-proof)
+ */
+
+input[type="search"] {
+  -webkit-appearance: textfield; /* 1 */
+  -webkit-box-sizing: content-box; /* 2 */
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+}
+
+/*
+ * Removes inner padding and search cancel button in S5, Chrome on OS X
+ */
+
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+}
+
+/*
+ * Removes inner padding and border in FF3+
+ * www.sitepen.com/blog/2008/05/14/the-devils-in-the-details-fixing-dojos-toolbar-buttons/
+ */
+
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+/*
+ * 1. Removes default vertical scrollbar in IE6/7/8/9
+ * 2. Improves readability and alignment in all browsers
+ */
+
+textarea {
+  overflow: auto; /* 1 */
+  vertical-align: top; /* 2 */
+}
+
+/*
+ * Olle: se skillnad på readonly fält.
+ */
+input[readonly] {
+  color: #999;
+}
+
+
+
+/* =============================================================================
+   Tables
+   ========================================================================== */
+
+/*
+ * Remove most spacing between table cells
+ */
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  /* width: 100%; */ /* Prevent cramped-looking tables */
+  /* Add vertical rhythm margins. */
+  margin-top: 0.5em; /*1.5em;*/
+  margin-bottom: 1em; /*1.5em;*/
+}
+
+/*
+ * Drupal provides table styling which is only useful for its admin section
+ * forms, so we override this default CSS. (We set it back in forms.css.)
+ */
+
+th {
+  text-align: left; /* LTR */
+  padding: 5px/*0*/;
+  border: medium none; /*border-bottom: none;*/
+  background-color: #6D92C0;
+  color: #FFFFFF;
+  font-weight: normal;
+  vertical-align: top;
+  white-space: nowrap;
+}
+
+tbody {
+  border-top: none;
+}
+
+
+tr.even {
+  background-color: #FFF;
+}
+tr.odd {
+  background-color: #F7F7F7;
+}
+
+
+th a:link, th a:visited  {
+  color: #FFFFFF;
+}
+
+th.active img {
+  margin-left: 3px;
+}
+
+td {
+  border-bottom: 1px solid #E7E7E7;
+  padding: 5px;
+  text-align: left;
+  vertical-align: top;
+}
+
+td.active {
+  background-color: #F3F3F3;
+}
+
+table.compact {
+  line-height: 1em;
+}
+
+table.border td {
+  border: 1px solid #E7E7E7;
+}
+
+table.sipprog td.col1, table.sipprog td.col2 {
+  background-color: #F3F7FF;
+}
+
+table.sipprog td.col3 {
+  font-style: italic;
+}
+
+/**
+ * @file
+ * Positioning for responsive layout .
+ *
+ * Define CSS classes to create a table-free, 3-column, 2-column, or single
+ * column layout depending on whether blocks are enabled in the left or right
+ * columns.
+ *
+ * This layout uses the Zen Grids plugin for Compass: http://zengrids.com
+ */
+
+#header,
+#banner,
+#content,
+/*#navigation,*/
+.region-sidebar-first,
+.region-sidebar-second,
+#footer {
+  /*padding-left: 10px;
+  padding-right: 10px;*/
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  word-wrap: break-word;
+  _display: inline;
+  _overflow: hidden;
+  _overflow-y: visible;
+}
+
+#content,
+.region-sidebar-first,
+.region-sidebar-second {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+/*
+ * Containers for grid items and flow items.
+ */
+
+#header,
+#banner,
+#main,
+#footer {
+  *position: relative;
+  *zoom: 1;
+}
+#header:before, #header:after,
+#banner:before, #banner:after,
+#main:before, #main:after,
+#footer:before, #footer:after {
+  content: "";
+  display: table;
+}
+#header:after,
+#banner:after,
+#navigation-inner,
+/*#banner,#navigation,*/
+#main:after,
+#footer:after {
+  clear: both;
+}
+
+#header-inner, #banner-inner, #navigation-inner, #main-inner, #footer-inner, #bottom-inner {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1200px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+#banner-inner {
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-bottom: 10px;
+  margin-top: 20px;
+}
+
+/*
+ * Use 3 grid columns for smaller screens.
+ */
+
+@media all and (min-width: 480px) and (max-width: 959px) {
+
+  /*
+   * The layout when there is only one sidebar, the left one.
+   */
+
+  .sidebar-first #content { /* Span 2 columns, starting in 2nd column from left. */
+    float: left;
+    width: 66.667%;
+    margin-left: 33.333%;
+    margin-right: -100%;
+  }
+  .sidebar-first .region-sidebar-first { /* Span 1 column, starting in 1st column from left. */
+    float: left;
+    width: 33.333%;
+    margin-left: 0%;
+    margin-right: -33.333%;
+  }
+
+  /*
+   * The layout when there is only one sidebar, the right one.
+   */
+
+  .sidebar-second #content { /* Span 2 columns, starting in 1st column from left. */
+    float: left;
+    width: 66.667%;
+    margin-left: 0%;
+    margin-right: -66.667%;
+  }
+  .sidebar-second .region-sidebar-second { /* Span 1 column, starting in 3rd column from left. */
+    float: left;
+    width: 33.333%;
+    margin-left: 66.667%;
+    margin-right: -100%;
+  }
+
+  /*
+   * The layout when there are two sidebars.
+   */
+
+  .two-sidebars #content { /* Span 2 columns, starting in 2nd column from left. */
+    float: left;
+    width: 66.667%;
+    margin-left: 33.333%;
+    margin-right: -100%;
+  }
+  .two-sidebars .region-sidebar-first { /* Span 1 column, starting in 1st column from left. */
+    float: left;
+    width: 33.333%;
+    margin-left: 0%;
+    margin-right: -33.333%;
+  }
+  .two-sidebars .region-sidebar-second { /* Start a new row and span all 3 columns. */
+    float: left;
+    width: 100%;
+    margin-left: 0%;
+    margin-right: -100%;
+    *position: relative;
+    *zoom: 1;
+    padding-left: 0;
+    padding-right: 0;
+    clear: left;
+  }
+  .two-sidebars .region-sidebar-second:before,
+  .two-sidebars .region-sidebar-second:after {
+    content: "";
+    display: table;
+  }
+  .two-sidebars .region-sidebar-second:after {
+    clear: both;
+  }
+  .two-sidebars .region-sidebar-second .block {
+    padding-left: 10px;
+    padding-right: 10px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+    word-wrap: break-word;
+    _display: inline;
+    _overflow: hidden;
+    _overflow-y: visible;
+  }
+  .two-sidebars .region-sidebar-second .block:nth-child(3n+1) { /* Span 1 column, starting in the 1st column from left. */
+    float: left;
+    width: 33.333%;
+    margin-left: 0%;
+    margin-right: -33.333%;
+    clear: left;
+  }
+  .two-sidebars .region-sidebar-second .block:nth-child(3n+2) { /* Span 1 column, starting in the 2nd column from left. */
+    float: left;
+    width: 33.333%;
+    margin-left: 33.333%;
+    margin-right: -66.667%;
+  }
+  .two-sidebars .region-sidebar-second .block:nth-child(3n) { /* Span 1 column, starting in the 3rd column from left. */
+    float: left;
+    width: 33.333%;
+    margin-left: 66.667%;
+    margin-right: -100%;
+  }
+}
+
+/*
+ * Use 5 grid columns for larger screens.
+ */
+
+@media all and (min-width: 960px) {
+
+  /*
+   * The layout when there is only one sidebar, the left one.
+   */
+
+  .sidebar-first #content { /* Span 4 columns, starting in 2nd column from left. */
+    float: left;
+    width: 75%/*80%*/;
+    margin-left: 25%/*20%*/;
+    margin-right: -100%;
+  }
+  .sidebar-first .region-sidebar-first { /* Span 1 column, starting in 1st column from left. */
+    float: left;
+    width: 25%/*20%*/;
+    margin-left: 0%;
+    margin-right: -25%/*-20%*/;
+  }
+
+  /*
+   * The layout when there is only one sidebar, the right one.
+   */
+
+
+
+  .sidebar-second #content { /* Span 4 columns, starting in 1st column from left. */
+    float: left;
+    width: 75%;
+    margin-left: 0%;
+    margin-right: -75%;
+  }
+  .sidebar-second .region-sidebar-second { /* Span 1 column, starting in 5th column from left. */
+    float: left;
+    width: 25%;
+    margin-left: 75%;
+    margin-right: -100%;
+  }
+
+  /*
+   * The layout when there are two sidebars.
+   */
+
+  .two-sidebars #content { /* Span 3 columns, starting in 2nd column from left. */
+    float: left;
+    width: 60%;
+    margin-left: 20%;
+    margin-right: -80%;
+  }
+  .two-sidebars .region-sidebar-first { /* Span 1 column, starting in 1st column from left. */
+    float: left;
+    width: 20%;
+    margin-left: 0%;
+    margin-right: -20%;
+  }
+  .two-sidebars .region-sidebar-second { /* Span 1 column, starting in 5th column from left. */
+    float: left;
+    width: 20%;
+    margin-left: 80%;
+    margin-right: -100%;
+  }
+}
+
+/**
+ * @file
+ * Navigation Styling
+ */
+
+
+/*
+ * Markup generated by theme_menu_tree().
+ */
+
+ul li.expanded {
+  *list-style-image: url(../images/menu-expanded.png);
+  list-style-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAHAQMAAAD+nMWQAAAABlBMVEX///8AAABVwtN+AAAAAXRSTlMAQObYZgAAABJJREFUeJxj+MdQw2DBIMAABgAUsAHD3c3BpwAAAABJRU5ErkJggg==');
+  list-style-type: circle;
+}
+
+ul li.collapsed {
+  *list-style-image: url(../images/menu-collapsed.png); /* LTR */
+  list-style-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAHAQMAAAD+nMWQAAAABlBMVEX///8AAABVwtN+AAAAAXRSTlMAQObYZgAAABFJREFUCB1jVmCGQClmEWYOAAZ8AMy3HPLXAAAAAElFTkSuQmCC'); /* LTR */
+  list-style-type: disc;
+}
+
+ul li.leaf {
+  *list-style-image: url(../images/menu-leaf.png);
+  list-style-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAHBAMAAAA2fErgAAAAD1BMVEX///+/v7+Li4sAAADAwMBFvsw8AAAAAXRSTlMAQObYZgAAAB1JREFUCFtjYAADYwMGBmYVZSDhKAwkFJWhYiAAAB2+Aa/9ugeaAAAAAElFTkSuQmCC');
+  list-style-type: square;
+}
+
+/*
+ * The active item in a Drupal menu
+ */
+
+li a.active {
+  color: #000;
+}
+
+/*
+ * Navigation bar
+ */
+
+#navigation {
+  /* overflow: hidden; */ /* Sometimes you want to prevent overlapping with main div. */
+}
+
+#navigation .block {
+  margin-bottom: 0;
+}
+
+#navigation .block-menu .block-title,
+#navigation .block-menu-block .block-title {
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  clip: rect(1px 1px 1px 1px);
+  clip: rect(1px, 1px, 1px, 1px);
+}
+
+#navigation ul.links, /* Main menu and secondary menu links */
+#navigation ul.menu { /* Menu block links */
+  margin: 0;
+  padding: 0;
+  text-align: left; /* LTR */
+}
+
+#navigation ul.links li,
+#navigation ul.menu li { /* A simple method to get navigation links to appear in one line. */
+  float: left;
+  padding: 0; /*0 10px 0 0;*/
+  list-style-type: none;
+  list-style-image: none;
+}
+
+.region-navigation {
+}
+
+/*
+ * Main menu and Secondary menu links
+ */
+
+#main-menu {
+  float: left;
+}
+
+#main-menu a {
+  color: #EEEEEE;
+  display: block;
+  font-weight: bold;
+  padding: 8px 20px;
+  text-decoration: none;
+  -webkit-border-radius: 10px 10px 0 0;
+  -moz-border-radius: 10px 10px 0 0;
+  border-radius: 10px 10px 0 0;
+  }
+
+#main-menu li.active-trail a, #main-menu li.active a {
+  color: #333333;
+  background-color: #FFFFFF;
+}
+
+#main-menu li a:hover, #main-menu li.active-trail a:hover {
+   color: #333333;
+  background-color: #FFFFFF;
+}
+
+#logged-in-status {
+  float: right;
+  margin-top: 5px;
+  white-space: nowrap;
+}
+
+#logged-in-status div {
+    display: inline;
+}
+
+#logged-in-status .points {
+    background-color: #EEAA00;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    padding: 2px 6px;
+    margin: 0 5px;
+}
+
+#logged-in-status div.admin-path a {
+  background-image: url("../images/sprites.png");
+  background-repeat: no-repeat;
+  content: "";
+  height: 16px;
+  width: 16px;
+  padding: 1px 22px 1px 0;
+  background-position: -296px 0;
+}
+
+#logged-in-status div.private-messages a:before {
+  background-image: url("../images/sprites.png");
+  background-repeat: no-repeat;
+  background-position: -272px 0;
+  content: "";
+  height: 16px;
+  width: 16px;
+  padding: 1px 20px 1px 0;
+}
+
+#logged-in-status div.private-messages a span {
+    background: none repeat scroll 0 0 #DD2222;
+    color: #FFFFFF;
+    padding: 0 2px;
+    position: relative;
+    top: -5px;
+    margin-left: -5px;
+}
+
+#logged-in-status div.username a:before {
+  background-image: url("../images/sprites.png");
+  background-repeat: no-repeat;
+  background-position: -203px 0;
+  content: "";
+  height: 16px;
+  width: 16px;
+  padding: 1px 20px 1px 0;
+}
+
+/* Secondary menu - Menu block */
+#block-menu-block-11 { float: right; margin-top: 3px; white-space: nowrap; }
+#block-menu-block-11 a { color: #EEEEEE; }
+#block-menu-block-11 ul.menu { padding: 0; margin: 0; }
+#block-menu-block-11 ul.menu li { display: inline; list-style-type: none; padding: 0 1em 0 0; }
+#block-menu-block-11 li.menu-mlid-457 a:before, /* Logga in */
+#block-menu-block-11 li.menu-mlid-5477 a:before, /* Webbshop */
+#block-menu-block-11 li.menu-mlid-5398 a:before /* Registrera dig */ { background-image: url("../images/sprites.png"); background-repeat: no-repeat;  content: ""; height: 16px; width: 16px; padding: 1px 20px 1px 0; }
+#block-menu-block-11 li.menu-mlid-457 a:before { background-position: -203px 0; }
+#block-menu-block-11 li.menu-mlid-5477 a:before { background-position: -362px 0; }
+#block-menu-block-11 li.menu-mlid-5398 a:before { background-position: -227px 0; }
+
+/**
+ * @file
+ * Page Styling
+ *
+ * Style the markup found in page.tpl.php. Also includes some styling of
+ * miscellaneous Drupal elements that appear in the $content variable, such as
+ * ul.links, .pager, .more-link, etc.
+ */
+
+
+/*
+ * Body
+ */
+
+body {
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+#page {
+}
+
+/*
+ * The skip-link link will be completely hidden until a user tabs to the link.
+ * See the element-focusable rule in system.base.css.
+ */
+
+#skip-link {
+  margin: 0;
+}
+#skip-link a,
+#skip-link a:visited {
+  display: block;
+  width: 100%;
+  padding: 2px 0 3px 0;
+  text-align: center;
+  background-color: #666;
+  color: #fff;
+}
+
+/*
+ * Header
+ */
+
+#header {  /* Inloggad användare */
+  background: none repeat scroll 0 0 #004475 /*35547B*/;
+}
+
+#header-inner {
+background: url("../images/top-background.png");
+height: 134px;
+}
+
+#header-inner-left, #header-inner-right {
+height: 100px;
+}
+
+#header-inner-left,
+#navigation-inner-left {
+  float: left;
+}
+
+#header-inner-right, #navigation-inner-right {
+float: right;
+}
+
+#logo {
+  float: left; /* LTR */
+  /*padding: 5px 0;*/
+  margin-top: 15px;
+}
+
+#logo.image-link {
+    background-image: url("../images/sprites.png");
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    content: "";
+    display: block;
+    font-size: 0;
+    height: 77px;
+    line-height: 0;
+    overflow: hidden;
+    text-indent: -9999px;
+    width: 165px;
+}
+
+/*#logo img {
+  vertical-align: bottom;
+}*/
+
+#name-and-slogan {
+  float: left;
+  margin-left: 5px;
+}
+
+#site-name {
+  margin: 0;
+  font-size: 2em;
+  line-height: 1.5em;
+}
+#site-name a:link,
+#site-name a:visited {
+  color: #000;
+  text-decoration: none;
+}
+#site-name a:hover,
+#site-name a:focus {
+  text-decoration: underline;
+}
+
+#site-slogan {
+  margin: 8px 0 0 10px;
+  font-size: 18px;
+  color: #eee;
+}
+
+.region-header { /* Wrapper for any blocks placed in the header region */
+  /*clear: both;  Clear the logo */
+  float: right;
+  padding-top: 9px;
+}
+
+/*
+ * Main (container for everything else)
+ */
+
+#main {
+margin-top: 15px;
+margin-bottom: 30px;
+min-height: 650px;
+}
+
+/*
+ * Content
+ */
+
+#content {
+}
+
+.region-highlighted {
+}
+
+.breadcrumb { /* The path to the current page in the form of a list of links */
+}
+.breadcrumb ol {
+  margin: 0;
+  padding: 0;
+}
+.breadcrumb li {
+  display: inline;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+h1.title, /* The title of the page */
+h2.node-title, /* Title of a piece of content when it is given in a list of content */
+h2.block-title, /* Block title */
+h2.title, /* Comment section heading */
+h2.comment-form, /* Comment form heading */
+h3.title { /* Comment title */
+  margin: 0;
+}
+
+/* Olle */
+h1.title {margin-bottom: 15px;}
+
+tr.even { /* Some tables have rows marked even or odd. */
+  /* background-color: #eee; */ /* Drupal core uses a #eee background */
+}
+
+tr.odd {
+  /* background-color: #eee; */ /* Drupal core uses a #eee background */
+}
+
+div.messages { /* Important messages (status, warning, and error) for the user. See also the declarations in messages.css. */
+  margin: 1.5em 0; /* Drupal core uses "6px 0" margin */
+}
+div.messages ul {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+div.status { /* Normal priority messages */
+}
+
+div.warning,
+tr.warning { /* Medium priority messages */
+  /* border: 1px solid #f0c020; */ /* Drupal core uses: 1px solid #f0c020 */
+}
+
+div.error,
+tr.error { /* High priority messages. See also the .error declaration below. */
+}
+
+.error { /* Errors that are separate from div.messages status messages. */
+  /* color: #e55; */ /* Drupal core uses a #e55 background */
+}
+
+.warning { /* Warnings that are separate from div.messages status messages. */
+  /* color: #e09010; */ /* Drupal core uses a #e09010 background */
+}
+
+/* Info-meddelande */
+.node-3727 {
+  background-color: lightskyblue;
+  background-image: url("../../../../../misc/message-24-info.png");
+  background-position: 8px 2px;
+  background-repeat: no-repeat;
+  border: 1px dotted cadetblue;
+  color: darkblue;
+  margin: 0px 0 15px;
+  padding: 5px 5px 5px 40px;
+  box-shadow: 1px 1px 8px rgba(99, 96, 78, 0.15);
+  -webkit-box-shadow: 1px 1px 8px rgba(99, 96, 78, 0.15);
+  -moz-box-shadow: 1px 1px 8px rgba(99, 96, 78, 0.15);
+}
+.node-3727 p { margin: 0; }
+.node-3727 a { text-decoration: underline; }
+
+
+
+.tabs { /* See also the tabs.css file. */
+}
+
+.region-help { /* Help text on a page */
+}
+
+.more-help-link { /* Link to more help */
+}
+
+.region-content { /* Wrapper for the actual page content */
+}
+
+ul.inline { /* List of links generated by theme_links() */
+  display: inline;
+  padding: 0;
+}
+ul.inline li {
+  display: inline;
+  list-style-type: none;
+  padding: 0 1em 0 0; /* LTR */
+}
+
+span.field-label { /* The inline field label used by the Fences module */
+  padding: 0 1em 0 0; /* LTR */
+}
+
+.item-list .pager { /* A list of page numbers when more than 1 page of content is available */
+  padding: 0;
+}
+.item-list .pager li { /* Each page number in the pager list */
+  padding: /*0*/ 0.5em;
+}
+
+.item-list ul.pager li.pager-current { /* Aktiv sida */
+  background-color: #4484C5;
+  color: #FFFFFF;
+  font-weight: bold;
+}
+
+.feed-icon { /* The link to the RSS or Atom feed for the current list of content */
+}
+
+.more-link { /* Aggregator, blog, and forum more link */
+}
+
+/*
+ * First sidebar (on left in LTR languages, on right in RTL)
+ *
+ * Remember to NOT add padding or margin to your .region-sidebar-first
+ * (see the layout.css file.)
+ */
+
+.region-sidebar-first {
+}
+
+/*
+ * Second sidebar (on right in LTR languages, on left in RTL)
+ *
+ * Remember to NOT add padding or margin to your .region-sidebar-second
+ * (see the layout.css file.)
+ */
+
+.region-sidebar-second {
+}
+
+/*
+ * Footer
+ */
+
+#footer {
+  background: none repeat scroll 0 0 ;
+  background-color: #383838 /*#111111*/;
+  clear: both;
+  overflow: hidden;
+  padding: 20px 10px;
+  color: #CCCCCC;
+}
+
+#footer a {
+  color: #AAAAAA;
+}
+
+/*
+ * Page bottom
+ */
+
+.region-bottom { /* Wrapper for any blocks placed in the page bottom region */
+  background: none repeat scroll 0 0 #2C2C2C /*#181818*/;
+  border-top: 3px solid #282828 /*#202020*/;
+  clear: both;
+  overflow: hidden;
+}
+
+#bottom {
+   padding: 10px;
+ }
+
+#bottom a {
+  color: #CCCCCC;
+}
+
+.footer-bottom .text {
+  float: left;
+  color: #777777;
+}
+
+.footer-bottom .links {
+  margin-bottom: 28px;
+}
+
+.footer-bottom .links a {
+  color: #4484C5;
+  padding-right: 20px;
+}
+
+#secondary-menu .menu-5477 a:before,
+.footer-bottom .links a:before {
+  background-image: url("../images/sprites.png");
+  background-repeat: no-repeat;
+  content: "";
+  height: 16px;
+  width: 16px;
+  /*padding-right: 21px;*/
+  padding: 1px 21px 1px 0;
+}
+
+.footer-bottom .links a.contact:before {
+  background-position: -250px 0;
+}
+
+.footer-bottom .links a.sitemap:before {
+  background-position: -179px 0;
+}
+
+#secondary-menu .menu-5477 a:before,
+.footer-bottom .links a.webbshop:before {
+  background-position: -361px 0;
+}
+
+.footer-bottom .lg-logo {
+  float: right;
+}
+
+.footer-bottom .image-link {
+  background-image: url("../images/sprites.png");
+  background-repeat: no-repeat;
+  content: "";
+  background-position: 0 -83px;
+  height: 60px;
+  width: 117px;
+  display: block;
+  font-size: 0;
+  line-height: 0;
+  text-indent: -9999px;
+  overflow: hidden;
+}
+
+
+/**
+ * @file
+ * Styles for system messages.
+ */
+
+div.messages {
+  background-position: 8px 8px; /* LTR */
+  background-repeat: no-repeat;
+  border: 1px solid;
+  margin: 6px 0;
+  padding: 10px 10px 10px 50px; /* LTR */
+}
+
+div.status {
+  background-image: url(../images/message-24-ok.png);
+  border-color: #be7;
+}
+div.status,
+.ok {
+  color: #234600;
+}
+div.status,
+table tr.ok {
+  background-color: #f8fff0;
+}
+
+div.warning {
+  background-image: url(../images/message-24-warning.png);
+  border-color: #ed5;
+}
+div.warning,
+.warning {
+  color: #840;
+}
+div.warning,
+table tr.warning {
+  background-color: #fffce5;
+}
+
+div.error {
+  background-image: url(../images/message-24-error.png);
+  border-color: #ed541d;
+}
+div.error,
+.error {
+  color: #8c2e0b;
+}
+div.error,
+table tr.error {
+  background-color: #fef5f1;
+}
+div.error p.error {
+  color: #333;
+}
+
+div.messages ul {
+  margin: 0 0 0 1em; /* LTR */
+  padding: 0;
+}
+div.messages ul li {
+  list-style-image: none;
+}
