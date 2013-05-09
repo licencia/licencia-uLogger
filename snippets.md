@@ -44,7 +44,6 @@ console.dir(result);
 ```  
 
 ## Vanliga Git-kommandon
-<<<<<<< HEAD
 
 ##### Log och status  
 [master]> *git status* `# Visa aktuella förändringar`  
@@ -71,46 +70,6 @@ console.dir(result);
 [master]> *git add .* `#  Stages new and modified, without deleted`  
 [master]> *git add -u* `# Stages modified and deleted, not new files`  
 [master]> *git add -i* `# Addera interaktivt`  
-[master]> *?* `# Kommentar`  
-[master]> *?* `# Kommentar`  
-
-<<<<<<< HEAD
-### Merge
-Merge 1.x-dev med master & kopiera till GitHub
-
-git checkout master  
-git merge 1.x-dev  
-git push origin master  
-
-=======
-
-##### Log och status  
-[master]> *git status* `# Visa aktuella förändringar`  
-[master]> *gitk --all* `# Öppna grafiskt statusfönster`  
-[master]> *git log --graph --all --oneline* `# List alla commits (avsluta med Q).`  
-
-##### Branch
-[master]> *git checkout 1.x-dev* `# Gå till branch`  
-[master]> *git branch 1.x-dev* `# Skapa ny branch`  
-[master]> *git checkout -b 1.x-dev* `# Skapa och gå till`  
-
-##### Diff
-[master]> *git diff* `# Ändringar sen senaste commit`  
-[master]> *git diff snippets.md* `# Ändringar i specifik fil`  
-
-##### Tag
-[master]> *git tag* `# Lista alla taggar`  
-[master]> *git tag test1* `# Lightweight - Namn på en commit`  
-[master]> *git tag -a RC1 -m 'the first release candidate'* `# Annotated - Fullt object med info`  
-
-##### Add
-[master]> *git add -A* `# Stages All`  
-[master]> *git add .* `#  Stages new and modified, without deleted`  
-[master]> *git add -u* `# Stages modified and deleted, not new files`  
-[master]> *git add -i* `# Addera interaktivt`  
-[master]> *?* `# Kommentar`  
-[master]> *?* `# Kommentar`  
->>>>>>> 1.x-dev
 
 ##### Commit
 [master]> *git commit -m 'commit message'* `# Commit changes`  
@@ -120,54 +79,6 @@ git push origin master
 [master]> *git push origin master* `# Kopiera till github`  
 [master]> *git pull origin master* `# Hämta från github`  
 
-<<<<<<< HEAD
-Övrig
-Ignorera filer eller mappar genom att skapa en *.gitignore* i aktuell mapp.
-
-=======
-##### Commit
-[master]> *git commit -m 'commit message'* `# Commit changes`  
-[master]> *git commit --amend* `# Om man missat något i sista comitten, kompletterar utan att skapa en ny`  
-
-##### GitHub Push/Pull 
-[master]> *git push origin master* `# Kopiera till github`  
-[master]> *git pull origin master* `# Hämta från github`  
-
-#### Övrig
->>>>>>> 1.x-dev
-
-##### Radslut
-[master]> *git config core.autocrlf false* `Stäng av automatisk hantering av radslut.`  
-
-<<<<<<< HEAD
-Log
-gitk --all - Gui (windows?)
-git log --graph --all --oneline
-
-
-
-Tag
-$ git tag v0.5.6 - Lightweight
-$ git tag -a RC1 -m 'the first release candidate' - Annotated with comment
-
-Add
-git add -i - Interactive
-
-Diff
-git diff - Change since last commit
-git diff index.html Specifik fil
-=======
-##### Ignorera filer
-Ignorera alla filer utom *.gitignore*.
-```
-*
-!.gitignore
-```
-
-##### Dummy
-[master]> *?* `# Kommentar`  
->>>>>>> 1.x-dev
-=======
 #### Övrig
 
 ##### Radslut
@@ -182,4 +93,3 @@ Ignorera alla filer utom *.gitignore*.
 
 ##### Dummy
 [master]> *?* `# Kommentar`  
->>>>>>> 1.x-dev
