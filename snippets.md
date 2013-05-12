@@ -41,6 +41,8 @@ echo "<pre>" . htmlspecialchars($new_contents) . "</pre>";
 
 ```javascript
 console.dir(result);
+location.reload();
+setTimeout(function(){"window.location = 'index.php'";}, 3000);
 ```  
 
 ## Vanliga Git-kommandon
@@ -80,6 +82,9 @@ console.dir(result);
 [master]> *git pull origin master* `# Hämta från github`  
 
 #### Övrig
+
+##### Exportera Issues
+https://api.github.com/repos/ropaolle/ulogger/issues
 
 ##### Radslut
 [master]> *git config core.autocrlf false* `Stäng av automatisk hantering av radslut.`  

@@ -1,23 +1,14 @@
 <?php
 
-/***************************************************
- * Logg in check
- **************************************************/
 session_start();
-
-function is_login_page() {           
-  $parts = Explode('/', $_SERVER["PHP_SELF"]);
-  return ('login.php' == $parts[count($parts) - 1]);
-}
-
-// Check if the user is logged in. If not redirect to login.php.
-if(!isset($_SESSION['login_user']) && (!is_login_page())){    
-  header('Location:login.php?pagename='.basename($_SERVER['PHP_SELF'], ".php"));
-}
 
  /***************************************************
  * Settings
  **************************************************/
+
+// GLOBALS
+$allowed_pages = array('index.php', 'login_server.php', 'login.php', 'logout.php');
+$logged_in = isset($_SESSION['logged_in']) && ($_SESSION['logged_in'] == 'yes');
  
  // uLogger
 define('ULOGGER_VERSION', '1.x-dev');
@@ -33,6 +24,29 @@ define('DB_PASS', 'test');
 define('APACHE_DIR', '/var/www');
 define('TRACE_DIR', '/var/www/trace');
 
+
+/***************************************************
+ * Logg in check
+ **************************************************/
+
+function current_page() {           
+  $parts = Explode('/', $_SERVER["PHP_SELF"]);
+  return $parts[count($parts) - 1];
+}
+
+function allowed_page() {           
+  global $allowed_pages;    
+  return in_Array(current_page(), $allowed_pages);
+}
+
+if (!$logged_in && !allowed_page()) {
+  header('Location:login.php');
+  exit();
+}
+elseif ($logged_in && (current_page() == 'login.php')) {
+  header("Location: http://{$_SERVER['SERVER_NAME']}/");
+  exit();
+}
 
 /***************************************************
  * uLogger
@@ -161,38 +175,71 @@ function getIPinfo() {
 /**
  * Print HTML
  */
-function printHead() {
-  //echo '<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">';
-  echo '<link href="css/licencia2013.css" rel="stylesheet" type="text/css">';
-  echo '<link href="css/siplogg.css" rel="stylesheet" type="text/css">';
-  echo '<meta name="HandheldFriendly" content="true" />';
-  echo '<meta name="viewport" content="width=device-width, height=device-height, user-scalable=no" />';
-  echo '<meta charset="UTF-8" />';
-  echo '<script src="js/functions.js"></script>';
-  //echo '<script src="js/bootstrap.min.js"></script>';
-  echo '<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>' . "\n";
+function printHead($pageTitle) {
+  echo '<meta charset="utf-8">';
+  echo '<title>' . $pageTitle . '</title>';
+  include("templates/header.tpl.php");
 }
 
-function printHeaderMenu($active = 0) {
-  $activelist[1] = "";
-  $activelist[2] = "";
-  $activelist[3] = "";
-  $activelist[4] = "";
-  $activelist[5] = "";
-  $activelist[$active] = "active";
-  echo '<header role="banner" id="header"><div id="header-inner"><div id="header-inner-left"><a title="Licencia.se" href="/" rel="home" class="image-link" id="logo">www.licencia.se</a></div><div id="navigation"><div id="navigation-inner"><div id="navigation-inner-right"></div><div id="navigation-inner-left"><nav role="navigation" id="main-menu"><ul class="menu">';
-  echo "<li class='leaf $activelist[1]'><a href='/siplogg/index.php'>Hem</a></li>";
-  echo "<li class='leaf $activelist[2]'><a href='/siplogg/siplogg.php'>SIP-logg</a></li>";
-  echo "<li class='leaf $activelist[3]'><a href='/siplogg/settings.php'>Inställningar</a></li>";
-  echo "<li class='leaf $activelist[4]'><a href='login.php?ch=logout'>Logout</a></li>";
-  
-  echo '</ul></nav></div></div></div></div></header>';
-  echo '<div id="spinner" class="spinner" style="display:none;"><img id="img-spinner" src="images/spinner.gif" alt="Loading"/></div>';
+/***************************************************
+ * Messages (from drupal drupal_set_message, 
+   drupal_get_messages and theme_status_messages).
+ **************************************************/
+
+function set_message($message = NULL, $type = 'status', $repeat = TRUE) {
+  if ($message) {
+    if (!isset($_SESSION['messages'][$type])) {
+      $_SESSION['messages'][$type] = array();
+    }
+    if ($repeat || !in_array($message, $_SESSION['messages'][$type])) {
+      $_SESSION['messages'][$type][] = $message;
+    }
+  }
+  return isset($_SESSION['messages']) ? $_SESSION['messages'] : NULL;
 }
 
-function printFooter() {
-  echo '<div id="footer"><div id="links"><a href="/kontakt1">Uppgraderingar</a> | <a href="/sitemap2">Dokumentation</a></div>';
-  echo '<div id="company"><a target="_blank" href="http://www.licencia.se" title="www.licencia.se">Licencia Telecom AB</a> generalagent för <a target="_blank" href="http://www.ericssonlg.com" title="www.ericssonlg.com">Ericsson-LG</a> i Sverige och Baltikum.</div></div>';
+function get_messages($type = NULL, $clear_queue = TRUE) {
+  if ($messages = set_message()) {
+    if ($type) {
+      if ($clear_queue) {
+        unset($_SESSION['messages'][$type]);
+      }
+      if (isset($messages[$type])) {
+        return array($type => $messages[$type]);
+      }
+    }
+    else {
+      if ($clear_queue) {
+        unset($_SESSION['messages']);
+      }
+      return $messages;
+    }
+  }
+  return array();
+}
+
+function theme_messages() {
+  $output = '';
+  $status_heading = array('success' => '', 'info' => '', 'error' => 'Fel! ', 'warning' => 'Varning! ');
+  foreach (get_messages() as $type => $messages) {  
+    if (count($messages) > 1) {
+      $output .= "<div class=\"alert alert-block alert-$type\">\n";
+      $output .= '<button type="button" class="close" data-dismiss="alert">&times;</button>';
+      $output .= "<h4>$status_heading[$type]</h4>";
+      $output .= " <ul>\n";
+      foreach ($messages as $message) {
+        $output .= '  <li>' . $message . "</li>\n";
+      }
+      $output .= " </ul>\n";
+    }
+    else {
+      $output .= "<div class=\"alert alert-$type\">\n";
+      $output .= '<button type="button" class="close" data-dismiss="alert">&times;</button>';
+      $output .= "<strong>$status_heading[$type]</strong>" . $messages[0];
+    }    
+    $output .= "</div>\n";
+  }
+  return $output;
 }
 
 /***************************************************
@@ -228,7 +275,8 @@ function tcpdumpStart($max_file_size = 0, $ring_buffer_size = 0, $filter = "") {
     // Start Tcpdump
     $command = "sudo /usr/sbin/tcpdump -i eth0 -Z www-data $max_file $ring_buffer -vvv -s 0 -w $path $filter";
     $pid = exec("nohup $command > /dev/null 2>&1 & echo $!");
-    return $pid;
+    //return $pid;
+    return $filename;
   }
 }
 
@@ -259,8 +307,7 @@ function getFileList($dir) {
 
 function getFileListHTML() {
   $files = getFileList(TRACE_DIR . "/");
-  //$fileTable = "<table id='file-table'>";
-  $fileTable = "";
+  $fileTable = "<tbody>";
   $id = 0;
   foreach ($files as $file) {
     if ($file['type'] == 'file') {
@@ -271,8 +318,7 @@ function getFileListHTML() {
       $id += 1;
     }
   }
-  if ($id == 0) $fileTable .= "<tr><td>Inga sparade loggfiler ...</td></tr>";
-  //$fileTable .= "</table>";
+  if ($id == 0) $fileTable .= "<tr><td>Inga sparade loggfiler ...</td></tr></tbody>";
   return $fileTable;
 }
 
@@ -294,7 +340,7 @@ function formatSize($bytes)
 
 function getSize() {
   /* get disk space free (in bytes) */
-  $df = disk_free_space(APACHE_DIR);
+  $df = 1000000; //disk_free_space(APACHE_DIR);
   /* and get disk space total (in bytes)  */
   $dt = disk_total_space(APACHE_DIR);
   /* now we calculate the disk space used (in bytes) */

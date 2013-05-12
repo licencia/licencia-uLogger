@@ -1,12 +1,11 @@
 $(document).ready(function(){
-  getStatus();
+  updateStatus();
   $(":button").click(handleButtonClicks);  
 });
 
 /* Display log time */
 var clockTicking = false;
-function logTime(startTime)
-{
+function logTime(startTime){
   totalSec = Math.round(new Date().getTime() / 1000) - startTime;
   hours = parseInt(totalSec / 3600) % 24;
   minutes = parseInt(totalSec / 60) % 60;
@@ -33,24 +32,13 @@ function handleButtonClicks(){
       files_to_delete: $("#file-table :input").serializeArray()
     },
     dataType: 'json',
-    success:function(result){  
-      showMessages(result); 
-      if (result.action=="start") {
-        $('#running').show();
-        $(".not-when-running").attr("disabled", "disabled");
-        $("#current-file").text(result.filename);               
-      }      
-      if (result.action=="stop") {
-        $('#running').hide();        
-      }
-      updateFileList();
-    },
-    complete:function(){setTimeout(getStatus, 1000);},
+    success:function(result){location.reload();},
+    //complete:function(){setTimeout(getStatus, 1000);},
     error:function(xhr, ajaxOptions, thrownError){showError("Status: " + xhr.status + " (" + thrownError + ").");} 
   });
 };      
 
-function getStatus(){     
+function updateStatus(){     
   $.ajax({
     url:"/siplogg/siplogg_server.php",                  
     type: 'POST',
@@ -58,50 +46,35 @@ function getStatus(){
     data: {action: 'getstatus'},
     dataType: 'json',
     success:function(result){                   
-      //showMessages(result); 
-      updateStatus(result);
-      setTimeout(getStatus, 5000);      
+      setStatus(result);
+      setTimeout(updateStatus, 5000);      
     },    
     error:function(xhr, ajaxOptions, thrownError){
       showError("Status: " + xhr.status + " (" + thrownError + ").");
-      setTimeout(getStatus, 5000);
+      setTimeout(updateStatus, 5000);
     }   
   });
 }; 
       
-function updateStatus(result){
-  $("#max-trace-size").html("Tillgängligt loggutrymme  (" + result.fs + " av " + result.ts + " används)");
-  $(".ts div").css("width", result.tp);
-  $("#meter-tp").text(result.tp);
-  $("#total-disk-size").html("Total diskstorlek (" + result.du + " av " + result.dt + " används)");
-  $(".dt div").css("width", result.dp);
-  $("#meter-dp").text(result.dp);
+function setStatus(result){
+  // Disk size
+  $("#disk-status h5").html("Loggutrymme " + result.tp + " (" + result.fs + " av " + result.ts + " används)");
+  $("#disk-status .bar").css("width", result.tp);
+  
+  // Running
   if (result.running == true) {
-    $('#running').show();
+    $("#disk-status .progress").addClass('active');
+    $("#time-status").removeClass('hidden');
     $(".not-when-running").attr("disabled", "disabled");
     $("#current-file").text(result.filename);        
     if (clockTicking==false) {
       clockTicking = true;
       logTime(result.start_time);      
     };
-  } else if (result.running == false) {
-    $('#running').hide();
+  } else {
+    $("#disk-status .progress").removeClass('active');
+    $("#time-status").addClass('hidden');
     $(".not-when-running").removeAttr("disabled");
     clockTicking = false;
   }
 }
-
-function updateFileList(){     
-  $.ajax({
-    url:"/siplogg/siplogg_server.php",                  
-    type: 'POST',
-    cache: false,
-    data: {action: 'updatefilelist'},
-    dataType: 'json',
-    success:function(result){                   
-      //showMessages(result); 
-      $("#file-table").html(result.fileList);
-    },    
-    error:function(xhr, ajaxOptions, thrownError){showError("Status: " + xhr.status + " (" + thrownError + ").");}   
-  });
-}; 

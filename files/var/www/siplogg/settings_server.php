@@ -2,8 +2,7 @@
 
 include_once "functions.php";
 
-// Krävs för att IE ska acceptera json object.
-header('Content-Type: application/json');
+
 
 $data = array('action' => 'none', 'statusMsg' => '', 'errorMsg' => '');
 
@@ -52,6 +51,10 @@ if (isset($_POST['action']) && !empty($_POST['action'])) {
           $data['errorMsg'] = "Felaktig port. Tillåtet portintervall är 1024 - 65535.";
         }
         break;
-  }
-  echo json_encode($data);
+  }  
 }
+
+// Krävs för att IE ska acceptera json object.
+header('Content-Type: application/json');
+
+echo json_encode($data);

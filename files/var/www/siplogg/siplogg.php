@@ -2,79 +2,77 @@
 <?php include_once "functions.php"; ?>
 <html>
 <head>
-  <title>Licencia uLogger</title>
-  <?php printHead(); ?>
-  <script src="js/siplogg.js"></script>
+  <?php printHead('Licencia uLogger'); ?>
 </head>
 <body>
-<div id="page">
-  <?php printHeaderMenu(2); ?>
-  <div id="main"><div id="main-inner"><div role="main" class="column" id="content">
-    <!-- CONTENT -->
-    <img alt="" src="images/header-siplogg.png">
-    <h1 class="page-title">SIP-logg</h1>
-    <div class='messages status hidden'><span id="status-message">dummy</span></div>
-    <div class='messages error hidden'><span id="error-message">dummy</span></div>
-            
-    
-    
-    <fieldset id="tcpdump_settings">
-      <legend>Inställningar</legend>
-      <span id='running' style='display: none; float: right;'><img border='0' alt='' title='' src='images/spinner.gif'></span>
-      <p><label>Maximal filstorlek: </label>
-      <select name='max_file_size' id='max_file_size'>
-        <option value="0">Obegränsad</option>
-        <option value="1">1 Mbyte</option>
-        <option value="10">10 Mbyte</option>
-        <option value="100">100 Mbyte</option>
-      </select></p>
-      <p><label>Använd ringbuffer: </label>
-      <select name='ring_buffer_size' id='ring_buffer_size'>
-        <option value="0">Nej</option>
-        <option value="5">5 filer</option>
-        <option value="10">10 filer</option>
-        <option value="25">25 filer</option>
-      </select></p>
-      <p><label>Loggfilter: </label>
-        <input type="text" name="filter" id="filter"> (t.ex. "port 5060")
-      </p>
-        <button id="start" class=" btn btn-primary not-when-running">Starta logg</button>
-        <button id="stop">Stoppa logg</button>
+  <?php include("templates/menu.tpl.php"); ?>
+  <div id="wrap"><div class="container">    
+    <!-- START CONTENT -->
+
+    <div class="row"><!--div class="row-fluid"-->
+      
+      <div class="span3">
+        <?php include("templates/menu.left.tpl.php"); ?>
+      </div>     
+      
+      <div class="span9">
+        <?php echo theme_messages(); ?>
+        <h1 class="page-title">SIP-logg</h1>
+        <div class="well well-small alert-info hidden" id="time-status">
+          <div><strong>Tid:</strong> <span id="log-time">00:00:00</span></div>
+          <div><strong>Fil:</strong> <span id="current-file">-</span></div>
+        </div>   
         
-            <div class="btn-group">
-    <button class="btn">Left</button>
-    <button class="btn">Middle</button>
-    <button class="btn">Right</button>
-    </div>
+        <div id="disk-status">
+          <h5>Loggutrymme x% (x andvänds av y)</h5>
+          <div class="progress progress-success progress-striped">
+            <div class="bar" style="width: 40%"></div>
+          </div>
+        </div>
         
-    </fieldset>
-    
-    <fieldset id="status">
-      <legend>Status</legend>
-      <div id="time-file">
-        <div><strong>Tid:</strong> <span id="log-time">00:00:00</span></div>
-        <div><strong>Fil:</strong> <span id="current-file">-</span></div>
+        <div class="control-group">
+          <label class="form-inline">Filstorlek:
+          <select id='max_file_size'>
+            <option value="0">Obegränsad</option>
+            <option value="1">1 Mbyte</option>
+            <option value="10">10 Mbyte</option>
+            <option value="100">100 Mbyte</option>
+          </select>
+          </label>          
+          <label class="form-inline">Ringbuffer:
+          <select id='ring_buffer_size'>
+            <option value="0">Nej</option>
+            <option value="5">5 filer</option>
+            <option value="10">10 filer</option>
+            <option value="25">25 filer</option>
+          </select>
+          </label>          
+          <label class="form-inline">Loggfilter:
+            <input type="text" id="filter" placeholder="filter"><span class="help-inline">(t.ex. "port 5060")</span>      
+          </label>  
+        </div>        
+        
+        <button id="start" class="btn btn-success not-when-running">Starta logg</button>
+        <button id="stop" class="btn btn-danger">Stoppa logg</button> 
+      
+        <fieldset class="top-buffer">
+          <legend>Loggfiler</legend>
+          <!--h4 class="top-buffer">Loggfiler</h4-->
+          <table id="file-table" class="table table-striped table-condensed autowidth">      
+            <thead><tr><th></th><th>Filnamn</th><th>Tid</th><th>Storlek</th></tr></thead>
+            <?php echo getFileListHTML(TRACE_DIR . "/"); ?>
+          </table>
+          <button id="deleteallfiles" class="btn not-when-running">Radera alla filer</button>
+          <button id="deleteselectedfiles" class="btn not-when-running">Radera markerade filer</button>              
+        </fieldset>
       </div>
-      <h4 id="max-trace-size"></h4>
-      <div class="meter ts"><div style="width: 0%"></div></div>
-      <div id="meter-tp"></div>
-      <h4 id="total-disk-size"></h4>
-      <div class="meter dt"><div style="width: 0%"></div></div>
-      <div id="meter-dp"></div>
-    </fieldset>
-    
-    <fieldset id="logg">
-      <legend>Loggfiler</legend>
-      <table id='file-table'>
-        <?php echo getFileListHTML(TRACE_DIR . "/"); ?>
-      </table>
-      <button id="deleteallfiles" class="not-when-running">Radera alla filer</button>
-      <button id="deleteselectedfiles" class="not-when-running">Radera markerade filer</button>
-    </fieldset>
-    
-    <!-- CONTENT -->
-    <?php printFooter(); ?>
-  </div></div></div>
-</div>
+      
+    </div>
+
+    <!-- END CONTENT -->
+  </div></div>
+  <?php include("templates/footer.tpl.php"); ?>
+  <?php include("templates/scrips.tpl.php"); ?>
+  <script src="ulogger/siplogg.js"></script>
 </body>
 </html>
