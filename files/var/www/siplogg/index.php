@@ -6,8 +6,9 @@
 </head>
 <body>
   <?php include("templates/menu.tpl.php"); ?>
-  <div id="wrap"><div class="container">
-    <?php echo theme_messages(); ?>
+  <div id="page">
+    <div class="container">
+    <?php include("templates/messages.tpl.php"); ?>        
     <!-- START CONTENT -->
       
       <div class="hero-unit">
@@ -35,7 +36,8 @@
       </div>
       
     <!-- END CONTENT -->
-  </div></div>
+    </div>
+  </div>
   <?php include("templates/footer.tpl.php"); ?>
   <?php include("templates/scrips.tpl.php"); ?>
 </body>

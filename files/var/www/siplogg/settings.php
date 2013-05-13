@@ -3,11 +3,11 @@
 <html>
 <head>
   <?php printHead('Licencia uLogger'); ?>
-  <!--link href="fine-uploader/fineuploader-3.5.0.css" rel="stylesheet"-->
 </head>
 <body>
   <?php include("templates/menu.tpl.php"); ?>
-  <div id="wrap"><div class="container">    
+  <div id="page">
+    <div class="container">    
     <!-- START CONTENT -->
     
     <div class="row">
@@ -51,9 +51,6 @@
 
         <fieldset class="top-buffer">
           <legend>HTTP-portar</legend>
-          
-          
-          
           <p>Anger vilka portar som webbservern svarar på.</p>
           <div class="form-inline control-group">
             <label>Webbserverport: </label> 80 + 
@@ -86,31 +83,15 @@
           <button id="reboot" class="btn">Starta om</button>
         </fieldset>
         
-        <fieldset class="top-buffer">
-          <legend>Uppgradera</legend>
-          <div id="fine-uploader"></div> 
-          <span id="upgrade-to">Upgrade to</span>      
-        </fieldset>
-
-        <!--p id="version" class="clearfix"><?php echo sprintf(ULOGGER_VERSION_STRING, getVar('ulogger_version', '')); ?>
-        <span class="label label-info"><?php echo sprintf(ULOGGER_VERSION_STRING, getVar('ulogger_version', '')); ?></span>
-        
-        <span class="badge badge-warning"><?php echo sprintf(ULOGGER_VERSION_STRING, getVar('ulogger_version', '')); ?></span>
-        <div class="badge badge-error"><?php echo sprintf(ULOGGER_VERSION_STRING, getVar('ulogger_version', '')); ?></div>
-</p-->
-
-        <div class="label label-info"><?php echo sprintf(ULOGGER_VERSION_STRING, getVar('ulogger_version', '')); ?></div>
-        <div class="label label-warning"><?php echo sprintf(ULOGGER_VERSION_STRING, getVar('ulogger_version', '')); ?></div>
-        
       </div>
     </div>
       
     <!-- END CONTENT -->
-  </div></div>
+    </div>
+  </div>
   <?php include("templates/footer.tpl.php"); ?>
   <?php include("templates/scrips.tpl.php"); ?>
   <script src="ulogger/settings.js"></script>                       
-  <!--script src="fine-uploader/jquery.fineuploader-3.5.0.min.js"></script-->
   
 </body>
 </html>

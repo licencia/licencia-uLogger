@@ -32,7 +32,9 @@ function handleButtonClicks(){
       files_to_delete: $("#file-table :input").serializeArray()
     },
     dataType: 'json',
-    success:function(result){location.reload();},
+    success:function(result){
+      location.reload();      
+    },
     //complete:function(){setTimeout(getStatus, 1000);},
     error:function(xhr, ajaxOptions, thrownError){showError("Status: " + xhr.status + " (" + thrownError + ").");} 
   });

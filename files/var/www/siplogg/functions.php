@@ -12,7 +12,7 @@ $logged_in = isset($_SESSION['logged_in']) && ($_SESSION['logged_in'] == 'yes');
  
  // uLogger
 define('ULOGGER_VERSION', '1.x-dev');
-define('ULOGGER_VERSION_STRING', 'Version ' . ULOGGER_VERSION . ' (Databas %s), maj 2013, Olle Sjögren, Licencia telecom ab');
+define('ULOGGER_VERSION_STRING', 'Licencia uLogger version ' . ULOGGER_VERSION . ' (databas %s), maj 2013.');
 define('EXT_IP_SERVER', 'http://checkip.dyndns.org');
 define('VNC_PORT', '5091');
 define('VNC_PASS', 'dude12');
@@ -40,8 +40,14 @@ function allowed_page() {
 }
 
 if (!$logged_in && !allowed_page()) {
+  $_SESSION['last_page'] = current_page();
   header('Location:login.php');
   exit();
+}
+elseif ($logged_in && isset($_SESSION['last_page'])) {
+  $last_page = $_SESSION['last_page'];
+  unset($_SESSION['last_page']);
+  header("Location:$last_page");
 }
 elseif ($logged_in && (current_page() == 'login.php')) {
   header("Location: http://{$_SERVER['SERVER_NAME']}/");

@@ -34,6 +34,14 @@ function handleLogin(){
   });
 };
 
+function showMessage(message, type) {
+  var data = '<div class="alert alert-' + type + '">' +
+             '<button data-dismiss="alert" class="close" type="button">×</button>'
+             + message + '</div>';
+  $('#jquery-messages').append(data);
+}
+
+/*
 // Print status messages
 function showStatus(message) {
   if (message) {
@@ -56,4 +64,4 @@ function showError(message) {
 function showMessages(result) {
   showError(result.errorMsg);
   showStatus(result.statusMsg);
-};
+};*/

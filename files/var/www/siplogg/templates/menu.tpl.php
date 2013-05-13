@@ -9,9 +9,10 @@
       <a class="brand" href="/siplogg/">Licencia uLogger</a>
       <div class="nav-collapse collapse" id="main-menu">              
         <ul class="nav">
-          <li><a href="/siplogg/">Hem</a></li>
+          <li><a href="/siplogg/"><i class="icon-home icon-white"></i> Hem</a></li>              
+          <?php if ($logged_in): ?>
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Funktioner <b class="caret"></b></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-th-large icon-white"></i> Funktioner <b class="caret"></b></a>
             <ul class="dropdown-menu">
               <li><a href="/siplogg/siplogg.php">SIP-logg</a></li>
               <li class="divider"></li>
@@ -19,11 +20,12 @@
               <li><a href="/siplogg/settings.php">Inställningar</a></li>
             </ul>
           </li>
-          <li><a href="http://www.licencia.se/kontakt">Kontakt</a></li>          
+          <?php endif; ?>  
+          <li><a href="http://www.licencia.se/kontakt"><i class="icon-envelope icon-white"></i> Kontakt</a></li>          
         </ul>
         <div class="navbar-form pull-right">        
         <?php if ($logged_in): ?>
-          <button class="btn btn-link logout-button" id="logout">Logga ut</button>
+          <button class="btn btn-link logout-button" id="logout"><i class="icon-user icon-white"></i>  Logga ut</button>
         <?php else: ?>
           <input class="span2" type="text" id="user" placeholder="Email">
           <input class="span2" type="password" id="password" placeholder="Password">

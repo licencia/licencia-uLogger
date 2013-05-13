@@ -13,9 +13,9 @@
       <?php echo theme_messages(); ?>
       <input type="text" class="input-block-level" id="user" placeholder="Användarnamn">
       <input type="password" class="input-block-level" id="password" placeholder="Lösenord">
-      <label class="checkbox">
+      <!--label class="checkbox">
         <input type="checkbox" value="remember-me" id="remember_me"> Fortsätt vara inloggad          
-      </label>
+      </label-->
       <button class="btn btn-large btn-primary login-button" id="login">Logga in</button>
     </div>        
     

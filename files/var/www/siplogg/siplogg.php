@@ -6,7 +6,8 @@
 </head>
 <body>
   <?php include("templates/menu.tpl.php"); ?>
-  <div id="wrap"><div class="container">    
+  <div id="page">
+    <div class="container">    
     <!-- START CONTENT -->
 
     <div class="row"><!--div class="row-fluid"-->
@@ -16,7 +17,7 @@
       </div>     
       
       <div class="span9">
-        <?php echo theme_messages(); ?>
+        <?php include("templates/messages.tpl.php"); ?>  
         <h1 class="page-title">SIP-logg</h1>
         <div class="well well-small alert-info hidden" id="time-status">
           <div><strong>Tid:</strong> <span id="log-time">00:00:00</span></div>
@@ -57,7 +58,6 @@
       
         <fieldset class="top-buffer">
           <legend>Loggfiler</legend>
-          <!--h4 class="top-buffer">Loggfiler</h4-->
           <table id="file-table" class="table table-striped table-condensed autowidth">      
             <thead><tr><th></th><th>Filnamn</th><th>Tid</th><th>Storlek</th></tr></thead>
             <?php echo getFileListHTML(TRACE_DIR . "/"); ?>
@@ -70,7 +70,8 @@
     </div>
 
     <!-- END CONTENT -->
-  </div></div>
+    </div>
+  </div>
   <?php include("templates/footer.tpl.php"); ?>
   <?php include("templates/scrips.tpl.php"); ?>
   <script src="ulogger/siplogg.js"></script>
