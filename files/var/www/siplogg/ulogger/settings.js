@@ -1,7 +1,6 @@
 $(document).ready(function(){
 
-
-  // SKa ej anropas då visa/dölj klickas
+  // Ska ej anropas då visa/dölj klickas
   $(":button").click(handleButtonClicks);
 
   // Show/hide static IP fields
@@ -15,20 +14,27 @@ $(document).ready(function(){
     $("#show-ip").hasClass('hidden') ? $("#show-ip").removeClass('hidden') : $("#show-ip").addClass('hidden');
     return false;
   });
-  
+
+  // Initiera Tooltip för denna sida.          
+  $("a").tooltip({ 'selector': '', 'placement': 'bottom' });  
+
+  // Initiera en popover
+  $("#version-btn").popover({ 'selector': '', 'placement': 'bottom' });  
+
 });
+
 
 
 // Ajax call
 function handleButtonClicks(){
   
-  $("#setport").button('loading');
-  //$(".alert").hide();
+  var id = this.id;
   
   $.ajax({
     url:"/siplogg/settings_server.php",
     type: 'POST',
-    cache: false,
+    //cache: false,
+    dataType: 'json',
     data: {
       action: this.id,
       port: $('#http_port').val(),
@@ -36,71 +42,71 @@ function handleButtonClicks(){
       ip_address: $('#ip_address').val(),
       ip_gateway: $('#ip_gateway').val(),
       ip_netmask: $('#ip_netmask').val()
-    },
-    dataType: 'json',
-    beforeSend: function(){$('#spinner').show();},
-    complete: function(){$('#spinner').hide(); },
-    success:function(result){            
-      showMessages(result);            
+    },    
+    beforeSend: function(){$("#" + id).button('loading');},
+    complete: function(){$("#" + id).button('reset');},
+    success:function(result){  
+   
       // Change ip
       if (result.action=="changeip") {
-        // Omstart måste utföras efter att meddelande visats, annars visas inte meddelandet.
-        $.ajax({
-          url:"/siplogg/settings_restart_eth0.php",
-          type: 'POST'
-        });
+        if (!result.errorMsg) {
+          showMessage(result.statusMsg, 'success');
+          // Starta om eth0.
+          $.ajax({
+            url:"/siplogg/settings_server.php",
+            type: 'POST',
+            data: {action: 'restart_eth0'}
+          });          
+        } else {
+          showMessage(result.errorMsg, 'error');
+        }                
       }
-      //Reboot
-      if (result.action=="reboot") {
-        var count = 45;
-        var countdown = setInterval(function(){
-          $('#spinner').show();
-          $("span#countdown").html(count);
-          if (count == 0) {
-            window.location = '/siplogg/index.php';
-          }
-          count--;
-        }, 1000);
-      }
+      
       //Set port
       if (result.action=="setport") {
-        $("#setport").button('reset');
-        $(".alert").html(result.statusMsg);
-        $(".alert").removeClass('hidden');
+        if (!result.errorMsg) {
+          showMessage(result.statusMsg, 'success');
+        } else {
+          showMessage(result.errorMsg, 'error');
+        }                
       }
+
       //Halt
       if (result.action=="halt") {
-        var count = 30;
-        var countdown = setInterval(function(){
-          $('#spinner').show();
-          $("span#countdown").html(count);
-          if (count == 0) {
-            $("#status-message").html("Nu kan du koppla ur strömmen till uLoggern.");
-            $('#spinner').hide();
-            return false;
-          }
-          count--;
-        }, 1000);
-      }            
+        if (!result.errorMsg) {
+          showMessage(result.statusMsg, 'warning');
+          var count = 30;
+          var countdown = setInterval(function(){
+            $("span#countdown").html(count);
+            if (count == 0) {
+              showMessage("Nu kan du koppla ur strömmen till uLoggern.", 'success');
+              clearTimeout(countdown);
+            }
+            count--;
+          }, 1000);
+        } else {
+          showMessage(result.errorMsg, 'error');
+        }                
+      }
+      
+      //Reboot
+      if (result.action=="reboot") {
+        if (!result.errorMsg) {
+          showMessage(result.statusMsg, 'success');
+          var count = 45;
+          var countdown = setInterval(function(){
+            $("span#countdown").html(count);
+            if (count == 0) {
+              window.location = '/siplogg/index.php';
+            }
+            count--;
+          }, 1000);
+        } else {
+          showMessage(result.errorMsg, 'error');
+        }                
+      }      
+      
     },
     error:function(xhr, ajaxOptions, thrownError){showError("Status: " + xhr.status + " (" + thrownError + ").");} 
   });
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

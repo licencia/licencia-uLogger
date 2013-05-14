@@ -39,7 +39,7 @@
             <option value="10">10 Mbyte</option>
             <option value="100">100 Mbyte</option>
           </select>
-          </label>          
+          </label>                       
           <label class="form-inline">Ringbuffer:
           <select id='ring_buffer_size'>
             <option value="0">Nej</option>

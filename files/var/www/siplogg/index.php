@@ -14,7 +14,7 @@
       <div class="hero-unit">
         <h1>Licencia uLogger</h1>
         <p>Med hjälp av Licencia uLogger kan du enkelt sätta upp en loggserver hos en kund där du behöver övervaka SIP-trafiken. Licencia uLogger körs på Raspberry PI vilket är en liten enkortsdator som kan utföra det mesta en PC kan.</p>
-        <p><a href="#" class="btn btn-primary btn-large">Läs mer &raquo;</a></p>
+        <p><a href="/siplogg/siplogg.php" class="btn btn-primary btn-large">Ta mig dit nu &raquo;</a></p>
       </div>
 
       <div class="row">

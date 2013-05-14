@@ -167,14 +167,18 @@ function getFwIp() {
   }
 }
 
-function getIPinfo() {
+function getIPtooltip() {
   $ip_address = shell_exec("/sbin/ifconfig eth0 | grep 'inet addr' | awk -F: '{print $2}' | awk '{print $1}'");
   $ip_netmask = shell_exec("/sbin/ifconfig eth0 | grep 'inet addr' | awk -F: '{print $4}' | awk '{print $1}'");
   $ip_gateway = shell_exec("/sbin/route -n | grep '^0.0.0.0' | awk '{print $2}'");
-  $output = "IP-adress: " . $ip_address . "";
-  $output .= "Subnätmask: " . $ip_netmask;
-  $output .= "Gateway: " . $ip_gateway . "\n";
-  $output .= shell_exec('/sbin/ifconfig && /sbin/route -n');
+  $output = "IP-adress: " . $ip_address . "<br>";
+  $output .= "Subnätmask: " . $ip_netmask . "<br>";
+  $output .= "Gateway: " . $ip_gateway;
+  return $output;
+}
+
+function getIPinfo() {
+  $output = shell_exec('/sbin/ifconfig && /sbin/route -n');
   return $output;
 }
 

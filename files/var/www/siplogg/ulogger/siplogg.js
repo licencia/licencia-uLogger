@@ -23,7 +23,8 @@ function handleButtonClicks(){
   $.ajax({
     url:"/siplogg/siplogg_server.php",                  
     type: 'POST',
-    cache: false,
+    //cache: false,
+    dataType: 'json',
     data: {
       action: this.id,
       filter: $('#filter').val(),
@@ -31,11 +32,7 @@ function handleButtonClicks(){
       ring_buffer_size: $('#ring_buffer_size').val(),
       files_to_delete: $("#file-table :input").serializeArray()
     },
-    dataType: 'json',
-    success:function(result){
-      location.reload();      
-    },
-    //complete:function(){setTimeout(getStatus, 1000);},
+    success:function(result){location.reload();},
     error:function(xhr, ajaxOptions, thrownError){showError("Status: " + xhr.status + " (" + thrownError + ").");} 
   });
 };      
@@ -44,7 +41,7 @@ function updateStatus(){
   $.ajax({
     url:"/siplogg/siplogg_server.php",                  
     type: 'POST',
-    cache: false,
+    //cache: false,
     data: {action: 'getstatus'},
     dataType: 'json',
     success:function(result){                   
