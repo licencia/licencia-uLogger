@@ -30,6 +30,6 @@
 
 	CustomLog ${APACHE_LOG_DIR}/access.log combined
   
-  ErrorDocument 404 /siplogg/404.php
+  ErrorDocument 404 /404.php
   
 </VirtualHost>

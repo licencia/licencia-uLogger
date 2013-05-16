@@ -2,23 +2,27 @@
 
 # Skapa instfil
 # - Kopiera alla filer i ulogger/files till /home/install.make
+# - sudo mv /home/install.make/home/make.sh /home/make.sh
+# - sudo chmod 755 /home/make.sh
 # - sudo /home/make.sh
 # Installera
-# - sudo tar zxvfp /home/ulogger.1.x-dev.tar.gz -C /
+# - sudo tar zxvfp /home/ulogger.1.0-beta1.tar.gz -C /
+
 
 sudo chown root:www-data /home/install.make/var/www/trace
-sudo chown root:www-data /home/install.make/var/www/uploads
+sudo chown root:www-data /home/install.make/home/uploads
 sudo chown root:www-data /home/install.make/home/ulogger/phpcommands.sh
 sudo chown root:www-data /home/install.make/home/ulogger/interfaces.d
 sudo chown root:www-data /home/install.make/etc/apache2/myports.conf
 sudo chown root:www-data /home/install.make/etc/apache2/sites-available/default
 
 sudo chmod 775 /home/install.make/var/www/trace
-sudo chmod 775 /home/install.make/var/www/uploads
+sudo chmod 775 /home/install.make/home/uploads
 sudo chmod 750 /home/install.make/home/ulogger/phpcommands.sh
 sudo chmod 660 /home/install.make/home/ulogger/interfaces.d
 sudo chmod 660 /home/install.make/etc/apache2/myports.conf
 sudo chmod 660 /home/install.make/etc/apache2/sites-available/default
+sudo chmod 755 /home/install.make/etc/init.d/tightvncserver
 
 VER=`cat /home/install.make/home/ulogger/version.info`
 NAME="/home/ulogger.$VER.tar.gz"
