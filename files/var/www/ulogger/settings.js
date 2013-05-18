@@ -15,15 +15,32 @@ $(document).ready(function(){
     return false;
   });
 
-  // Initiera Tooltip för denna sida.          
-  $("a").tooltip({ 'selector': '', 'placement': 'bottom' });  
-
   // Initiera en popover
   $("#version-btn").popover({ 'selector': '', 'placement': 'bottom' });  
+  
+  // Initiera filupladdning
+  initUploads();
 
 });
 
-
+function initUploads(){
+  $('#fileupload').fileupload({
+    url: '/file-upload/upload.php',
+    dataType: 'json',
+    done: function (e, data) {
+      $.each(data.result.files, function (index, file) {
+          $('<p/>').text(file.name).insertAfter('#progress');
+      });
+    },   
+    progressall: function (e, data) {
+    var progress = parseInt(data.loaded / data.total * 100, 10);
+    $('#progress .bar').css(
+      'width',
+      progress + '%'
+    );
+    }
+  });
+};
 
 // Ajax call
 function handleButtonClicks(){
@@ -46,7 +63,7 @@ function handleButtonClicks(){
     beforeSend: function(){$("#" + id).button('loading');},
     complete: function(){$("#" + id).button('reset');},
     success:function(result){  
-   
+      //.done .fail .always
       // Change ip
       if (result.action=="changeip") {
         if (!result.errorMsg) {

@@ -10,14 +10,14 @@
 
 
 sudo chown root:www-data /home/install.make/var/www/trace
-sudo chown root:www-data /home/install.make/home/uploads
+sudo chown root:www-data /home/install.make/var/www/uploads
 sudo chown root:www-data /home/install.make/home/ulogger/phpcommands.sh
 sudo chown root:www-data /home/install.make/home/ulogger/interfaces.d
 sudo chown root:www-data /home/install.make/etc/apache2/myports.conf
 sudo chown root:www-data /home/install.make/etc/apache2/sites-available/default
 
 sudo chmod 775 /home/install.make/var/www/trace
-sudo chmod 775 /home/install.make/home/uploads
+sudo chmod 775 /home/install.make/var/www/uploads
 sudo chmod 750 /home/install.make/home/ulogger/phpcommands.sh
 sudo chmod 660 /home/install.make/home/ulogger/interfaces.d
 sudo chmod 660 /home/install.make/etc/apache2/myports.conf

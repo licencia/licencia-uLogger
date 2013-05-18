@@ -3,6 +3,7 @@
 <html>
 <head>
   <?php printHead('Licencia uLogger'); ?>
+  <link rel="stylesheet" href="file-upload/jquery.fileupload-ui.css">
 </head>
 <body>
   <?php include("templates/menu.tpl.php"); ?>
@@ -64,7 +65,23 @@
            och anslut mot adressen <?php echo getFwIpHtml(); ?>.
             Mer information om VNC-klienten finns på sidan <a href='http://www.uvnc.com'>www.uvnc.com</a>.
           </p>
-        </fieldset>      
+        </fieldset>   
+
+        <fieldset class="top-buffer">
+        <legend>Uppgradera uLogger</legend>
+          <p>?</p>
+          
+          <span class="btn btn-success fileinput-button">
+            <i class="icon-plus icon-white"></i>
+            <span>Välj fil ...</span>
+            <input id="fileupload" type="file" multiple="" name="files[]">
+          </span>          
+          
+          <div id="progress" class="progress progress-success progress-striped top-buffer">
+              <div class="bar" style="width: 2%;"></div>
+          </div>   
+          <p id="files"></p>
+        </fieldset> 
       
         <fieldset class="top-buffer">
           <legend>Avstängning/omstart av server</legend>
@@ -84,6 +101,8 @@
   </div>
   <?php include("templates/footer.tpl.php"); ?>
   <?php include("templates/scrips.tpl.php"); ?>
+  <script src="file-upload/jquery.iframe-transport.js"></script>
+  <script src="file-upload/jquery.fileupload.js"></script>
   <script src="ulogger/settings.js"></script>                       
   
 </body>
