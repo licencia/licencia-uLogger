@@ -25,7 +25,7 @@ $(document).ready(function(){
 
 function initUploads(){
   $('#fileupload').fileupload({
-    url: '/file-upload/upload.php',
+    url: '/bootstrap/file-upload/upload_server.php',
     dataType: 'json',
     done: function (e, data) {
       $.each(data.result.files, function (index, file) {

@@ -5,10 +5,10 @@
   <?php printHead('Licencia uLogger'); ?>
 </head>
 <body>
-  <?php include("templates/menu.tpl.php"); ?>
+  <?php include("ulogger/templates/menu.tpl.php"); ?>
   <div id="page">
     <div class="container">
-    <?php include("templates/messages.tpl.php"); ?>        
+    <?php include("ulogger/templates/messages.tpl.php"); ?>        
     <!-- START CONTENT -->
       
       <div class="hero-unit">
@@ -74,7 +74,7 @@
     <!-- END CONTENT -->
     </div>
   </div>
-  <?php include("templates/footer.tpl.php"); ?>
-  <?php include("templates/scrips.tpl.php"); ?>
+  <?php include("ulogger/templates/footer.tpl.php"); ?>
+  <?php include("ulogger/templates/scrips.tpl.php"); ?>
 </body>
 </html>

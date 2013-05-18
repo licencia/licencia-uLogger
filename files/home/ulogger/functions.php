@@ -25,7 +25,7 @@ define('UPLOAD_DIR', '/home/uploads');
 
 // Siplogg
 define('APACHE_DIR', '/var/www');
-define('TRACE_DIR', '/var/www/trace');
+define('TRACE_DIR', '/var/www/FILES/trace');
 
 /***************************************************
  * Try to connect to the database
@@ -219,7 +219,7 @@ function getFwIpHtml() {
 function printHead($pageTitle) {
   echo '<meta charset="utf-8">';
   echo '<title>' . $pageTitle . '</title>';
-  include("templates/header.tpl.php");
+  include("ulogger/templates/header.tpl.php");
 }
 
 /***************************************************

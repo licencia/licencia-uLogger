@@ -3,10 +3,10 @@
 <html>
 <head>
   <?php printHead('Licencia uLogger'); ?>
-  <link rel="stylesheet" href="file-upload/jquery.fileupload-ui.css">
+  <link rel="stylesheet" href="bootstrap/file-upload/jquery.fileupload-ui.css">
 </head>
 <body>
-  <?php include("templates/menu.tpl.php"); ?>
+  <?php include("ulogger/templates/menu.tpl.php"); ?>
   <div id="page">
     <div class="container">    
     <!-- START CONTENT -->
@@ -14,11 +14,11 @@
     <div class="row">
       
       <div class="span3">
-        <?php include("templates/menu.left.tpl.php"); ?>
+        <?php include("ulogger/templates/menu.left.tpl.php"); ?>
       </div>      
       
       <div class="span9">       
-        <?php include("templates/messages.tpl.php"); ?>   
+        <?php include("ulogger/templates/messages.tpl.php"); ?>   
         <h1 class="page-title">Serverinställningar</h1>
                 
         <fieldset class="top-buffer">
@@ -99,10 +99,10 @@
     <!-- END CONTENT -->
     </div>
   </div>
-  <?php include("templates/footer.tpl.php"); ?>
-  <?php include("templates/scrips.tpl.php"); ?>
-  <script src="file-upload/jquery.iframe-transport.js"></script>
-  <script src="file-upload/jquery.fileupload.js"></script>
+  <?php include("ulogger/templates/footer.tpl.php"); ?>
+  <?php include("ulogger/templates/scrips.tpl.php"); ?>
+  <script src="bootstrap/file-upload/jquery.iframe-transport.js"></script>
+  <script src="bootstrap/file-upload/jquery.fileupload.js"></script>
   <script src="ulogger/settings.js"></script>                       
   
 </body>

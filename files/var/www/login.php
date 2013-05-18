@@ -9,7 +9,7 @@
     <!-- START CONTENT -->                
     <div class="form-signin">
       <h2 class="form-signin-heading">Logga in</h2>
-      <?php include("templates/messages.tpl.php"); ?>
+      <?php include("ulogger/templates/messages.tpl.php"); ?>
       <input type="text" class="input-block-level" id="user" placeholder="Användarnamn">
       <input type="password" class="input-block-level" id="password" placeholder="Lösenord">
       <!--label class="checkbox">
@@ -19,6 +19,6 @@
     </div>            
     <!-- END CONTENT -->
   </div></div>  
-  <?php include("templates/scrips.tpl.php"); ?>
+  <?php include("ulogger/templates/scrips.tpl.php"); ?>
 </body>
 </html>

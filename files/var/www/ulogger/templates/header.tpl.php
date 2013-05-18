@@ -10,8 +10,8 @@
 <!--[if lt IE 9]>
   <script src="bootstrap/html5shiv.js"></script>
 <![endif]-->
-<link rel="apple-touch-icon-precomposed" sizes="144x144" href="ulogger/apple-touch-icon-144-precomposed.png">
-<link rel="apple-touch-icon-precomposed" sizes="114x114" href="ulogger/apple-touch-icon-114-precomposed.png">
-<link rel="apple-touch-icon-precomposed" sizes="72x72" href="ulogger/apple-touch-icon-72-precomposed.png">
-<link rel="apple-touch-icon-precomposed" href="ulogger/apple-touch-icon-57-precomposed.png">
-<link rel="shortcut icon" href="ulogger/favicon.png">
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/apple-touch-icon-144-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/apple-touch-icon-114-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/apple-touch-icon-72-precomposed.png">
+<link rel="apple-touch-icon-precomposed" href="img/apple-touch-icon-57-precomposed.png">
+<link rel="shortcut icon" href="img/favicon.png">

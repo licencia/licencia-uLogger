@@ -5,7 +5,7 @@
   <?php printHead('Licencia uLogger'); ?>
 </head>
 <body>
-  <?php include("templates/menu.tpl.php"); ?>
+  <?php include("ulogger/templates/menu.tpl.php"); ?>
   <div id="page">
     <div class="container">    
     <!-- START CONTENT -->
@@ -13,11 +13,11 @@
     <div class="row"><!--div class="row-fluid"-->
       
       <div class="span3">
-        <?php include("templates/menu.left.tpl.php"); ?>
+        <?php include("ulogger/templates/menu.left.tpl.php"); ?>
       </div>     
       
       <div class="span9">
-        <?php include("templates/messages.tpl.php"); ?>  
+        <?php include("ulogger/templates/messages.tpl.php"); ?>  
         <h1 class="page-title">SIP-logg</h1>
         <div class="well well-small alert-info hidden" id="time-status">
           <div><strong>Tid:</strong> <span id="log-time">00:00:00</span></div>
@@ -71,8 +71,8 @@
     <!-- END CONTENT -->
     </div>
   </div>
-  <?php include("templates/footer.tpl.php"); ?>
-  <?php include("templates/scrips.tpl.php"); ?>
+  <?php include("ulogger/templates/footer.tpl.php"); ?>
+  <?php include("ulogger/templates/scrips.tpl.php"); ?>
   <script src="ulogger/siplogg.js"></script>
 </body>
 </html>
