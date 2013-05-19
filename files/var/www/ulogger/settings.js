@@ -9,12 +9,6 @@ $(document).ready(function(){
   });
   ($('#dhcp').prop('checked')) ? $('#fixed-ip').hide() : $('#fixed-ip').show();
 
-  // Show/hid IP info
-  $("#show-ip-btn").click(function() {
-    $("#show-ip").hasClass('hidden') ? $("#show-ip").removeClass('hidden') : $("#show-ip").addClass('hidden');
-    return false;
-  });
-
   // Initiera en popover
   //$("#version-btn").popover({ 'selector': '', 'placement': 'bottom' });  
   

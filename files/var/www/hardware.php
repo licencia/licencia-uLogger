@@ -2,7 +2,6 @@
 
 namespace raspcontrol;
 
-spl_autoload_extensions('.php');
 spl_autoload_register();
 
 use raspcontrol\Uptime;
@@ -68,9 +67,7 @@ function shell_to_html_table_result($shellExecOutput) {
 			. '</table>';
 }
 
-
 ?>
-
 
 <!DOCTYPE html>
 <?php require_once "/home/ulogger/functions.php"; ?>
@@ -107,7 +104,7 @@ function shell_to_html_table_result($shellExecOutput) {
         <fieldset id="check-ram" class="top-buffer">
           <legend><i class="icon-asterisk"></i> RAM</legend>                
           <div class="infos">
-            <div class="progress" id="popover-ram">
+            <div class="progress progress-striped" id="popover-ram">
                 <div class="bar bar-<?php echo $ram['alert']; ?>" style="width: <?php echo $ram['percentage']; ?>%;"><?php echo $ram['percentage']; ?>%</div>
             </div>
             <div id="popover-ram-head" class="hide">Top RAM eaters</div>
@@ -119,7 +116,7 @@ function shell_to_html_table_result($shellExecOutput) {
         <fieldset id="check-swap" class="top-buffer">
           <legend><i class="icon-refresh"></i> SWAP</legend>                
           <div class="infos">
-            <div class="progress">
+            <div class="progress progress-striped">
               <div class="bar bar-<?php echo $swap['alert']; ?>" style="width: <?php echo $swap['percentage']; ?>%;"><?php echo $swap['percentage']; ?>%</div>
             </div>
             Free: <span class="text-success"><?php echo $swap['free']; ?>Mb</span>  &middot; Used: <span class="text-warning"><?php echo $swap['used']; ?>Mb</span> &middot; Total: <?php echo $swap['total']; ?>Mb
@@ -132,12 +129,13 @@ function shell_to_html_table_result($shellExecOutput) {
             <p>Loads: <?php echo $cpu['loads']; ?> [1 min] &middot; <?php echo $cpu['loads5']; ?> [5 min] &middot; <?php echo $cpu['loads15']; ?> [15 min]</p>
             <p>Tunning at <span class="text-info"><?php echo $cpu['current']; ?></span> (min: <?php echo $cpu['min']; ?>  &middot;  max: <?php echo $cpu['max']; ?>)</p>
             <p>Governor: <strong><?php echo $cpu['governor']; ?></strong></p>
-            <div class="progress" id="popover-cpu">
+            <p><strong>Heat: </strong><span class="text-info"><?php echo $cpu_heat['degrees']; ?>°C</span></p> 
+            <div class="progress progress-striped" id="popover-cpu">
               <div class="bar bar-<?php echo $cpu_heat['alert']; ?>" style="width: <?php echo $cpu_heat['percentage']; ?>%;"><?php echo $cpu_heat['percentage']; ?>%</div>
             </div>
             <div id="popover-cpu-head" class="hide">Top CPU eaters</div>
             <div id="popover-cpu-body" class="hide"><?php echo shell_to_html_table_result($cpu_heat['detail']); ?></div>
-            <p>Heat: <span class="text-info"><?php echo $cpu_heat['degrees']; ?>°C</span></p>                        
+                                   
           </div>
         </fieldset>           
 
@@ -146,7 +144,7 @@ function shell_to_html_table_result($shellExecOutput) {
           <?php for ($i=0; $i<sizeof($hdd); $i++) { ?>
           <div> <i class="icon-folder-open"></i> <?php echo $hdd[$i]['name']; ?></div>
           <div class="infos"> 
-            <div class="progress">
+            <div class="progress progress-striped">
               <div class="bar bar-<?php echo $hdd[$i]['alert']; ?>" style="width: <?php echo $hdd[$i]['percentage']; ?>%;"><?php echo $hdd[$i]['percentage']; ?>%</div>
             </div>          
             <p>
@@ -162,9 +160,12 @@ function shell_to_html_table_result($shellExecOutput) {
         <fieldset id="check-network" class="top-buffer">
           <legend><i class="icon-globe"></i> Network <span class="icon"><?php echo icon_alert($net_connections['alert']); ?></span></legend>                
           <div class="infos">
-            <p>IP: <span class="text-info"><?php echo Rbpi::ip(); ?></span> [internal]</p>
+            <button id="show-ip-btn" class="btn btn-link pull-right">Visa/dölj IP-information</button> 
+            <p>IP: <span class="text-info"><?php echo Rbpi::ip(); ?></span> &middot; Subnet: <span class="text-info"><?php echo Rbpi::subnet(); ?></span> &middot; Gateway: <span class="text-info"><?php echo Rbpi::gateway(); ?></span></p>
+            <p>External IP: <span class="text-info"><?php echo Rbpi::extIp(); ?></span></p>            
             <p>Received: <strong><?php echo $net_eth['down']; ?>Mb</strong> &middot; Sent: <strong><?php echo $net_eth['up']; ?>Mb</strong> &middot; Total: <?php echo $net_eth['total']; ?>Mb</p>
             <p>Connections: <?php echo $net_connections['connections']; ?></p>
+            <div id='show-ip' class="hidden top-buffer well alert-success pre"><h5>ifconfig</h5><?php echo Rbpi::ifconfig(); ?><h5>routes</h5><?php echo Rbpi::route(); ?></div>
           </div>
         </fieldset>          
        

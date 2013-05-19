@@ -1,5 +1,11 @@
+<?php 
+  namespace raspcontrol;  
+  spl_autoload_register();
+  use raspcontrol\Rbpi; 
+  
+  require_once "/home/ulogger/functions.php";
+?>
 <!DOCTYPE html>
-<?php require_once "/home/ulogger/functions.php"; ?>
 <html>
 <head>
   <?php printHead('Licencia uLogger'); ?>
@@ -20,14 +26,13 @@
       <div class="span9">       
         <?php include("ulogger/templates/messages.tpl.php"); ?>   
         <h1 class="page-title">Serverinställningar</h1>
-                                
+
         <fieldset class="top-buffer">
-          <legend>IP-adress</legend>          
-          <button id="show-ip-btn" class="btn btn-link pull-right">Visa/dölj IP-information</button>          
+          <legend>IP-adress</legend>                  
           <div class="control-group">
             <label class="checkbox">
               <input type="checkbox" id="dhcp" <?php if (getVar('ulogger_ip_dhcp', "") == 'true') { echo "checked"; }; ?>> Använd DHCP 
-              (<a href="#" id="ip-info-tooltip" rel="tooltip" data-html="true" title="<?php echo getIPtooltip(); ?>">aktuell IP</a>).
+              (<a href="#" id="ip-info-tooltip" rel="tooltip" data-html="true" title="<?php echo Rbpi::ip(); ?>">aktuell IP</a>).
             </label>
           </div>          
           <div id="fixed-ip">          
@@ -45,7 +50,6 @@
             </div>  
           </div>
           <button id="changeip" class="btn">Ändra IP-adress</button>          
-          <div id='show-ip' class="hidden top-buffer well alert-success pre"><?php echo getIPinfo(); ?></div>
         </fieldset>        
 
         <fieldset class="top-buffer">
@@ -61,9 +65,9 @@
         <fieldset class="top-buffer">
           <legend>TightVNC Server</legend>
           <p>Fjärrstyr uLoggser från Windows genom att installera klienten 
-          <a href='../downloads/UltraVNC_1_1_8_X86_Setup.exe'>UltraVNC Viewer</a> 
-           och anslut mot adressen <?php echo getFwIpHtml(); ?>.
-            Mer information om VNC-klienten finns på sidan <a href='http://www.uvnc.com'>www.uvnc.com</a>.
+          <a href='../downloads/UltraVNC_1_1_8_X86_Setup.exe'>UltraVNC Viewer</a> och anslut mot adressen 
+          <?php echo sprintf('<a href="http://%1$s:%2$s">%1$s:%2$s</a> (lösenord: %3$s)', Rbpi::extIp(), VNC_PORT, VNC_PASS); ?>.
+          Mer information om VNC-klienten finns på sidan <a href='http://www.uvnc.com'>www.uvnc.com</a>.
           </p>
         </fieldset>   
 

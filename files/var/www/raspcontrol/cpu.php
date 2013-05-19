@@ -49,7 +49,7 @@ class CPU {
 	$cpuDetails = shell_exec('ps -e -o pcpu,user,args --sort=-pcpu | sed "/^ 0.0 /d" | head -' . self::$DETAIL_LINE_COUNT);
 
 	$result['degrees'] = round($currenttemp / 1000);
-    $result['percentage'] = round($result['degrees'] / self::$MaxTemp * 100);
+  $result['percentage'] = round($result['degrees'] / self::$MaxTemp * 100);
 
 	if ($result['percentage'] >= '80')
       $result['alert'] = 'danger';

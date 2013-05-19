@@ -1,3 +1,9 @@
+// Show/hid IP info
+$("#show-ip-btn").click(function() {
+  $("#show-ip").hasClass('hidden') ? $("#show-ip").removeClass('hidden') : $("#show-ip").addClass('hidden');
+  return false;
+});
+
 $('#popover-ram').popover({
 	html : true,
 	placement : 'bottom',

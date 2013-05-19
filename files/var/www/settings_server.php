@@ -2,6 +2,63 @@
 
 require_once "/home/ulogger/functions.php";
 
+function validateUpgradeFile($filename) {
+  $version_string = phpShellExec("get_tar_comment " . UPLOAD_DIR . '/' . $filename);  
+  // Check  if the file includs a valid version comment.  
+  $pos = strpos($version_string, UPGRADE_VERSION_ID);
+  if ($pos === false) {    
+    return false;
+  }
+  else {
+    $version_string = str_replace(UPGRADE_VERSION_ID, "", $version_string);
+    return $version_string;
+  }   
+}
+
+function setIP($dhcp, $ip_address = '', $ip_gateway = '', $ip_netmask = '') {
+  if ($dhcp == 'true') {
+    // Set dhcp
+    setVar('ulogger_ip_dhcp', 'true');
+    $config = "iface eth0 inet dhcp\n";
+  }
+  else {
+    // Validera IP
+    $error = '';
+    $ip_address = $_POST['ip_address'];
+    $ip_gateway = $_POST['ip_gateway'];
+    $ip_netmask = $_POST['ip_netmask'];
+    if (!filter_var($ip_address, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) { $error .= "IP-adress "; }
+    if (!filter_var($ip_gateway, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) { $error .= "gateway "; }
+    if (!filter_var($ip_netmask, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) { $error .= "nätmask "; }
+    // Set static IP
+    if (empty($error)) {
+      setVar('ulogger_ip_dhcp', 'false');
+      setVar('ulogger_ip_address', $ip_address);
+      setVar('ulogger_ip_gateway', $ip_gateway);
+      setVar('ulogger_ip_netmask', $ip_netmask);
+      $config = "iface eth0 inet static\naddress $ip_address\ngateway $ip_gateway\nnetmask $ip_netmask\n";
+    }
+    else {
+      throw new Exception("Felaktig: " . $error);
+    }  
+  }
+  file_put_contents("/home/ulogger/interfaces.d", $config);    
+  return true;      
+} 
+
+function setHtmlPort($port) {
+  // Update virtual hosts
+  $filename = '/etc/apache2/sites-available/default';
+  $pattern = "'<virtualhost'si";
+  $newline = "<VirtualHost *:80 *:" . $port . ">\n";
+  replaceLineInFile($filename, $pattern, $newline);
+  // Update ports
+  file_put_contents('/etc/apache2/myports.conf', "Listen " . $port);
+  setVar('ulogger_http_port', $port);
+  // Reload Apache  
+  return phpShellExec('reload_apache');
+}
+
 $data = array('action' => 'none', 'statusMsg' => '', 'errorMsg' => '');
 
 if (isset($_GET['action']) && !empty($_GET['action'])) {

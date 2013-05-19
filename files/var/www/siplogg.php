@@ -1,5 +1,27 @@
-<!DOCTYPE html>                    
-<?php require_once "/home/ulogger/functions.php"; ?>
+<?php 
+
+require_once "/home/ulogger/functions.php"; 
+
+function getFileListHTML() {
+  $files = getFileList(TRACE_DIR . "/");
+  $fileTable = "<tbody>";
+  $id = 0;
+  foreach ($files as $file) {
+    if ($file['type'] == 'file') {
+      $fileTable .= "<tr><td class='file'><input type='checkbox' value='" . $file['name'] . "' name='file_" . $id . "'></td>"
+                  . "<td><a href=../trace/" . $file['name'] . ">" . $file['name'] . "</a></td>"
+                  . "<td>" .  $file['date'] . "</td>"
+                  . "<td>" .  formatSize($file['size']) . "</td></tr>";
+      $id += 1;
+    }
+  }
+  if ($id == 0) $fileTable .= "<tr><td>Inga sparade loggfiler ...</td></tr></tbody>";
+  return $fileTable;
+}
+
+?>
+
+<!DOCTYPE html>
 <html>
 <head>
   <?php printHead('Licencia uLogger'); ?>
