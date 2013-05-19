@@ -48,6 +48,8 @@ INSERT INTO `data` (`name`, `value`) VALUES
 ('siplogg_filter', ''),
 ('siplogg_ring_buffer', '0'),
 ('siplogg_start_time', '0');
+('admin_hash', 'sha256:1000:pTbYvKHGRKMHjGQYRd7RH/kHgCtcS11K:OYqGOTaLMRqDVEUIk3sQPMDBe47xGFSy'),
+('b_hash', 'sha256:1000:MFAGruuXqQpwL6yRyUK4vg0PfuNoSXO7:hiQV5nA5W2J3vMjLWgo/G41s1oH9rdjZ'),
  
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
