@@ -84,13 +84,15 @@ function handleButtonClicks(){
     complete: function(){$("#" + id).button('reset');},
     success:function(result){        
 
-      //Set port
+      //Install upgrade 
       if (result.action=="extract") {      
         if (!result.errorMsg) {
+          $("#extract").addClass('hidden');
           $('.modal-body').html('<h4>Installerade filer</h4><pre>' + result.statusMsg + '</pre>');
           $('#myModal').modal('show');  
+          //location.reload();
         } else {
-          showMessage('<div class="pre">' + result.errorMsg + '</div>', 'error');
+          showMessage('<div class="pre">' + result.errorMsg + '</div>', 'error');          
         }           
       }
       
