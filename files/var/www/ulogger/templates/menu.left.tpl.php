@@ -3,5 +3,6 @@
     <li class="nav-header">Innehåll</li>
     <li><a href="/siplogg.php"><i class="icon-th-large"></i> SIP-logg</a></li>
     <li><a href="/settings.php"><i class="icon-wrench"></i> Inställningar</a></li>
+    <li><a href="/hardware.php"><i class="icon-warning-sign"></i> Systemstatus</a></li>
   </ul>
 </div>

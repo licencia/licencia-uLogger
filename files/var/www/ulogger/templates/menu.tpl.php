@@ -18,6 +18,7 @@
               <li class="divider"></li>
               <li class="nav-header">Övrigt</li>
               <li><a href="/settings.php">Inställningar</a></li>
+              <li><a href="/hardware.php">Systemstatus</a></li>
             </ul>
           </li>
           <?php endif; ?>  

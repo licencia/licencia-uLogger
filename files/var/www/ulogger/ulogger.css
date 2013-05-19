@@ -11,8 +11,24 @@
 .hero-unit h1 { margin-bottom: 10px; }
 .vnc1-image { max-width: 250px; }
 
-/* Settings.php */
-/*.bar { height: 18px; background: green; }*/
+/* hardware.php */
+.hardware [class^="icon-"], .hardware [class*=" icon-"] { vertical-align: baseline; }
+
+/* Bootstrap override */
+.popover {
+	width: 650px;
+	max-width: 650px;
+}
+.infos div .popover-content {
+	margin-bottom: 0px;
+}
+.popover-content table {
+	margin-bottom: 0px;
+}
+
+
+
+
 
 /* Logga in
 -------------------------------------------------- */
