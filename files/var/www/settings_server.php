@@ -4,6 +4,26 @@ require_once "/home/ulogger/functions.php";
 
 $data = array('action' => 'none', 'statusMsg' => '', 'errorMsg' => '');
 
+if (isset($_GET['action']) && !empty($_GET['action'])) {
+  $data['action'] = $_GET['action'];
+  switch($data['action']) {
+    case 'upload' :
+      $filename = $_GET['filename'];
+      //if ($version_string = getUpgradeFile()) {
+      if ($version_string = validateUpgradeFile($filename)) {            
+        $data['action'] = $version_string;
+        setVar('ulogger_upgrade_filename', $filename);
+        setVar('ulogger_upgrade_version', $version_string);
+        //set_message("En uppgradering till version $version_string har detekterats.", 'success');
+      }
+      else {
+        set_message("$filename innehåller inte någon uppgradering.", 'warning');
+        cleanUpgradeDir();
+      }
+      break; 
+  }
+}
+
 if (isset($_POST['action']) && !empty($_POST['action'])) {
   $data['action'] = $_POST['action'];
   switch($data['action']) {
@@ -13,6 +33,18 @@ if (isset($_POST['action']) && !empty($_POST['action'])) {
       $data['action'] = shell_exec("tar --test-label -f /var/www/uploads/$filename 2>&1");      
       //tar --test-label -f /var/www/uploads/ulogger.1.x-dev.tar.gz
     break;*/
+
+    case 'extract' :
+      $result = phpShellExec('extract_tar ' . UPLOAD_DIR . '/' . getVar('ulogger_upgrade_filename', ''));      
+      if (strrpos($result, "ulogger-tar-error") === false) {        
+        setVar('ulogger_version', getVar('ulogger_upgrade_version', ''));
+        cleanUpgradeDir();
+        $data['statusMsg'] = $result;        
+      }
+      else {        
+        $data['errorMsg'] = $result;
+      }      
+      break;
     
     case 'changeip' :
       $dhcp = $_POST['dhcp'];

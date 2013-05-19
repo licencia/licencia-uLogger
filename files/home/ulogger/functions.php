@@ -11,7 +11,6 @@ $allowed_pages = array('index.php', 'login_server.php', 'login.php', 'logout.php
 $logged_in = isset($_SESSION['logged_in']) && ($_SESSION['logged_in'] == 'yes');
  
 // uLogger
-//define('ULOGGER_VERSION', '1.x-dev');
 define('ULOGGER_VERSION_STRING', 'Licencia uLogger version %s, &copy; 2013.');
 define('EXT_IP_SERVER', 'http://checkip.dyndns.org');
 define('VNC_PORT', '5091');
@@ -21,7 +20,9 @@ define('DB_USER', 'root');
 define('DB_PASS', 'ulogger');
 define('ULOGGER_USER', 'licencia');
 define('ULOGGER_PASS', 'ulogger');
-define('UPLOAD_DIR', '/home/uploads');
+define('UPLOAD_DIR', '/var/www/FILES/uploads');
+define('UPGRADE_FILE_MASK', '/var/www/FILES/uploads/*.tar.gz');
+define('UPGRADE_VERSION_ID', 'ulogger-update-');
 
 // Siplogg
 define('APACHE_DIR', '/var/www');
@@ -40,6 +41,12 @@ if (mysqli_connect_errno(@mysqli_connect("localhost", DB_USER, DB_PASS, DB_NAME)
  **************************************************/
 
 require_once "password.php";
+
+function add_user($username, $password) {
+  $hash = create_hash($password);
+  setVar($username . '_hash', $hash);
+  return $hash;
+}
  
 function valid_user($username, $password) {
   return validate_password($password, getVar($username . '_hash', ''));
@@ -281,6 +288,29 @@ function theme_messages() {
     $output .= "</div>\n";
   }
   return $output;
+}
+
+// Remove all upgrades
+function cleanUpgradeDir() {
+  $files = glob(UPGRADE_FILE_MASK);
+  foreach ($files as $filename) {
+    unlink($filename);
+  }
+  setVar('ulogger_upgrade_filename', '');
+  setVar('ulogger_upgrade_version', '');  
+}
+
+function validateUpgradeFile($filename) {
+  $version_string = phpShellExec("get_tar_comment " . UPLOAD_DIR . '/' . $filename);  
+  // Check  if the file includs a valid version comment.  
+  $pos = strpos($version_string, UPGRADE_VERSION_ID);
+  if ($pos === false) {    
+    return false;
+  }
+  else {
+    $version_string = str_replace(UPGRADE_VERSION_ID, "", $version_string);
+    return $version_string;
+  }   
 }
 
 /***************************************************

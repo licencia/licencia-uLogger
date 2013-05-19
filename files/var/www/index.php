@@ -9,8 +9,7 @@
   <div id="page">
     <div class="container">
     <?php include("ulogger/templates/messages.tpl.php"); ?>        
-    <!-- START CONTENT -->
-      
+    <!-- START CONTENT --> 
       <div class="hero-unit">
         <h1>Licencia uLo<span>gg</span>er</h1>
         <p>Med hjälp av Licencia uLogger kan du enkelt sätta upp en loggserver hos en kund där du behöver övervaka SIP-trafiken. Licencia uLogger körs på Raspberry PI vilket är en liten enkortsdator som kan utföra det mesta en PC kan.</p>

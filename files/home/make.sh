@@ -6,7 +6,7 @@
 # - sudo chmod 755 /home/make.sh
 # - sudo /home/make.sh
 # Installera
-# - sudo tar zxvfp /home/ulogger.1.0-beta1.tar.gz -C /
+# - sudo tar zxvfp /home/ulogger.1.0-alfa1.tar.gz -C /
 
 
 sudo chown root:www-data /home/install.make/var/www/FILES/trace
@@ -28,18 +28,18 @@ VER=`cat /home/install.make/home/ulogger/version.info`
 NAME="/home/ulogger.$VER.tar.gz"
 
 cd /home/install.make
-sudo tar -czvf $NAME --label="$VER" .
+sudo tar -czvf $NAME --label="ulogger-update-$VER" .
 
 echo
 echo -----------------------------------------------------------
-echo -e "Creating file: $NAME (\033[33m$VER\033[0m)"
+echo -e "Filnamn: $NAME (\033[33m$VER\033[0m)"
 
 # Test
-tar -tf $NAME #print comment and files
-tar --test-label -f $NAME #print comment
+#tar -tf $NAME #print comment and files
+#tar --test-label -f $NAME #print comment
 
 #Kontrollerar om $VER = arkivets kommentar
-if tar --test-label -f $NAME $VER; then
+if tar --test-label -f $NAME ulogger-update-$VER; then
   echo -e "\033[32mOK: Arkiv skapat"
 else
   echo -e "\033[31mNot OK: Version matchar inte arkiv."

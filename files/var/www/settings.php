@@ -20,7 +20,7 @@
       <div class="span9">       
         <?php include("ulogger/templates/messages.tpl.php"); ?>   
         <h1 class="page-title">Serverinställningar</h1>
-                
+                                
         <fieldset class="top-buffer">
           <legend>IP-adress</legend>          
           <button id="show-ip-btn" class="btn btn-link pull-right">Visa/dölj IP-information</button>          
@@ -69,19 +69,35 @@
 
         <fieldset class="top-buffer">
         <legend>Uppgradera uLogger</legend>
-          <p>?</p>
-          
+          <p>Ladda upp en uppgradering. Om uppgraderingen är giltig visas en uppgraderingsknapp som startar själva uppgraderingen.</p>          
+          <div id="progress" class="progress progress-success progress-striped top-buffer2 hidden">
+              <div class="bar" style="width: 0%;"></div>
+          </div>             
           <span class="btn btn-success fileinput-button">
-            <i class="icon-plus icon-white"></i>
-            <span>Välj fil ...</span>
+            <i class="icon-upload icon-white"></i>
+            <span>Ladda upp ...</span>
             <input id="fileupload" type="file" multiple="" name="files[]">
-          </span>          
+          </span>  
           
-          <div id="progress" class="progress progress-success progress-striped top-buffer">
-              <div class="bar" style="width: 2%;"></div>
-          </div>   
-          <p id="files"></p>
-        </fieldset> 
+          <?php if (getVar('ulogger_upgrade_version', '') != ''): ?> 
+          <button id="extract" class="btn btn-danger">
+            <i class="icon-play icon-white"></i>
+            <span>Uppgradera till version <?php echo getVar('ulogger_upgrade_version', ''); ?></span>            
+          </button>     
+          <?php endif; ?>  
+
+          <!-- Modal upgrade info -->
+          <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              <h3 id="myModalLabel">Uppgradering klar</h3>
+            </div>
+            <div class="modal-body"></div>
+            <!--div class="modal-footer">
+              <button class="btn" data-dismiss="modal" aria-hidden="true">OK</button>    
+            </div-->
+          </div>          
+        </fieldset>         
       
         <fieldset class="top-buffer">
           <legend>Avstängning/omstart av server</legend>
@@ -89,8 +105,6 @@
           utan att först stänga av servern kan SD-kortet sluta fungera och behöva återställas.</p>
           <button id="halt" class="btn btn-inverse">Stäng av</button>
           <button id="reboot" class="btn btn-inverse">Starta om</button>
-          <a href="#" id="version-btn" class="btn btn-info pull-right" rel="popover" 
-          data-content="<?php echo sprintf(ULOGGER_VERSION_STRING, getVar('ulogger_version', '')); ?>">Visa version</a>  
         </fieldset>
         
       </div>

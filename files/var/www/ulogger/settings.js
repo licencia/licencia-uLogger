@@ -16,10 +16,23 @@ $(document).ready(function(){
   });
 
   // Initiera en popover
-  $("#version-btn").popover({ 'selector': '', 'placement': 'bottom' });  
+  //$("#version-btn").popover({ 'selector': '', 'placement': 'bottom' });  
   
-  // Initiera filupladdning
-  initUploads();
+  // Ladda upp en fil
+  $("#fileupload").click(initUploads);
+  
+  /*
+  $.getJSON('test.php', { name: "John", time: "2pm" }, function(data) {
+    $("#version-btn").html(data.action);
+  });
+  */
+
+  /*
+  $.getJSON('test.php', { action: "stuff" }, function(data) {})
+  .done(function() { console.log( "second success" ); })
+  .fail(function() { console.log( "error" ); });
+*/
+
 
 });
 
@@ -27,9 +40,16 @@ function initUploads(){
   $('#fileupload').fileupload({
     url: '/bootstrap/file-upload/upload_server.php',
     dataType: 'json',
+    beforeSend: function(){$("#progress").removeClass('hidden');},
     done: function (e, data) {
-      $.each(data.result.files, function (index, file) {
-          $('<p/>').text(file.name).insertAfter('#progress');
+      console.log( data.result.files);
+      //$.getJSON('test.php', { filename: data.result.files['0'].name }, function(data) {
+      $.getJSON('settings_server.php', { action: 'upload', filename: data.result.files['0'].name }, function(data) {
+        
+        //console.log( data.result.files);
+        console.log( data.action);
+        //showMessage(data.result.files['0'].name, 'success');
+        location.reload();
       });
     },   
     progressall: function (e, data) {
@@ -50,7 +70,7 @@ function handleButtonClicks(){
   $.ajax({
     url:"/settings_server.php",
     type: 'POST',
-    //cache: false,
+    cache: false,
     dataType: 'json',
     data: {
       action: this.id,
@@ -62,8 +82,18 @@ function handleButtonClicks(){
     },    
     beforeSend: function(){$("#" + id).button('loading');},
     complete: function(){$("#" + id).button('reset');},
-    success:function(result){  
-      //.done .fail .always
+    success:function(result){        
+
+      //Set port
+      if (result.action=="extract") {      
+        if (!result.errorMsg) {
+          $('.modal-body').html('<h4>Installerade filer</h4><pre>' + result.statusMsg + '</pre>');
+          $('#myModal').modal('show');  
+        } else {
+          showMessage('<div class="pre">' + result.errorMsg + '</div>', 'error');
+        }           
+      }
+      
       // Change ip
       if (result.action=="changeip") {
         if (!result.errorMsg) {

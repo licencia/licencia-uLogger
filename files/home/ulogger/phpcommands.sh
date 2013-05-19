@@ -32,7 +32,20 @@ case "$1" in
   restart_eth0)
     ifdown eth0 && ifup eth0
     ;;
+  
+  get_tar_comment)  
+    tar --test-label -f $2
+    ;;
 
+  extract_tar)  
+    #tar zxvfp $2 -C /tmp/slask #test
+    tar zxvfp $2 -C /
+    errorcode=$?
+    if [[ $errorcode != 0 ]] ; then
+        echo ulogger-tar-error $errorcode
+    fi        
+    ;;
+    
   test)
     ls /
     ;;
