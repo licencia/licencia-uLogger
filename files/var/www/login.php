@@ -1,5 +1,6 @@
+<?php require_once "ulogger/functions.php"; ?>
+
 <!DOCTYPE html>
-<?php require_once "/home/ulogger/functions.php"; ?>
 <html>
 <head>
   <?php printHead('Licencia uLogger'); ?>  

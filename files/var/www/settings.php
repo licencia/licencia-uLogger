@@ -1,10 +1,12 @@
-<?php 
+<?php   
   //Load raspcontrol
-  namespace ulogger\raspcontrol;
+  namespace raspcontrol;
   spl_autoload_register();
-
-  require_once "/home/ulogger/functions.php";
+  set_include_path('ulogger');
+  
+  require_once "ulogger/functions.php";
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>

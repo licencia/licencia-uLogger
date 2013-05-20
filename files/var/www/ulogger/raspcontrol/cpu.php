@@ -1,6 +1,6 @@
 <?php
 
-namespace ulogger\raspcontrol;
+namespace raspcontrol;
 
 class CPU {
 

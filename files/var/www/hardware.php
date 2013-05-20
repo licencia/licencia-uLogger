@@ -1,6 +1,10 @@
 <?php
-namespace ulogger\raspcontrol;
+
+namespace raspcontrol;
 spl_autoload_register();
+set_include_path('ulogger');
+
+require_once "ulogger/functions.php";
 
 $uptime = Uptime::uptime();
 $ram = Memory::ram();
@@ -60,7 +64,6 @@ function shell_to_html_table_result($shellExecOutput) {
 ?>
 
 <!DOCTYPE html>
-<?php require_once "/home/ulogger/functions.php"; ?>
 <html>
 <head>
   <?php printHead('Licencia uLogger'); ?>

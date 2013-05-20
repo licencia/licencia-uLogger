@@ -21,7 +21,7 @@ function logTime(startTime){
       
 function handleButtonClicks(){   
   $.ajax({
-    url:"/siplogg_server.php",                  
+    url:"ulogger/siplogg_server.php",                  
     type: 'POST',
     //cache: false,
     dataType: 'json',
@@ -39,7 +39,7 @@ function handleButtonClicks(){
 
 function updateStatus(){     
   $.ajax({
-    url:"/siplogg_server.php",                  
+    url:"ulogger/siplogg_server.php",                  
     type: 'POST',
     //cache: false,
     data: {action: 'getstatus'},

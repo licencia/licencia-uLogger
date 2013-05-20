@@ -1,6 +1,6 @@
 <?php 
 
-require_once "/home/ulogger/functions.php"; 
+require_once "ulogger/functions.php"; 
 
 function getFileListHTML() {
   $files = getFileList(TRACE_DIR . "/");

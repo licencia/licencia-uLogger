@@ -9,9 +9,6 @@ $(document).ready(function(){
   });
   ($('#dhcp').prop('checked')) ? $('#fixed-ip').hide() : $('#fixed-ip').show();
 
-  // Initiera en popover
-  //$("#version-btn").popover({ 'selector': '', 'placement': 'bottom' });  
-  
   // Ladda upp en fil
   $("#fileupload").click(initUploads);
   
@@ -62,7 +59,7 @@ function handleButtonClicks(){
   var id = this.id;
   
   $.ajax({
-    url:"/settings_server.php",
+    url:"ulogger/settings_server.php",
     type: 'POST',
     cache: false,
     dataType: 'json',

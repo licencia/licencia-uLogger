@@ -8,16 +8,14 @@ $(document).ready(function(){
   //Hantera knapptryckningar
   $(".login-button, .logout-button").click(handleLogin);   
   
-
   // Initiera/visa bootstrap tooltip för länkar.          
   $("a").tooltip();    
 });
 
-
 // login/logout
 function handleLogin(){  
   $.ajax({
-    url:"/login_server.php",                    
+    url:"ulogger/login_server.php",                    
     type: 'POST',
     //cache: false,
     dataType: 'json',
