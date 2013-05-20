@@ -1,16 +1,6 @@
 <?php
-
-namespace raspcontrol;
-
+namespace ulogger\raspcontrol;
 spl_autoload_register();
-
-use raspcontrol\Uptime;
-use raspcontrol\Memory;
-use raspcontrol\CPU;
-use raspcontrol\Storage;
-use raspcontrol\Network;
-use raspcontrol\Rbpi;
-use raspcontrol\Users;
 
 $uptime = Uptime::uptime();
 $ram = Memory::ram();
@@ -93,13 +83,25 @@ function shell_to_html_table_result($shellExecOutput) {
         <fieldset id="check-system" class="top-buffer">
           <legend><i class="icon-cog"></i> System<span class="icon"></span></legend>
           <div class="infos">
-            <p>Hostname: <span class="text-info"><?php echo Rbpi::hostname(true); ?></span></p>
-            <p>Distribution: <span class="text-info"><?php echo Rbpi::distribution(); ?></span></p>
+            <p>Hostname: <span class="text-success"><?php echo Rbpi::hostname(true); ?></span></p>
+            <p>Distribution: <span class="text-success"><?php echo Rbpi::distribution(); ?></span></p>
             <p>Kernel: <?php echo Rbpi::kernel(); ?></p>
             <p>Firmware: <?php echo Rbpi::firmware(); ?></p>
             <p>Uptime: <?php echo $uptime; ?></p>
           </div>
         </fieldset>
+        
+        <fieldset id="check-network" class="top-buffer">
+          <legend><i class="icon-globe"></i> Network <span class="icon"><?php echo icon_alert($net_connections['alert']); ?></span></legend>                
+          <div class="infos">
+            <button id="show-ip-btn" class="btn btn-link pull-right">Visa/dölj IP-information</button> 
+            <p>IP: <span class="text-success"><?php echo Rbpi::ip(); ?></span> &middot; Subnet: <span class="text-success"><?php echo Rbpi::subnet(); ?></span> &middot; Gateway: <span class="text-success"><?php echo Rbpi::gateway(); ?></span></p>
+            <p>External IP: <span class="text-success"><?php echo Rbpi::extIp(); ?></span></p>            
+            <p>Received: <strong><?php echo $net_eth['down']; ?>Mb</strong> &middot; Sent: <strong><?php echo $net_eth['up']; ?>Mb</strong> &middot; Total: <?php echo $net_eth['total']; ?>Mb</p>
+            <p>Connections: <?php echo $net_connections['connections']; ?></p>
+            <div id='show-ip' class="hidden top-buffer well alert-success pre"><h5>ifconfig</h5><?php echo Rbpi::ifconfig(); ?><h5>routes</h5><?php echo Rbpi::route(); ?></div>
+          </div>
+        </fieldset>             
        
         <fieldset id="check-ram" class="top-buffer">
           <legend><i class="icon-asterisk"></i> RAM</legend>                
@@ -127,9 +129,9 @@ function shell_to_html_table_result($shellExecOutput) {
           <legend><i class="icon-tasks"></i> CPU <span class="icon"><?php echo icon_alert($cpu['alert']); ?></span></legend>    
           <div class="infos">
             <p>Loads: <?php echo $cpu['loads']; ?> [1 min] &middot; <?php echo $cpu['loads5']; ?> [5 min] &middot; <?php echo $cpu['loads15']; ?> [15 min]</p>
-            <p>Tunning at <span class="text-info"><?php echo $cpu['current']; ?></span> (min: <?php echo $cpu['min']; ?>  &middot;  max: <?php echo $cpu['max']; ?>)</p>
+            <p>Tunning at <span class="text-success"><?php echo $cpu['current']; ?></span> (min: <?php echo $cpu['min']; ?>  &middot;  max: <?php echo $cpu['max']; ?>)</p>
             <p>Governor: <strong><?php echo $cpu['governor']; ?></strong></p>
-            <p><strong>Heat: </strong><span class="text-info"><?php echo $cpu_heat['degrees']; ?>°C</span></p> 
+            <p><strong>Heat: </strong><span class="text-success"><?php echo $cpu_heat['degrees']; ?>°C</span></p> 
             <div class="progress progress-striped" id="popover-cpu">
               <div class="bar bar-<?php echo $cpu_heat['alert']; ?>" style="width: <?php echo $cpu_heat['percentage']; ?>%;"><?php echo $cpu_heat['percentage']; ?>%</div>
             </div>
@@ -157,18 +159,6 @@ function shell_to_html_table_result($shellExecOutput) {
           <?php } ?>
          </fieldset>  
 
-        <fieldset id="check-network" class="top-buffer">
-          <legend><i class="icon-globe"></i> Network <span class="icon"><?php echo icon_alert($net_connections['alert']); ?></span></legend>                
-          <div class="infos">
-            <button id="show-ip-btn" class="btn btn-link pull-right">Visa/dölj IP-information</button> 
-            <p>IP: <span class="text-info"><?php echo Rbpi::ip(); ?></span> &middot; Subnet: <span class="text-info"><?php echo Rbpi::subnet(); ?></span> &middot; Gateway: <span class="text-info"><?php echo Rbpi::gateway(); ?></span></p>
-            <p>External IP: <span class="text-info"><?php echo Rbpi::extIp(); ?></span></p>            
-            <p>Received: <strong><?php echo $net_eth['down']; ?>Mb</strong> &middot; Sent: <strong><?php echo $net_eth['up']; ?>Mb</strong> &middot; Total: <?php echo $net_eth['total']; ?>Mb</p>
-            <p>Connections: <?php echo $net_connections['connections']; ?></p>
-            <div id='show-ip' class="hidden top-buffer well alert-success pre"><h5>ifconfig</h5><?php echo Rbpi::ifconfig(); ?><h5>routes</h5><?php echo Rbpi::route(); ?></div>
-          </div>
-        </fieldset>          
-       
         <fieldset id="check-users" class="top-buffer">
           <legend><i class="icon-user"></i> Users <span class="icon"><span class="badge"><?php echo sizeof($users); ?></span></span></legend>                
           <div class="infos">
@@ -176,7 +166,7 @@ function shell_to_html_table_result($shellExecOutput) {
               <?php
                 if (sizeof($users) > 0) {
                   for ($i=0; $i<sizeof($users); $i++)
-                    echo '<li><span class="text-info">', $users[$i]['user'] ,'</span> since ', $users[$i]['date'], ' at ', $users[$i]['hour'], ' from <strong>', $users[$i]['ip'] ,'</strong> ', $users[$i]['dns'], '</li>', "\n";
+                    echo '<li><span class="text-success">', $users[$i]['user'] ,'</span> since ', $users[$i]['date'], ' at ', $users[$i]['hour'], ' from <strong>', $users[$i]['ip'] ,'</strong> ', $users[$i]['dns'], '</li>', "\n";
                 }
                 else
                   echo '<li>no user logged in</li>';

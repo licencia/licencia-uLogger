@@ -1,10 +1,11 @@
 <?php
 
-namespace raspcontrol;  
+//Load raspcontrol
+namespace ulogger\raspcontrol;
 spl_autoload_register();
-use raspcontrol\Storage;
 $hdd = Storage::hdd();
-  
+
+//Common functions  
 require_once "/home/ulogger/functions.php";
 
 function tcpdumpIsRunning() {

@@ -46,7 +46,9 @@ function updateStatus(){
     dataType: 'json',
     success:function(result){                   
       setStatus(result);
-      setTimeout(updateStatus, 5000);      
+      if (result.running == true) {
+        setTimeout(updateStatus, 5000);      
+      }
     },    
     error:function(xhr, ajaxOptions, thrownError){
       showError("Status: " + xhr.status + " (" + thrownError + ").");

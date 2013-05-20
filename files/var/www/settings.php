@@ -1,8 +1,8 @@
 <?php 
-  namespace raspcontrol;  
+  //Load raspcontrol
+  namespace ulogger\raspcontrol;
   spl_autoload_register();
-  use raspcontrol\Rbpi; 
-  
+
   require_once "/home/ulogger/functions.php";
 ?>
 <!DOCTYPE html>
@@ -28,7 +28,8 @@
         <h1 class="page-title">Serverinställningar</h1>
 
         <fieldset class="top-buffer">
-          <legend>IP-adress</legend>                  
+          <legend>IP-adress</legend> 
+          <p>Ange IP-adress för uLogger.</p>
           <div class="control-group">
             <label class="checkbox">
               <input type="checkbox" id="dhcp" <?php if (getVar('ulogger_ip_dhcp', "") == 'true') { echo "checked"; }; ?>> Använd DHCP 
@@ -54,7 +55,7 @@
 
         <fieldset class="top-buffer">
           <legend>HTTP-portar</legend>
-          <p>Anger vilka portar som webbservern svarar på.</p>
+          <p>Ange vilka portar som webbservern svarar på.</p>
           <div class="form-inline control-group">
             <label>Webbserverport: </label> 80 + 
             <input type="text" id="http_port" class="input-small" size="5" value="<?php echo getVar('ulogger_http_port', ""); ?>">
