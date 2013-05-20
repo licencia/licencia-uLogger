@@ -29,17 +29,13 @@ $(document).ready(function(){
 
 function initUploads(){
   $('#fileupload').fileupload({
-    url: '/bootstrap/file-upload/upload_server.php',
+    url: 'ulogger/upload_server.php',
     dataType: 'json',
     beforeSend: function(){$("#progress").removeClass('hidden');},
     done: function (e, data) {
       console.log( data.result.files);
-      //$.getJSON('test.php', { filename: data.result.files['0'].name }, function(data) {
-      $.getJSON('settings_server.php', { action: 'upload', filename: data.result.files['0'].name }, function(data) {
-        
-        //console.log( data.result.files);
+      $.getJSON('ulogger/settings_server.php', { action: 'upload', filename: data.result.files['0'].name }, function(data) {        
         console.log( data.action);
-        //showMessage(data.result.files['0'].name, 'success');
         location.reload();
       });
     },   
