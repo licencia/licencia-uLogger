@@ -6,7 +6,7 @@
 # - sudo chmod 755 /home/make.sh
 # - sudo /home/make.sh
 # Installera
-# - sudo tar zxvfp /home/ulogger.1.0-alfa1.tar.gz -C /
+# - sudo tar zxvfp /home/ulogger.1.0-beta1.tar.gz -C /
 
 
 sudo chown root:www-data /home/install.make/var/www/FILES/trace

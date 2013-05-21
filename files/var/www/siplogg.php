@@ -9,7 +9,7 @@ function getFileListHTML() {
   foreach ($files as $file) {
     if ($file['type'] == 'file') {
       $fileTable .= "<tr><td class='file'><input type='checkbox' value='" . $file['name'] . "' name='file_" . $id . "'></td>"
-                  . "<td><a href=../trace/" . $file['name'] . ">" . $file['name'] . "</a></td>"
+                  . "<td><a href=../FILES/trace/" . $file['name'] . ">" . $file['name'] . "</a></td>"
                   . "<td>" .  $file['date'] . "</td>"
                   . "<td>" .  formatSize($file['size']) . "</td></tr>";
       $id += 1;
