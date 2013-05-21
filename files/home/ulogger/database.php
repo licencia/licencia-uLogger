@@ -10,11 +10,9 @@ define('DB_PASS', 'ulogger');
 
 
 //MySQLi
-/*
+
 function connect_to_db() {
-  // Connect to database
   $mysqli = new mysqli("localhost", DB_USER, DB_PASS, DB_NAME);
-  // Check connection
   if (mysqli_connect_errno()) {
     //printf("Connect failed: %s\n", mysqli_connect_error());
     exit();
@@ -25,22 +23,29 @@ function connect_to_db() {
 }
 
 function getVar($name, $value = "") {
-  if ($con = connect_to_db()) {        
-    $result = $con->query($con,"SELECT value FROM data WHERE name = '" . $name. "'");        
-    if ($row = $con->fetch_assoc()) {
+  if ($mysqli = connect_to_db()) {        
+    $result = $mysqli->query("SELECT value FROM data WHERE name = '" . $name. "'");        
+    if ($row = $result->fetch_assoc()) {
       return $row['value'];
     }
     else {
       return $value;
     }
-    $con->close();
+    $mysqli->close();
   }
 }
-*/
+
+function setVar($name, $value) {
+  if ($mysqli = connect_to_db()) {    
+    $command = "INSERT INTO data (name, value) VALUES('" . $name . "', '" . $value . "') ON DUPLICATE KEY UPDATE value = '" . $value . "';";
+    $mysqli->query($command);    
+    $mysqli->close();
+  }
+}
+
 
 //MySQL
-
-function connect_to_db() {
+/*function connect_to_db() {
   // Connect to database
   $con = @mysqli_connect("localhost", DB_USER, DB_PASS, DB_NAME);
   // Check connection
@@ -72,6 +77,6 @@ function getVar($name, $value = "") {
     }
     mysqli_close($con);
   }
-}
+}*/
 
 ?>
