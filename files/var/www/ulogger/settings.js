@@ -11,19 +11,6 @@ $(document).ready(function(){
 
   // Ladda upp en fil
   $("#fileupload").click(initUploads);
-  
-  /*
-  $.getJSON('test.php', { name: "John", time: "2pm" }, function(data) {
-    $("#version-btn").html(data.action);
-  });
-  */
-
-  /*
-  $.getJSON('test.php', { action: "stuff" }, function(data) {})
-  .done(function() { console.log( "second success" ); })
-  .fail(function() { console.log( "error" ); });
-*/
-
 
 });
 
@@ -68,81 +55,82 @@ function handleButtonClicks(){
       ip_netmask: $('#ip_netmask').val()
     },    
     beforeSend: function(){$("#" + id).button('loading');},
-    complete: function(){$("#" + id).button('reset');},
-    success:function(result){        
+  })
+  .done(function(result){
 
-      //Install upgrade 
-      if (result.action=="extract") {      
-        if (!result.errorMsg) {
-          $("#extract").addClass('hidden');
-          $('.modal-body').html('<h4>Installerade filer</h4><pre>' + result.statusMsg + '</pre>');
-          $('#myModal').modal('show');  
-          //location.reload();
-        } else {
-          showMessage('<div class="pre">' + result.errorMsg + '</div>', 'error');          
-        }           
-      }
-      
-      // Change ip
-      if (result.action=="changeip") {
-        if (!result.errorMsg) {
-          showMessage(result.statusMsg, 'success');
-          // Starta om eth0.
-          $.ajax({
-            url:"/settings_server.php",
-            type: 'POST',
-            data: {action: 'restart_eth0'}
-          });          
-        } else {
-          showMessage(result.errorMsg, 'error');
-        }                
-      }
-      
-      //Set port
-      if (result.action=="setport") {
-        if (!result.errorMsg) {
-          showMessage(result.statusMsg, 'success');
-        } else {
-          showMessage(result.errorMsg, 'error');
-        }                
-      }
+    //Install upgrade 
+    if (result.action=="extract") {      
+      if (!result.errorMsg) {
+        $("#extract").addClass('hidden');
+        $('.modal-body').html('<h4>Installerade filer</h4><pre>' + result.statusMsg + '</pre>');
+        $('#myModal').modal('show');  
+      } else {
+        showMessage('<div class="pre">' + result.errorMsg + '</div>', 'error');          
+      }           
+    }
+    
+    // Change ip
+    if (result.action=="changeip") {
+      if (!result.errorMsg) {
+        showMessage(result.statusMsg, 'success');
+        // Starta om eth0.
+        $.ajax({
+          url:"/settings_server.php",
+          type: 'POST',
+          data: {action: 'restart_eth0'}
+        });          
+      } else {
+        showMessage(result.errorMsg, 'error');
+      }                
+    }
+    
+    //Set port
+    if (result.action=="setport") {
+      if (!result.errorMsg) {
+        showMessage(result.statusMsg, 'success');
+      } else {
+        showMessage(result.errorMsg, 'error');
+      }                
+    }
 
-      //Halt
-      if (result.action=="halt") {
-        if (!result.errorMsg) {
-          showMessage(result.statusMsg, 'warning');
-          var count = 30;
-          var countdown = setInterval(function(){
-            $("span#countdown").html(count);
-            if (count == 0) {
-              showMessage("Nu kan du koppla ur strömmen till uLoggern.", 'success');
-              clearTimeout(countdown);
-            }
-            count--;
-          }, 1000);
-        } else {
-          showMessage(result.errorMsg, 'error');
-        }                
-      }
-      
-      //Reboot
-      if (result.action=="reboot") {
-        if (!result.errorMsg) {
-          showMessage(result.statusMsg, 'success');
-          var count = 45;
-          var countdown = setInterval(function(){
-            $("span#countdown").html(count);
-            if (count == 0) {
-              window.location = '/index.php';
-            }
-            count--;
-          }, 1000);
-        } else {
-          showMessage(result.errorMsg, 'error');
-        }                
-      }      
-      
-    },
-    error:function(xhr, ajaxOptions, thrownError){showError("Status: " + xhr.status + " (" + thrownError + ").");} 
+    //Halt
+    if (result.action=="halt") {
+      if (!result.errorMsg) {
+        showMessage(result.statusMsg, 'warning');
+        var count = 30;
+        var countdown = setInterval(function(){
+          $("span#countdown").html(count);
+          if (count == 0) {
+            showMessage("Nu kan du koppla ur strömmen till uLoggern.", 'success');
+            clearTimeout(countdown);
+          }
+          count--;
+        }, 1000);
+      } else {
+        showMessage(result.errorMsg, 'error');
+      }                
+    }
+    
+    //Reboot
+    if (result.action=="reboot") {
+      if (!result.errorMsg) {
+        showMessage(result.statusMsg, 'success');
+        var count = 45;
+        var countdown = setInterval(function(){
+          $("span#countdown").html(count);
+          if (count == 0) {
+            window.location = '/index.php';
+          }
+          count--;
+        }, 1000);
+      } else {
+        showMessage(result.errorMsg, 'error');
+      }                
+    }   
+    
+  })  
+  .complete(function(){$("#" + id).button('reset');})  
+  .fail(function(xhr, ajaxOptions, thrownError){
+    showMessage("AJAX-fel: " + xhr.status + " (" + thrownError + ").", "error");
   });
 };

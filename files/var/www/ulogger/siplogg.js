@@ -23,7 +23,6 @@ function handleButtonClicks(){
   $.ajax({
     url:"ulogger/siplogg_server.php",                  
     type: 'POST',
-    //cache: false,
     dataType: 'json',
     data: {
       action: this.id,
@@ -31,30 +30,32 @@ function handleButtonClicks(){
       max_file_size: $('#max_file_size').val(),
       ring_buffer_size: $('#ring_buffer_size').val(),
       files_to_delete: $("#file-table :input").serializeArray()
-    },
-    success:function(result){location.reload();},
-    error:function(xhr, ajaxOptions, thrownError){showError("Status: " + xhr.status + " (" + thrownError + ").");} 
-  });
+    }      
+  })
+  .done(function(result){location.reload();})
+  .fail(function(xhr, ajaxOptions, thrownError){
+    showMessage("AJAX-fel: " + xhr.status + " (" + thrownError + ").", "error");
+  });    
 };      
 
 function updateStatus(){     
   $.ajax({
     url:"ulogger/siplogg_server.php",                  
     type: 'POST',
-    //cache: false,
     data: {action: 'getstatus'},
     dataType: 'json',
-    success:function(result){                   
-      setStatus(result);
-      if (result.running == true) {
-        setTimeout(updateStatus, 5000);      
-      }
-    },    
-    error:function(xhr, ajaxOptions, thrownError){
-      showError("Status: " + xhr.status + " (" + thrownError + ").");
-      setTimeout(updateStatus, 5000);
-    }   
-  });
+  })  
+  .done(function(result){                   
+    setStatus(result);
+    if (result.running == true) {
+      setTimeout(updateStatus, 5000);      
+    }
+  })
+  .fail(function(xhr, ajaxOptions, thrownError){
+    showMessage("AJAX-fel: " + xhr.status + " (" + thrownError + ").", "error");
+    setTimeout(updateStatus, 5000);
+  });    
+  
 }; 
       
 function setStatus(result){

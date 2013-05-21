@@ -17,22 +17,23 @@ function handleLogin(){
   $.ajax({
     url:"ulogger/login_server.php",                    
     type: 'POST',
-    //cache: false,
     dataType: 'json',
     data: {
       action: this.id,
+      //remember_me: $('#remember_me').prop('checked'),
       user: $('#user').val(),
-      password: $('#password').val(),
-      remember_me: $('#remember_me').prop('checked')
-    },    
-    success:function(result){  
+      password: $('#password').val()      
+    },
+  })  
+  .done(function(result){      
       if (result.action=="login" || result.action=="logout") {
         window.location = '/';
       } else {
         location.reload();
       }
-    },
-    error:function(xhr, ajaxOptions, thrownError){showError("Status: " + xhr.status + " (" + thrownError + ").");} 
+  })    
+  .fail(function(xhr, ajaxOptions, thrownError){
+    showMessage("AJAX-fel: " + xhr.status + " (" + thrownError + ").", "error");
   });
 };
 
