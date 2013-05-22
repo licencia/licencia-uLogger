@@ -22,11 +22,12 @@
             </ul>
           </li>
           <?php endif; ?>  
+          <li><a href="http://www.licencia.se/ulogger"><i class="icon-question-sign icon-white"></i> Hjälp</a></li>          
           <li><a href="http://www.licencia.se/kontakt"><i class="icon-envelope icon-white"></i> Kontakt</a></li>          
         </ul>
         <div class="navbar-form pull-right">        
         <?php if ($logged_in): ?>
-          <button class="btn btn-link logout-button" id="logout"><i class="icon-user icon-white"></i>  Logga ut</button>
+          <button class="btn btn-link logout-button" id="logout"><i class="icon-user icon-white"></i> Logga ut</button>
         <?php else: ?>
           <input class="span2" type="text" id="user" placeholder="Användarnamn">
           <input class="span2" type="password" id="password" placeholder="Lösenord">

@@ -94,7 +94,7 @@ if (isset($_POST['action']) && !empty($_POST['action'])) {
     case 'extract' :
       $result = phpShellExec('extract_tar ' . UPLOAD_DIR . '/' . getVar('ulogger_upgrade_filename', ''));      
       if (strrpos($result, "ulogger-tar-error") === false) {        
-        setVar('ulogger_version', getVar('ulogger_upgrade_version', ''));
+        setVar('ulogger_version', getVar('ulogger_upgrade_version', UNKNOWN));
         cleanUpgradeDir();
         $data['statusMsg'] = $result;        
       }

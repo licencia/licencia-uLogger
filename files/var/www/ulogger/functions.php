@@ -9,20 +9,17 @@ session_start();
  **************************************************/
 
 // GLOBALS
-$allowed_pages = array('index.php', 'login_server.php', 'login.php', 'logout.php');
+$allowed_pages = array('index.php', 'login_server.php', 'login.php', 'logout.php', '404.php');
 $logged_in = isset($_SESSION['logged_in']) && ($_SESSION['logged_in'] == 'yes');
  
 // uLogger
+define('UNKNOWN', 'Unknown');
 define('ULOGGER_VERSION_STRING', 'Licencia uLogger version %s, &copy; 2013.');
 define('VNC_PORT', '5091');
 define('VNC_PASS', 'ulogger');
-
-//define('ULOGGER_USER', 'licencia');
-//define('ULOGGER_PASS', 'ulogger');
 define('UPGRADE_FILE_MASK', '/var/www/FILES/uploads/*.tar.gz');
 define('UPLOAD_DIR', '/var/www/FILES/uploads');
 define('UPGRADE_VERSION_ID', 'ulogger-update-');
-
 
 // Siplogg
 define('APACHE_DIR', '/var/www');
@@ -43,9 +40,16 @@ define('TRACE_DIR', '/var/www/FILES/trace');
 require_once "password.php";
 
 function add_user($username, $password) {
-  $hash = create_hash($password);
-  setVar($username . '_hash', $hash);
-  return $hash;
+  $db_username = $username . '_hash';
+  //Skapa bara en användare om användarnamnet är ledigt.
+  if (getVar($db_username, '') == '') {    
+    $hash = create_hash($password);
+    setVar($db_username, $hash);
+    return $hash;
+  } 
+  else
+    return FALSE;
+  }
 }
  
 function valid_user($username, $password) {
