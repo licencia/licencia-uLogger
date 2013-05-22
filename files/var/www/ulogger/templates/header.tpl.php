@@ -4,7 +4,7 @@
 <link href="bootstrap/bootstrap.min.css" rel="stylesheet">
 <link href="bootstrap/bootstrap-lightbox.css" rel="stylesheet">
 <style type="text/css"> body { padding-top: 60px; } </style>
-<link href="bootstrap/bootstrap-responsive.min.css" rel="stylesheet">  
+<link href="bootstrap/bootstrap-responsive.min.css" rel="stylesheet">
 <link href="ulogger/ulogger.css" rel="stylesheet">
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>

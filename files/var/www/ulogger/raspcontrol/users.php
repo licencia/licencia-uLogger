@@ -3,7 +3,7 @@
 namespace raspcontrol;
 
 class Users {
-  
+
   public static function connected() {
 
     $result = array();
@@ -39,7 +39,7 @@ class Users {
     }
 
     return $result;
-  }   
+  }
 
 }
 

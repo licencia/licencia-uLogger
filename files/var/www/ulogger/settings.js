@@ -4,8 +4,8 @@ $(document).ready(function(){
   $(":button").click(handleButtonClicks);
 
   // Show/hide static IP fields
-  $('#dhcp').click (function () {       
-    ($(this).is (':checked')) ? $('#fixed-ip').hide() : $('#fixed-ip').show();      
+  $('#dhcp').click (function () {
+    ($(this).is (':checked')) ? $('#fixed-ip').hide() : $('#fixed-ip').show();
   });
   ($('#dhcp').prop('checked')) ? $('#fixed-ip').hide() : $('#fixed-ip').show();
 
@@ -21,11 +21,11 @@ function initUploads(){
     beforeSend: function(){$("#progress").removeClass('hidden');},
     done: function (e, data) {
       console.log( data.result.files);
-      $.getJSON('ulogger/settings_server.php', { action: 'upload', filename: data.result.files['0'].name }, function(data) {        
+      $.getJSON('ulogger/settings_server.php', { action: 'upload', filename: data.result.files['0'].name }, function(data) {
         console.log( data.action);
         location.reload();
       });
-    },   
+    },
     progressall: function (e, data) {
     var progress = parseInt(data.loaded / data.total * 100, 10);
     $('#progress .bar').css(
@@ -38,9 +38,9 @@ function initUploads(){
 
 // Ajax call
 function handleButtonClicks(){
-  
+
   var id = this.id;
-  
+
   $.ajax({
     url:"ulogger/settings_server.php",
     type: 'POST',
@@ -53,22 +53,22 @@ function handleButtonClicks(){
       ip_address: $('#ip_address').val(),
       ip_gateway: $('#ip_gateway').val(),
       ip_netmask: $('#ip_netmask').val()
-    },    
+    },
     beforeSend: function(){$("#" + id).button('loading');},
   })
   .done(function(result){
 
-    //Install upgrade 
-    if (result.action=="extract") {      
+    //Install upgrade
+    if (result.action=="extract") {
       if (!result.errorMsg) {
         $("#extract").addClass('hidden');
         $('.modal-body').html('<h4>Installerade filer</h4><pre>' + result.statusMsg + '</pre>');
-        $('#myModal').modal('show');  
+        $('#myModal').modal('show');
       } else {
-        showMessage('<div class="pre">' + result.errorMsg + '</div>', 'error');          
-      }           
+        showMessage('<div class="pre">' + result.errorMsg + '</div>', 'error');
+      }
     }
-    
+
     // Change ip
     if (result.action=="changeip") {
       if (!result.errorMsg) {
@@ -78,19 +78,19 @@ function handleButtonClicks(){
           url:"/settings_server.php",
           type: 'POST',
           data: {action: 'restart_eth0'}
-        });          
+        });
       } else {
         showMessage(result.errorMsg, 'error');
-      }                
+      }
     }
-    
+
     //Set port
     if (result.action=="setport") {
       if (!result.errorMsg) {
         showMessage(result.statusMsg, 'success');
       } else {
         showMessage(result.errorMsg, 'error');
-      }                
+      }
     }
 
     //Halt
@@ -108,9 +108,9 @@ function handleButtonClicks(){
         }, 1000);
       } else {
         showMessage(result.errorMsg, 'error');
-      }                
+      }
     }
-    
+
     //Reboot
     if (result.action=="reboot") {
       if (!result.errorMsg) {
@@ -125,11 +125,11 @@ function handleButtonClicks(){
         }, 1000);
       } else {
         showMessage(result.errorMsg, 'error');
-      }                
-    }   
-    
-  })  
-  .complete(function(){$("#" + id).button('reset');})  
+      }
+    }
+
+  })
+  .complete(function(){$("#" + id).button('reset');})
   .fail(function(xhr, ajaxOptions, thrownError){
     showMessage("AJAX-fel: " + xhr.status + " (" + thrownError + ").", "error");
   });

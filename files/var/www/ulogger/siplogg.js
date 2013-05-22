@@ -1,6 +1,6 @@
 $(document).ready(function(){
   updateStatus();
-  $(":button").click(handleButtonClicks);  
+  $(":button").click(handleButtonClicks);
 });
 
 /* Display log time */
@@ -13,15 +13,15 @@ function logTime(startTime){
   result = (hours < 10 ? "0" + hours : hours) + ":"
            + (minutes < 10 ? "0" + minutes : minutes) + ":"
            + (seconds < 10 ? "0" + seconds : seconds);
-  jQuery("#log-time").html(result); 
+  jQuery("#log-time").html(result);
   if (clockTicking==true) {
     setTimeout(function(){logTime(startTime);},500);
   }
 };
-      
-function handleButtonClicks(){   
+
+function handleButtonClicks(){
   $.ajax({
-    url:"ulogger/siplogg_server.php",                  
+    url:"ulogger/siplogg_server.php",
     type: 'POST',
     dataType: 'json',
     data: {
@@ -30,48 +30,48 @@ function handleButtonClicks(){
       max_file_size: $('#max_file_size').val(),
       ring_buffer_size: $('#ring_buffer_size').val(),
       files_to_delete: $("#file-table :input").serializeArray()
-    }      
+    }
   })
   .done(function(result){location.reload();})
   .fail(function(xhr, ajaxOptions, thrownError){
     showMessage("AJAX-fel: " + xhr.status + " (" + thrownError + ").", "error");
-  });    
-};      
+  });
+};
 
-function updateStatus(){     
+function updateStatus(){
   $.ajax({
-    url:"ulogger/siplogg_server.php",                  
+    url:"ulogger/siplogg_server.php",
     type: 'POST',
     data: {action: 'getstatus'},
     dataType: 'json',
-  })  
-  .done(function(result){                   
+  })
+  .done(function(result){
     setStatus(result);
     if (result.running == true) {
-      setTimeout(updateStatus, 5000);      
+      setTimeout(updateStatus, 5000);
     }
   })
   .fail(function(xhr, ajaxOptions, thrownError){
     showMessage("AJAX-fel: " + xhr.status + " (" + thrownError + ").", "error");
     setTimeout(updateStatus, 5000);
-  });    
-  
-}; 
-      
+  });
+
+};
+
 function setStatus(result){
   // Disk size
   $("#disk-status h5").html("Loggutrymme " + result.tp + " (" + result.fs + " av " + result.ts + " används)");
   $("#disk-status .bar").css("width", result.tp);
-  
+
   // Running
   if (result.running == true) {
     $("#disk-status .progress").addClass('active');
     $("#time-status").removeClass('hidden');
     $(".not-when-running").attr("disabled", "disabled");
-    $("#current-file").text(result.filename);        
+    $("#current-file").text(result.filename);
     if (clockTicking==false) {
       clockTicking = true;
-      logTime(result.start_time);      
+      logTime(result.start_time);
     };
   } else {
     $("#disk-status .progress").removeClass('active');

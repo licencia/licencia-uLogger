@@ -3,16 +3,16 @@
 require_once "functions.php";
 
 function validateUpgradeFile($filename) {
-  $version_string = phpShellExec("get_tar_comment " . UPLOAD_DIR . '/' . $filename);  
-  // Check  if the file includs a valid version comment.  
+  $version_string = phpShellExec("get_tar_comment " . UPLOAD_DIR . '/' . $filename);
+  // Check  if the file includs a valid version comment.
   $pos = strpos($version_string, UPGRADE_VERSION_ID);
-  if ($pos === false) {    
+  if ($pos === false) {
     return false;
   }
   else {
     $version_string = str_replace(UPGRADE_VERSION_ID, "", $version_string);
     return $version_string;
-  }   
+  }
 }
 
 function setIP($dhcp, $ip_address = '', $ip_gateway = '', $ip_netmask = '') {
@@ -40,11 +40,11 @@ function setIP($dhcp, $ip_address = '', $ip_gateway = '', $ip_netmask = '') {
     }
     else {
       throw new Exception("Felaktig: " . $error);
-    }  
+    }
   }
-  file_put_contents("/home/ulogger/interfaces.d", $config);    
-  return true;      
-} 
+  file_put_contents("/home/ulogger/interfaces.d", $config);
+  return true;
+}
 
 function setHtmlPort($port) {
   // Update virtual hosts
@@ -55,7 +55,7 @@ function setHtmlPort($port) {
   // Update ports
   file_put_contents('/etc/apache2/myports.conf', "Listen " . $port);
   setVar('ulogger_http_port', $port);
-  // Reload Apache  
+  // Reload Apache
   return phpShellExec('reload_apache');
 }
 
@@ -67,7 +67,7 @@ if (isset($_GET['action']) && !empty($_GET['action'])) {
     case 'upload' :
       $filename = $_GET['filename'];
       //if ($version_string = getUpgradeFile()) {
-      if ($version_string = validateUpgradeFile($filename)) {            
+      if ($version_string = validateUpgradeFile($filename)) {
         $data['action'] = $version_string;
         setVar('ulogger_upgrade_filename', $filename);
         setVar('ulogger_upgrade_version', $version_string);
@@ -77,32 +77,32 @@ if (isset($_GET['action']) && !empty($_GET['action'])) {
         set_message("$filename innehåller inte någon uppgradering.", 'warning');
         cleanUpgradeDir();
       }
-      break; 
+      break;
   }
 }
 
 if (isset($_POST['action']) && !empty($_POST['action'])) {
   $data['action'] = $_POST['action'];
   switch($data['action']) {
-  
+
     /*case 'checkfile' :
       $filename = $_POST['filename'];
-      $data['action'] = shell_exec("tar --test-label -f /var/www/uploads/$filename 2>&1");      
+      $data['action'] = shell_exec("tar --test-label -f /var/www/uploads/$filename 2>&1");
       //tar --test-label -f /var/www/uploads/ulogger.1.x-dev.tar.gz
     break;*/
 
     case 'extract' :
-      $result = phpShellExec('extract_tar ' . UPLOAD_DIR . '/' . getVar('ulogger_upgrade_filename', ''));      
-      if (strrpos($result, "ulogger-tar-error") === false) {        
+      $result = phpShellExec('extract_tar ' . UPLOAD_DIR . '/' . getVar('ulogger_upgrade_filename', ''));
+      if (strrpos($result, "ulogger-tar-error") === false) {
         setVar('ulogger_version', getVar('ulogger_upgrade_version', UNKNOWN));
         cleanUpgradeDir();
-        $data['statusMsg'] = $result;        
+        $data['statusMsg'] = $result;
       }
-      else {        
+      else {
         $data['errorMsg'] = $result;
-      }      
+      }
       break;
-    
+
     case 'changeip' :
       $dhcp = $_POST['dhcp'];
       try {
@@ -115,37 +115,37 @@ if (isset($_POST['action']) && !empty($_POST['action'])) {
       }
       catch(Exception $e) {
         $data['errorMsg'] = 'Message: ' . $e->getMessage();
-      }   
+      }
       break;
-      
+
     case 'reboot' :
       $data['statusMsg'] = "uLogger startas om ... <span id='countdown'>45</span> sekunder.";
       $data['errorMsg'] = phpShellExec('reboot');
       break;
-      
+
     case 'halt' :
       $data['statusMsg'] = "Vänta <span id='countdown'>30</span> sekunder eller tills dess att endast de båda röda lamporna lyser i uLoggservern innan du kopplar ur strömmen!";
       if ($output = phpShellExec('halt')) {
         $data['errorMsg']  = "Servermeddelande: $output";
       }
       break;
-      
+
     case 'setport' :
       $validport = filter_var($_POST['port'], FILTER_VALIDATE_INT, array('options' => array('min_range' => 1024, 'max_range' => 65535)));
       if ($validport) {
         $port = $_POST['port'];
-        $data['statusMsg'] = "Webbservern lyssnar nu på port 80 och $port.";          
+        $data['statusMsg'] = "Webbservern lyssnar nu på port 80 och $port.";
         $data['errorMsg'] = setHtmlPort($port);
       }
       else {
         $data['errorMsg'] = "Felaktig port. Tillåtet portintervall är 1024 - 65535.";
       }
       break;
-      
+
     case 'restart_eth0' :
       phpShellExec('restart_eth0');
       break;
-  }  
+  }
 }
 
 // Krävs för att IE ska acceptera json object.

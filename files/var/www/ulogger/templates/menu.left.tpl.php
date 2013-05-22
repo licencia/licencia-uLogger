@@ -1,4 +1,4 @@
-<div class="well sidebar-nav" id="left-menu">      
+<div class="well sidebar-nav" id="left-menu">
   <ul class="nav nav-list">
     <li class="nav-header">Innehåll</li>
     <li><a href="/siplogg.php"><i class="icon-th-large"></i> SIP-logg</a></li>

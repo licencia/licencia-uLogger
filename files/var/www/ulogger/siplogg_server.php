@@ -7,7 +7,7 @@ namespace raspcontrol;
 include "raspcontrol/storage.php";
 $hdd = Storage::hdd();
 
-//Common functions  
+//Common functions
 require_once "functions.php";
 
 function tcpdumpIsRunning() {
@@ -53,23 +53,23 @@ function deleteAllFiles() {
 }
 
 $data = array('action' => 'none'/*, 'statusMsg' => '', 'errorMsg' => ''*/);
- 
+
 if (isset($_POST['action']) && !empty($_POST['action'])) {
   $data['action'] = $_POST['action'];
   switch($data['action']) {
     case 'deleteallfiles' :
       set_message('Alla filer har raderats.', 'success');
       deleteAllFiles();
-      break;    
+      break;
     case 'deleteselectedfiles' :
       if (!empty($_POST['files_to_delete'])) {
         $fileCount = sizeof(($_POST['files_to_delete']));
         if ($fileCount > 0) {
-          set_message("$fileCount fil/filer har raderats.", 'success');          
+          set_message("$fileCount fil/filer har raderats.", 'success');
           foreach ($_POST['files_to_delete'] as $key => $value) {
             unlink(TRACE_DIR . "/" . $value['value']);
             $data['action'] = TRACE_DIR . "/" . $value['value'];
-          }    
+          }
         }
       }
       break;
@@ -80,7 +80,7 @@ if (isset($_POST['action']) && !empty($_POST['action'])) {
       $data['start_time'] = getVar('siplogg_start_time', 0);
       break;
     case 'stop' :
-      phpShellExec('kill_tcpdump');      
+      phpShellExec('kill_tcpdump');
       break;
     case 'getstatus' :
       //$size = getSize();
@@ -91,10 +91,10 @@ if (isset($_POST['action']) && !empty($_POST['action'])) {
       $data['filename'] = getVar('siplogg_filename', '');
       $data['start_time'] = getVar('siplogg_start_time', 0);
       break;
-  }  
+  }
 }
 
 // Krävs för att IE ska acceptera json object.
-header('Content-Type: application/json');  
+header('Content-Type: application/json');
 
 echo json_encode($data);

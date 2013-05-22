@@ -4,34 +4,34 @@ $(document).ready(function(){
   $('#main-menu a[href="' + pathname + '"]').parent().addClass('active');
   $('#main-menu .dropdown a[href="' + pathname + '"]').parent().parent().parent().addClass('active');
   $('#left-menu a[href="' + pathname + '"]').parent().addClass('active');
- 
+
   //Hantera knapptryckningar
-  $(".login-button, .logout-button").click(handleLogin);   
-  
-  // Initiera/visa bootstrap tooltip för länkar.          
-  $("a").tooltip();    
+  $(".login-button, .logout-button").click(handleLogin);
+
+  // Initiera/visa bootstrap tooltip för länkar.
+  $("a").tooltip();
 });
 
 // login/logout
-function handleLogin(){  
+function handleLogin(){
   $.ajax({
-    url:"ulogger/login_server.php",                    
+    url:"ulogger/login_server.php",
     type: 'POST',
     dataType: 'json',
     data: {
       action: this.id,
       //remember_me: $('#remember_me').prop('checked'),
       user: $('#user').val(),
-      password: $('#password').val()      
+      password: $('#password').val()
     },
-  })  
-  .done(function(result){      
+  })
+  .done(function(result){
       if (result.action=="login" || result.action=="logout") {
         window.location = '/';
       } else {
         location.reload();
       }
-  })    
+  })
   .fail(function(xhr, ajaxOptions, thrownError){
     showMessage("AJAX-fel: " + xhr.status + " (" + thrownError + ").", "error");
   });

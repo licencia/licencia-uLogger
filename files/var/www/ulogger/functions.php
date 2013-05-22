@@ -11,7 +11,7 @@ session_start();
 // GLOBALS
 $allowed_pages = array('index.php', 'login_server.php', 'login.php', 'logout.php', '404.php');
 $logged_in = isset($_SESSION['logged_in']) && ($_SESSION['logged_in'] == 'yes');
- 
+
 // uLogger
 define('UNKNOWN', 'Unknown');
 define('ULOGGER_VERSION_STRING', 'Licencia uLogger version %s, &copy; 2013.');
@@ -42,31 +42,31 @@ require_once "password.php";
 function add_user($username, $password) {
   $db_username = $username . '_hash';
   //Skapa bara en användare om användarnamnet är ledigt.
-  if (getVar($db_username, '') == '') {    
+  if (getVar($db_username, '') == '') {
     $hash = create_hash($password);
     setVar($db_username, $hash);
     return $hash;
-  } 
+  }
   else
     return FALSE;
   }
 }
- 
+
 function valid_user($username, $password) {
   return validate_password($password, getVar($username . '_hash', ''));
 }
- 
+
 /***************************************************
  * Logg in check
  **************************************************/
 
-function current_page() {           
+function current_page() {
   $parts = Explode('/', $_SERVER["PHP_SELF"]);
   return $parts[count($parts) - 1];
 }
 
-function allowed_page() {           
-  global $allowed_pages;    
+function allowed_page() {
+  global $allowed_pages;
   return in_Array(current_page(), $allowed_pages);
 }
 
@@ -122,7 +122,7 @@ function cleanUpgradeDir() {
     unlink($filename);
   }
   setVar('ulogger_upgrade_filename', '');
-  setVar('ulogger_upgrade_version', '');  
+  setVar('ulogger_upgrade_version', '');
 }
 
 // Open a known directory, and proceed to read its contents
@@ -181,7 +181,7 @@ function get_messages($type = NULL, $clear_queue = TRUE) {
 function theme_messages() {
   $output = '';
   $status_heading = array('success' => '', 'info' => '', 'error' => 'Fel! ', 'warning' => 'Varning! ');
-  foreach (get_messages() as $type => $messages) {  
+  foreach (get_messages() as $type => $messages) {
     if (count($messages) > 1) {
       $output .= "<div class=\"alert alert-block alert-$type\">\n";
       $output .= '<button type="button" class="close" data-dismiss="alert">&times;</button>';
@@ -196,7 +196,7 @@ function theme_messages() {
       $output .= "<div class=\"alert alert-$type\">\n";
       $output .= '<button type="button" class="close" data-dismiss="alert">&times;</button>';
       $output .= "<strong>$status_heading[$type]</strong>" . $messages[0];
-    }    
+    }
     $output .= "</div>\n";
   }
   return $output;

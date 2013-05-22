@@ -3,7 +3,7 @@
 namespace raspcontrol;
 
 class Network {
-  
+
   public static function connections() {
 
     $connections = shell_exec("netstat -nta --inet | wc -l");
@@ -22,7 +22,7 @@ class Network {
   $data = str_ireplace("TX bytes:", "", $data);
   $data = trim($data);
   $data = explode(" ", $data);
-      
+
   $rxRaw = $data[0] / 1024 / 1024;
   $txRaw = $data[4] / 1024 / 1024;
   $rx = round($rxRaw, 2);

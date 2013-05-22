@@ -3,11 +3,11 @@
 namespace raspcontrol;
 
 class Uptime {
-  
+
   public static function uptime() {
 
     $uptime = shell_exec("cat /proc/uptime");
-    $uptime = explode(" ", $uptime); 
+    $uptime = explode(" ", $uptime);
 
     return self::readbleTime($uptime[0]);
 
