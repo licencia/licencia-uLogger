@@ -47,7 +47,7 @@ function add_user($username, $password) {
     setVar($db_username, $hash);
     return $hash;
   }
-  else
+  else {
     return FALSE;
   }
 }
@@ -118,11 +118,9 @@ function printHead($pageTitle) {
 
 function cleanUpgradeDir() {
   $files = glob(UPGRADE_FILE_MASK);
-  foreach ($files as $filename) {
-    unlink($filename);
-  }
+  foreach ($files as $filename) { unlink($filename); }
   setVar('ulogger_upgrade_filename', '');
-  setVar('ulogger_upgrade_version', '');
+  //setVar('ulogger_upgrade_version', '');
 }
 
 // Open a known directory, and proceed to read its contents

@@ -3,14 +3,14 @@
 require_once "functions.php";
 
 function validateUpgradeFile($filename) {
-  $version_string = phpShellExec("get_tar_comment " . UPLOAD_DIR . '/' . $filename);
+  $version_string = phpShellExec("get_tar_comment " . UPLOAD_DIR . '/' . $filename);  
   // Check  if the file includs a valid version comment.
   $pos = strpos($version_string, UPGRADE_VERSION_ID);
   if ($pos === false) {
     return false;
   }
   else {
-    $version_string = str_replace(UPGRADE_VERSION_ID, "", $version_string);
+    $version_string = trim(str_replace(UPGRADE_VERSION_ID, "", $version_string));
     return $version_string;
   }
 }
