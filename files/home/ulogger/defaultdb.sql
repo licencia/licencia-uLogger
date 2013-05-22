@@ -38,17 +38,17 @@ CREATE TABLE IF NOT EXISTS `data` (
 
 INSERT INTO `data` (`name`, `value`) VALUES
 ('ulogger_version', '1.0-beta1'),
-('ulogger_http_port', ''),
+('ulogger_http_port', '8080'),
 ('ulogger_ip_dhcp', 'true'),
-('ulogger_ip_address', '192.168.10.108'),
-('ulogger_ip_gateway', '192.168.10.1'),
+('ulogger_ip_address', '192.168.1.1'),
+('ulogger_ip_gateway', '192.168.1.254'),
 ('ulogger_ip_netmask', '255.255.255.0'),
 ('siplogg_filename', ''),
 ('siplogg_filesize', '0'),
 ('siplogg_filter', ''),
 ('siplogg_ring_buffer', '0'),
 ('siplogg_start_time', '0'),
-('admin_hash', 'sha256:1000:pTbYvKHGRKMHjGQYRd7RH/kHgCtcS11K:OYqGOTaLMRqDVEUIk3sQPMDBe47xGFSy');
+('licencia_hash', 'sha256:1000:vLVJN5b4rJvMis7AMO1AUS7HuM+T3y8v:o3Fet8gkla53FH/VNXUSi3BxhEJDEK9E');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
