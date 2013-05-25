@@ -30,6 +30,20 @@
         <h1 class="page-title">Serverinställningar</h1>
 
         <fieldset class="top-buffer">
+          <legend>Administratörslösenord</legend> 
+          <p>Ange nytt lösenord för användaren <strong><?php echo getVar('ulogger_admin_user', "admin"); ?></strong>.</p>
+          <div id="change-password">          
+            <div class="form-inline control-group">
+              <label class="input-small">Lösenord: </label>
+              <input type="password" id="password" placeholder="Nytt lösenord">
+              <input type="password" id="password2" placeholder="Upprepa lösenord">
+              <span id="password-check"></span>
+            </div>            
+          </div>
+          <button id="changepassword" class="btn">Spara lösenord</button>     
+        </fieldset>      
+
+        <fieldset class="top-buffer">
           <legend>IP-adress</legend> 
           <p>Ange IP-adress för uLogger.</p>
           <div class="control-group">

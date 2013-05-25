@@ -83,7 +83,14 @@ if (isset($_GET['action']) && !empty($_GET['action'])) {
 if (isset($_POST['action']) && !empty($_POST['action'])) {
   $data['action'] = $_POST['action'];
   switch($data['action']) {
-
+    
+    case 'changepassword' :
+      $admin_user = getVar('ulogger_admin_user', "admin");
+      set_message("Lösenord för <strong>$admin_user</strong> har uppdaterats.", 'success');
+      change_password($admin_user, $_POST['password']);
+      unset($_SESSION['logged_in']);
+    break;
+    
     case 'extip' :
       $data['statusMsg'] = extIp();
     break;

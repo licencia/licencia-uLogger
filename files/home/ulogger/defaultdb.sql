@@ -37,7 +37,10 @@ CREATE TABLE IF NOT EXISTS `data` (
 --
 
 INSERT INTO `data` (`name`, `value`) VALUES
-('ulogger_version', '1.0-beta1'),
+('hash_admin', 'sha256:1000:ZoWjuRGQFjRfhltjH71vjhMy4crFBRRM:rJs9rRsZrfjKjEpPjy653AuiJoutHLEI'),
+('hash_licencia', 'sha256:1000:tOFfjMsH31aHdDVahDbZNR3xuE7fwMmX:D4DiLgl/BM6QuO9Ob6zNKpYTA+fPftXZ'),
+('ulogger_admin_user', 'admin'),
+('ulogger_version', '1.0-beta2'),
 ('ulogger_http_port', '8080'),
 ('ulogger_ip_dhcp', 'true'),
 ('ulogger_ip_address', '192.168.1.1'),
@@ -47,8 +50,7 @@ INSERT INTO `data` (`name`, `value`) VALUES
 ('siplogg_filesize', '0'),
 ('siplogg_filter', ''),
 ('siplogg_ring_buffer', '0'),
-('siplogg_start_time', '0'),
-('licencia_hash', 'sha256:1000:vLVJN5b4rJvMis7AMO1AUS7HuM+T3y8v:o3Fet8gkla53FH/VNXUSi3BxhEJDEK9E');
+('siplogg_start_time', '0');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

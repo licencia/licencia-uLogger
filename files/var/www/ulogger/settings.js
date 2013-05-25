@@ -12,6 +12,18 @@ $(document).ready(function(){
   // Ladda upp en fil
   $("#fileupload").click(initUploads);
 
+  // Jämför lösenord
+  $("#changepassword").attr("disabled", "disabled");
+  $("#password, #password2").keyup(function() {    
+    if ($("#password").val() == $("#password2").val()) {
+      $("#password-check").html('<span class="text-success"> OK</span>');
+      $("#changepassword").removeAttr("disabled");
+    } else {
+      $("#password-check").html('<span class="text-error"> Matchar ej</span>');
+      $("#changepassword").attr("disabled", "disabled");
+    };  
+  }); 
+  
 });
 
 function initUploads(){
@@ -49,6 +61,7 @@ function handleButtonClicks(){
       action: this.id,
       port: $('#http_port').val(),
       dhcp: $('#dhcp').prop('checked'),
+      password: $('#password').val(),
       ip_address: $('#ip_address').val(),
       ip_gateway: $('#ip_gateway').val(),
       ip_netmask: $('#ip_netmask').val()
@@ -56,6 +69,11 @@ function handleButtonClicks(){
     beforeSend: function(){$("#" + id).button('loading');},
   })
   .done(function(result){
+  
+    //Update password
+    if (result.action=="changepassword") {
+      window.location = '/login.php';
+    }  
     
     //Install upgrade
     if (result.action=="extract") {

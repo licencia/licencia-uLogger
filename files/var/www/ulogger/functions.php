@@ -45,8 +45,8 @@ define('TRACE_DIR', '/var/www/FILES/trace');
 require_once "password.php";
 
 function add_user($username, $password) {
-  $db_username = $username . '_hash';
-  //Skapa bara en användare om användarnamnet är ledigt.
+  //$db_username = $username . '_hash';
+  $db_username = 'hash_' . $username;
   if (getVar($db_username, '') == '') {
     $hash = create_hash($password);
     setVar($db_username, $hash);
@@ -57,8 +57,14 @@ function add_user($username, $password) {
   }
 }
 
+function change_password($username, $password) {
+  $db_username = 'hash_' . $username;
+  $hash = create_hash($password);
+  setVar($db_username, $hash);  
+}
+
 function valid_user($username, $password) {
-  return validate_password($password, getVar($username . '_hash', ''));
+  return validate_password($password, getVar('hash_' . $username, ''));
 }
 
 /***************************************************
