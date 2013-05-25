@@ -10,6 +10,7 @@
 /* index.php */
 .hero-unit h1 { margin-bottom: 10px; }
 .vnc1-image { max-width: 250px; }
+.logged-in  { background-color: #C9DCF3; }
 
 /* settings.php */
 #show-ip-btn { padding-top: 0;}

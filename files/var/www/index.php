@@ -11,14 +11,18 @@
     <div class="container">
     <?php include("ulogger/templates/messages.tpl.php"); ?>        
     <!-- START CONTENT --> 
+      <?php if ($logged_in): ?>
+      <div class="hero-unit logged-in">
+        <h1>Licencia uLogger</h1>
+        <p>Med hjälp av Licencia uLogger kan du enkelt sätta upp en loggserver hos en kund där du behöver övervaka SIP-trafiken. Licencia uLogger körs på Raspberry PI vilket är en liten enkortsdator som kan utföra det mesta en PC kan.</p>        
+        <p><a href="/siplogg.php" class="btn btn-primary btn-large">Ta mig dit nu &raquo;</a></p>
+      </div>
+      <?php else: ?>
       <div class="hero-unit">
         <h1>Licencia uLogger</h1>
-        <p>Med hjälp av Licencia uLogger kan du enkelt sätta upp en loggserver hos en kund där du behöver övervaka SIP-trafiken. Licencia uLogger körs på Raspberry PI vilket är en liten enkortsdator som kan utföra det mesta en PC kan.</p>
-        <?php if ($logged_in): ?>
-        <p><a href="/siplogg.php" class="btn btn-primary btn-large">Ta mig dit nu &raquo;</a></p>
-        <?php endif; ?>
-        
-      </div>
+        <p>Med hjälp av Licencia uLogger kan du enkelt sätta upp en loggserver hos en kund där du behöver övervaka SIP-trafiken. Licencia uLogger körs på Raspberry PI vilket är en liten enkortsdator som kan utföra det mesta en PC kan.</p>        
+      </div>      
+      <?php endif; ?>
 
       <div class="row">
             
