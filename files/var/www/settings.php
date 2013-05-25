@@ -101,7 +101,7 @@
             <input id="fileupload" type="file" multiple="" name="files[]">
           </span>  
           
-          <?php if (getVar('ulogger_upgrade_version', '') != ''): ?> 
+          <?php if (getVar('ulogger_upgrade_filename', '') != ''): ?> 
           <button id="extract" class="btn btn-danger">
             <i class="icon-play icon-white"></i>
             <span>Uppgradera till version <?php echo getVar('ulogger_upgrade_version', ''); ?></span>            

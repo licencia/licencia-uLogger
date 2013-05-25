@@ -91,8 +91,7 @@ function shell_to_html_table_result($shellExecOutput) {
             <p>Kernel: <?php echo Rbpi::kernel(); ?></p>
             <p>Firmware: <?php echo Rbpi::firmware(); ?></p>
             <p>Uptime: <?php echo $uptime; ?></p>
-            <p>Server time: <?php echo date('D F d Y h:i:s T O'); ?></p>               
-            <p>Client time: <span id="client-date">?</span></p>                        
+            <p>Server time: <?php echo date('D F d Y h:i:s T O'); ?></p>                                     
           </div>
         </fieldset>
         
