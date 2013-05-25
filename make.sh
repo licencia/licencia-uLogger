@@ -13,15 +13,17 @@ sudo chown root:www-data /home/install.make/var/www/FILES/trace
 sudo chown root:www-data /home/install.make/var/www/FILES/uploads
 sudo chown root:www-data /home/install.make/home/ulogger/phpcommands.sh
 sudo chown root:www-data /home/install.make/home/ulogger/interfaces.d
+sudo chown root:www-data /home/install.make/home/ulogger/resolv.conf
 sudo chown root:www-data /home/install.make/etc/apache2/myports.conf
 sudo chown root:www-data /home/install.make/etc/apache2/sites-available/default
 
 sudo chmod 775 /home/install.make/var/www/FILES/trace
 sudo chmod 775 /home/install.make/var/www/FILES/uploads
 sudo chmod 750 /home/install.make/home/ulogger/phpcommands.sh
-sudo chmod 660 /home/install.make/home/ulogger/interfaces.d
-sudo chmod 660 /home/install.make/etc/apache2/myports.conf
-sudo chmod 660 /home/install.make/etc/apache2/sites-available/default
+sudo chmod 664 /home/install.make/home/ulogger/interfaces.d
+sudo chmod 664 /home/install.make/home/ulogger/resolv.conf
+sudo chmod 664 /home/install.make/etc/apache2/myports.conf
+sudo chmod 664 /home/install.make/etc/apache2/sites-available/default
 sudo chmod 755 /home/install.make/etc/init.d/tightvncserver
 
 VER=`cat /home/install.make/home/ulogger/version.info`
