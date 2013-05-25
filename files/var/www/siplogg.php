@@ -2,9 +2,11 @@
 
 require_once "ulogger/functions.php"; 
 
-function getFileListHTML() {
+function printFileTable() {
   $files = getFileList(TRACE_DIR . "/");
-  $fileTable = "<tbody>";
+  $fileTable = '<table id="file-table" class="table table-striped table-condensed autowidth">';
+  $fileTable .= '<thead><tr><th></th><th>Filnamn</th><th>Tid</th><th>Storlek</th></tr></thead>';
+  $fileTable .= "<tbody>";
   $id = 0;
   foreach ($files as $file) {
     if ($file['type'] == 'file') {
@@ -15,7 +17,13 @@ function getFileListHTML() {
       $id += 1;
     }
   }
-  if ($id == 0) $fileTable .= "<tr><td>Inga sparade loggfiler ...</td></tr></tbody>";
+  if ($id == 0) {
+    $fileTable = "";
+  }
+  else {
+    $fileTable .= "</tbody></table>";
+  }
+  
   return $fileTable;
 }
 
@@ -79,12 +87,13 @@ function getFileListHTML() {
       
         <fieldset class="top-buffer">
           <legend>Loggfiler</legend>
-          <table id="file-table" class="table table-striped table-condensed autowidth">      
-            <thead><tr><th></th><th>Filnamn</th><th>Tid</th><th>Storlek</th></tr></thead>
-            <?php echo getFileListHTML(TRACE_DIR . "/"); ?>
-          </table>
-          <button id="deleteallfiles" class="btn not-when-running">Radera alla filer</button>
-          <button id="deleteselectedfiles" class="btn not-when-running">Radera markerade filer</button>              
+          <?php if ($table = printFileTable(TRACE_DIR . "/")): ?>
+            <?php echo $table; ?>
+            <button id="deleteallfiles" class="btn not-when-running">Radera alla filer</button>
+            <button id="deleteselectedfiles" class="btn not-when-running">Radera markerade filer</button> 
+          <?php else: ?>
+            <p>Inga sparade loggfiler...</p>
+          <?php endif; ?>
         </fieldset>
       </div>
       
