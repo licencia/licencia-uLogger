@@ -13,9 +13,16 @@
       <?php include("ulogger/templates/messages.tpl.php"); ?>
       <input type="text" class="input-block-level" id="user" placeholder="Användarnamn">
       <input type="password" class="input-block-level" id="password" placeholder="Lösenord">
-      <!--label class="checkbox">
-        <input type="checkbox" value="remember-me" id="remember_me"> Fortsätt vara inloggad          
-      </label-->
+      <label class="checkbox">
+        <?php if (isset($_COOKIE['remember_me'])) {
+          $checked = 'checked="checked"';
+          }
+          else {
+            $checked =  '';
+          }
+        ?>          
+        <input type="checkbox" value="remember-me" id="remember_me" <?php echo $checked; ?>> Fortsätt vara inloggad          
+      </label>
       <button class="btn btn-large btn-primary login-button" id="login">Logga in</button>
     </div>            
     <!-- END CONTENT -->

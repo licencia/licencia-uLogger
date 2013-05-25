@@ -29,9 +29,21 @@
         <?php if ($logged_in): ?>
           <button class="btn btn-link logout-button" id="logout"><i class="icon-user icon-white"></i> Logga ut</button>
         <?php else: ?>
-          <input class="span2" type="text" id="user" placeholder="Användarnamn">
-          <input class="span2" type="password" id="password" placeholder="Lösenord">
-          <button class="btn login-button" id="login">Logga in</button>
+          <div class="form-inline">
+            <input class="input-small" type="text" id="user" placeholder="Användare">
+            <input class="input-small" type="password" id="password" placeholder="Lösenord">            
+            <label class="checkbox">
+            <?php if (isset($_COOKIE['remember_me'])) {
+              $checked = 'checked="checked"';
+              }
+              else {
+                $checked =  '';
+              }
+            ?>          
+            <input type="checkbox" value="remember-me" id="remember_me" <?php echo $checked; ?>> Kom ihåg mig
+            </label>
+            <button class="btn login-button btn-success btn-small" id="login">Logga in</button>
+          </div>
         <?php endif; ?>
         </div>
       </div>

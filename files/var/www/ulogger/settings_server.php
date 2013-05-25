@@ -43,6 +43,8 @@ function setIP($dhcp, $ip_address = '', $ip_gateway = '', $ip_netmask = '') {
     }
   }
   file_put_contents("/home/ulogger/interfaces.d", $config);
+  file_put_contents("/etc/resolv.conf", "nameserver $ip_gateway\nnameserver 8.8.8.8\nnameserver 8.8.4.4\n");
+  
   return true;
 }
 

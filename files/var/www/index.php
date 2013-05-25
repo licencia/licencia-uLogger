@@ -11,6 +11,7 @@
     <div class="container">
     <?php include("ulogger/templates/messages.tpl.php"); ?>        
     <!-- START CONTENT --> 
+    
       <?php if ($logged_in): ?>
       <div class="hero-unit logged-in">
         <h1>Licencia uLogger</h1>

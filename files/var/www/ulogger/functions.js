@@ -26,7 +26,7 @@ function handleLogin(){
     dataType: 'json',
     data: {
       action: this.id,
-      //remember_me: $('#remember_me').prop('checked'),
+      remember_me: $('#remember_me').prop('checked'),
       user: $('#user').val(),
       password: $('#password').val()
     },

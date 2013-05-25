@@ -25,6 +25,7 @@ define('UPGRADE_FILE_MASK', '/var/www/FILES/uploads/*.tar.gz');
 define('UPLOAD_DIR', '/var/www/FILES/uploads');
 define('UPGRADE_VERSION_ID', 'ulogger-update-');
 define('EXT_IP_SERVER', 'http://checkip.dyndns.org');
+define('REMEMBER_ME_COOKIE', 2592000); // 30 dagar
 
 // Siplogg
 define('APACHE_DIR', '/var/www');
@@ -70,6 +71,13 @@ function valid_user($username, $password) {
 /***************************************************
  * Logg in check
  **************************************************/
+
+if (!$logged_in) {
+  if (isset($_COOKIE['remember_me']) && validate_password('admin', $_COOKIE['remember_me'])) {            
+    $_SESSION['logged_in'] = 'yes';
+    $logged_in = true;
+  } 
+}
  
 function current_page() {
   $parts = Explode('/', $_SERVER["PHP_SELF"]);
@@ -86,15 +94,19 @@ if (!$logged_in && !allowed_page()) {
   header('Location:/login.php');
   exit();
 }
+
+/* Goto last page after login (not ok when *_server.php was the last page.
 elseif ($logged_in && isset($_SESSION['last_page'])) {
   $last_page = $_SESSION['last_page'];
   unset($_SESSION['last_page']);
   header("Location:$last_page");
 }
+
 elseif ($logged_in && (current_page() == 'login.php')) {
   header("Location: http://{$_SERVER['SERVER_NAME']}/");
   exit();
 }
+*/
 
 /***************************************************
  * uLogger (common functions)

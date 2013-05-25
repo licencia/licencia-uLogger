@@ -12,6 +12,11 @@
 .vnc1-image { max-width: 250px; }
 .logged-in  { background-color: #C9DCF3; }
 
+/* menu.tpl.php */
+.navbar label.checkbox { color: #FFFFFF; }
+.navbar #password , .navbar #user { height: 15px; }
+.navbar .form-inline { margin-top: 2px; }
+
 /* settings.php */
 #show-ip-btn { padding-top: 0;}
 #extip { padding-top: 0; }
