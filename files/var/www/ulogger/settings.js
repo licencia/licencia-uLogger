@@ -44,7 +44,6 @@ function handleButtonClicks(){
   $.ajax({
     url:"ulogger/settings_server.php",
     type: 'POST',
-    cache: false,
     dataType: 'json',
     data: {
       action: this.id,
@@ -57,7 +56,7 @@ function handleButtonClicks(){
     beforeSend: function(){$("#" + id).button('loading');},
   })
   .done(function(result){
-
+    
     //Install upgrade
     if (result.action=="extract") {
       if (!result.errorMsg) {

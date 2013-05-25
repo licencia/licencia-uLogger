@@ -52,12 +52,13 @@
               <input type="text" id="ip_gateway" value="<?php echo getVar('ulogger_ip_gateway', ""); ?>">
             </div>  
           </div>
-          <button id="changeip" class="btn">Ändra IP-adress</button>          
+          <button id="changeip" class="btn">Ändra IP-adress</button>     
         </fieldset>        
 
         <fieldset class="top-buffer">
           <legend>HTTP-portar</legend>
-          <p>Ange vilka portar som webbservern svarar på. Om du vill nå uLogger externt måste port <span class="text-success">80</span> eller <span class="text-success"><?php echo getVar('ulogger_http_port', ""); ?></span> vara styrd till <span class="text-success"><?php echo Rbpi::ip(); ?></span> i kundens brandvägg.</p>
+          <p>Ange vilka portar som webbservern svarar på. Om du vill nå uLogger externt måste port 
+          <span class="text-success">80</span> eller <span class="text-success"><?php echo getVar('ulogger_http_port', ""); ?></span> vara styrd till <span class="text-success"><?php echo Rbpi::ip(); ?></span> i kundens brandvägg.</p>
           <div class="form-inline control-group">
             <label>Webbserverport: </label> 80 + 
             <input type="text" id="http_port" class="input-small" size="5" value="<?php echo getVar('ulogger_http_port', ""); ?>">
@@ -67,9 +68,9 @@
       
         <fieldset class="top-buffer">
           <legend>TightVNC Server</legend>
-          <p>Fjärrstyr uLoggser från Windows genom att installera klienten 
-          <a href='http://www.uvnc.com'>UltraVNC Viewer</a> och anslut sedan mot adressen 
-          <?php echo sprintf('<a href="http://%1$s:%2$s">%1$s:%2$s</a> (lösenord: %3$s)', Rbpi::extIp(), VNC_PORT, VNC_PASS); ?>.
+          <p>Fjärrstyr uLogger från Windows genom att installera klienten 
+          <a href='http://www.uvnc.com'>UltraVNC Viewer</a> och anslut sedan mot           
+          <span class="text-success">http://extern-ip:<?php echo VNC_PORT; ?></span> (lösenord: <?php echo VNC_PASS; ?>)
           </p>
           <p>Om du vill nå VPN-servern externt måste port <span class="text-success"><?php echo VNC_PORT; ?></span> vara styrd till <span class="text-success"><?php echo Rbpi::ip(); ?></span> i kundens brandvägg.</p>
         </fieldset>   

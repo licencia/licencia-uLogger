@@ -4,7 +4,7 @@ namespace raspcontrol;
 
 class Rbpi {
 
-  const EXT_IP_SERVER = 'http://checkip.dyndns.org';
+  //const EXT_IP_SERVER = 'http://checkip.dyndns.org';
 
   public static function distribution() {
     $distroTypeRaw = exec("cat /etc/*-release | grep PRETTY_NAME=", $out);
@@ -42,7 +42,7 @@ class Rbpi {
     return shell_exec("/sbin/route -n | grep '^0.0.0.0' | awk '{print $2}'");;
   }
 
-  public static function extIp() {
+  /*public static function extIp() {
     if ($extip = @file_get_contents(Rbpi::EXT_IP_SERVER)) {
       $extip = strip_tags($extip);
       return trim(substr($extip, strpos($extip, ':')+1));
@@ -50,7 +50,7 @@ class Rbpi {
     else {
       return FALSE;
     }
-  }
+  }*/
 
   public static function ifconfig() {
     return shell_exec('/sbin/ifconfig');

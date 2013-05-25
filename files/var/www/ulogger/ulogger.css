@@ -13,6 +13,7 @@
 
 /* settings.php */
 #show-ip-btn { padding-top: 0;}
+#extip { padding-top: 0; }
 
 /* hardware.php */
 .hardware [class^="icon-"], .hardware [class*=" icon-"] { vertical-align: baseline; }

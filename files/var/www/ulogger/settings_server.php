@@ -66,7 +66,6 @@ if (isset($_GET['action']) && !empty($_GET['action'])) {
   switch($data['action']) {
     case 'upload' :
       $filename = $_GET['filename'];
-      //if ($version_string = getUpgradeFile()) {
       if ($version_string = validateUpgradeFile($filename)) {
         $data['action'] = $version_string;
         setVar('ulogger_upgrade_filename', $filename);
@@ -85,11 +84,9 @@ if (isset($_POST['action']) && !empty($_POST['action'])) {
   $data['action'] = $_POST['action'];
   switch($data['action']) {
 
-    /*case 'checkfile' :
-      $filename = $_POST['filename'];
-      $data['action'] = shell_exec("tar --test-label -f /var/www/uploads/$filename 2>&1");
-      //tar --test-label -f /var/www/uploads/ulogger.1.x-dev.tar.gz
-    break;*/
+    case 'extip' :
+      $data['statusMsg'] = extIp();
+    break;
 
     case 'extract' :
       $result = phpShellExec('extract_tar ' . UPLOAD_DIR . '/' . getVar('ulogger_upgrade_filename', ''));

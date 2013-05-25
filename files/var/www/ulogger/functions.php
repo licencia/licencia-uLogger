@@ -20,6 +20,7 @@ define('VNC_PASS', 'ulogger');
 define('UPGRADE_FILE_MASK', '/var/www/FILES/uploads/*.tar.gz');
 define('UPLOAD_DIR', '/var/www/FILES/uploads');
 define('UPGRADE_VERSION_ID', 'ulogger-update-');
+define('EXT_IP_SERVER', 'http://checkip.dyndns.org');
 
 // Siplogg
 define('APACHE_DIR', '/var/www');
@@ -140,6 +141,16 @@ function getFileList($dir) {
   return $files;
 }
 
+function extIp() {
+  if ($extip = @file_get_contents(EXT_IP_SERVER)) {
+    $extip = strip_tags($extip);
+    return trim(substr($extip, strpos($extip, ':')+1));
+  }
+  else {
+    return FALSE;
+  }
+}
+  
 /***************************************************
  * Session messages (based on Drupal messages)
  **************************************************/

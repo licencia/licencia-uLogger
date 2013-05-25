@@ -99,7 +99,7 @@ function shell_to_html_table_result($shellExecOutput) {
           <div class="infos">
             <button id="show-ip-btn" class="btn btn-link pull-right">Visa/dölj IP-information</button> 
             <p>IP: <span class="text-success"><?php echo Rbpi::ip(); ?></span> &middot; Subnet: <span class="text-success"><?php echo Rbpi::subnet(); ?></span> &middot; Gateway: <span class="text-success"><?php echo Rbpi::gateway(); ?></span></p>
-            <p>External IP: <span class="text-success"><?php echo Rbpi::extIp(); ?></span></p>            
+            <p id="extip-holder">External IP: <button id="extip" class="btn btn-link">Försök detektera extern IP ...</button></p>            
             <p>Received: <strong><?php echo $net_eth['down']; ?>Mb</strong> &middot; Sent: <strong><?php echo $net_eth['up']; ?>Mb</strong> &middot; Total: <?php echo $net_eth['total']; ?>Mb</p>
             <p>Connections: <?php echo $net_connections['connections']; ?></p>
             <div id='show-ip' class="hidden top-buffer well alert-success pre"><h5>ifconfig</h5><?php echo Rbpi::ifconfig(); ?><h5>routes</h5><?php echo Rbpi::route(); ?></div>
