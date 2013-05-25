@@ -12,9 +12,12 @@
     <?php include("ulogger/templates/messages.tpl.php"); ?>        
     <!-- START CONTENT --> 
       <div class="hero-unit">
-        <h1>Licencia uLo<span>gg</span>er</h1>
+        <h1>Licencia uLogger</h1>
         <p>Med hjälp av Licencia uLogger kan du enkelt sätta upp en loggserver hos en kund där du behöver övervaka SIP-trafiken. Licencia uLogger körs på Raspberry PI vilket är en liten enkortsdator som kan utföra det mesta en PC kan.</p>
+        <?php if ($logged_in): ?>
         <p><a href="/siplogg.php" class="btn btn-primary btn-large">Ta mig dit nu &raquo;</a></p>
+        <?php endif; ?>
+        
       </div>
 
       <div class="row">
@@ -37,7 +40,9 @@
           <p class="lead">Logga IP-trafik direkt till ett SD-kort i uLogger och kontrollera allt över nätet, direkt från din telefon eller en PC.</p>
           <p>uLogger dumpar trafiken med TCP-dump och stöder filter så väl som uppdelning i mindre filer och ringbuffert för hantering av längre loggar. </p>
           <p>Kvarstående diskkapacitet och tid för loggen visas i relatid.</p>
+          <?php if ($logged_in): ?>
           <p><a class="btn btn-success" href="siplogg.php">Börja logga &raquo;</a></p>
+          <?php endif; ?>
         </div>
 
         <div class="span5">
@@ -48,7 +53,9 @@
             </a>
           </div>
           <p class="top-buffer">uLogger kan fjärrstyras med en VNC klient och har som standard programmet TightVNC Server installerat. Med klienten Ultra VNC Viewer kommer du åt servern via ett grafiskt gränssnitt. </p>
+          <?php if ($logged_in): ?>  
           <p><a class="btn btn-success" href="settings.php">Till inställningar &raquo;</a></p>
+          <?php endif; ?>
        </div>
        
        <!-- Hidden images -->

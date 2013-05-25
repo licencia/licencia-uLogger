@@ -12,7 +12,7 @@ if (isset($_POST['action']) && ($_POST['action']=='logout')) {
 elseif (valid_user($_POST['user'], $_POST['password']) == 'as') {
   //($_POST['remember_me'] == 'true/false')
   $data['action'] = 'login';
-  $_SESSION['logged_in'] = 'yes';
+  $_SESSION['logged_in'] = 'yes';  
 }
 // Visa att användarnamnet saknas
 /*elseif (getVar($_POST['user'] . '_hash', '') == '') {

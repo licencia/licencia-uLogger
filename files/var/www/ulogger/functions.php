@@ -2,6 +2,10 @@
 
 require_once "/home/ulogger/database.php";
 
+ /***************************************************
+ * Session
+ **************************************************/
+ 
 session_start();
 
  /***************************************************
@@ -60,7 +64,7 @@ function valid_user($username, $password) {
 /***************************************************
  * Logg in check
  **************************************************/
-
+ 
 function current_page() {
   $parts = Explode('/', $_SERVER["PHP_SELF"]);
   return $parts[count($parts) - 1];
@@ -73,7 +77,7 @@ function allowed_page() {
 
 if (!$logged_in && !allowed_page()) {
   $_SESSION['last_page'] = current_page();
-  header('Location:login.php');
+  header('Location:/login.php');
   exit();
 }
 elseif ($logged_in && isset($_SESSION['last_page'])) {
