@@ -148,6 +148,6 @@ function handleButtonClicks(){
   })
   .complete(function(){$("#" + id).button('reset');})
   .fail(function(xhr, ajaxOptions, thrownError){
-    showMessage("AJAX-fel: " + xhr.status + " (" + thrownError + ").", "error");
+    //showMessage("AJAX-fel: " + xhr.status + " (" + thrownError + ").", "error");
   });
 };

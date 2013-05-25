@@ -34,7 +34,7 @@ function handleButtonClicks(){
   })
   .done(function(result){location.reload();})
   .fail(function(xhr, ajaxOptions, thrownError){
-    showMessage("AJAX-fel: " + xhr.status + " (" + thrownError + ").", "error");
+    //showMessage("AJAX-fel: " + xhr.status + " (" + thrownError + ").", "error");
   });
 };
 
@@ -52,7 +52,7 @@ function updateStatus(){
     }
   })
   .fail(function(xhr, ajaxOptions, thrownError){
-    showMessage("AJAX-fel: " + xhr.status + " (" + thrownError + ").", "error");
+    //showMessage("AJAX-fel: " + xhr.status + " (" + thrownError + ").", "error");
     setTimeout(updateStatus, 5000);
   });
 

@@ -39,7 +39,7 @@ function handleLogin(){
       }
   })
   .fail(function(xhr, ajaxOptions, thrownError){
-    showMessage("AJAX-fel: " + xhr.status + " (" + thrownError + ").", "error");
+    //showMessage("AJAX-fel: " + xhr.status + " (" + thrownError + ").", "error");
   });
 };
 
