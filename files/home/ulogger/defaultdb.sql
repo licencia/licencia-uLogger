@@ -42,7 +42,7 @@ INSERT INTO `data` (`name`, `value`) VALUES
 ('ulogger_admin_user', 'admin'),
 ('ulogger_version', '1.0-beta2'),
 ('ulogger_http_port', '8080'),
-('ulogger_ip_dhcp', 'true'),
+('ulogger_ip_dhcp', 'false'),
 ('ulogger_ip_address', '192.168.1.1'),
 ('ulogger_ip_gateway', '192.168.1.254'),
 ('ulogger_ip_netmask', '255.255.255.0'),

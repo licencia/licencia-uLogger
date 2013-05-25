@@ -92,7 +92,7 @@ function handleButtonClicks(){
         showMessage(result.statusMsg, 'success');
         // Starta om eth0.
         $.ajax({
-          url:"/settings_server.php",
+          url:"ulogger/settings_server.php",
           type: 'POST',
           data: {action: 'restart_eth0'}
         });
