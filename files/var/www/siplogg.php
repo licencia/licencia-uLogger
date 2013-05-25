@@ -48,10 +48,11 @@ function printFileTable() {
       
       <div class="span9">
         <?php include("ulogger/templates/messages.tpl.php"); ?>  
+      
         <h1 class="page-title">SIP-logg</h1>
         <div class="well well-small alert-info hidden" id="time-status">
-          <div><strong>Tid:</strong> <span id="log-time">00:00:00</span></div>
-          <div><strong>Fil:</strong> <span id="current-file">-</span></div>
+          <div><strong>Tid:</strong> <span id="log-duration">0 min 1 sek</span></div>
+          <div><strong>Fil:</strong> <span id="current-file"></span></div>
         </div>   
         
         <div id="disk-status">
@@ -103,7 +104,9 @@ function printFileTable() {
     </div>
   </div>
   <?php include("ulogger/templates/footer.tpl.php"); ?>
-  <?php include("ulogger/templates/scrips.tpl.php"); ?>
+  <?php include("ulogger/templates/scrips.tpl.php"); ?>  
+  <script src="bootstrap/stopwatch/jquery.stopwatch.js"></script>
+  <script src="bootstrap/stopwatch/jintervals.js"></script>  
   <script src="ulogger/siplogg.js"></script>
 </body>
 </html>

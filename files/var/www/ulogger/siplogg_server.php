@@ -31,7 +31,7 @@ function tcpdumpStart($max_file_size = 0, $ring_buffer_size = 0, $filter = "") {
 
     // Save filename and time to database
     setVar('siplogg_filename', $filename);
-    setVar('siplogg_start_time', time());
+    setVar('siplogg_start_time', time());    
     setVar('siplogg_filesize', $max_file_size);
     setVar('siplogg_ring_buffer', $ring_buffer_size);
     setVar('siplogg_filter', $filter);
@@ -52,7 +52,7 @@ function deleteAllFiles() {
   }
 }
 
-$data = array('action' => 'none'/*, 'statusMsg' => '', 'errorMsg' => ''*/);
+$data = array('action' => 'none');
 
 if (isset($_POST['action']) && !empty($_POST['action'])) {
   $data['action'] = $_POST['action'];
@@ -74,23 +74,34 @@ if (isset($_POST['action']) && !empty($_POST['action'])) {
       }
       break;
     case 'start' :
-      $data['running'] = TRUE;
-      tcpdumpStart($_POST['max_file_size'], $_POST['ring_buffer_size'], $_POST['filter']);
-      $data['filename'] = getVar('siplogg_filename', '');
-      $data['start_time'] = getVar('siplogg_start_time', 0);
+      if (tcpdumpIsRunning()) {
+        set_message("En logg är redan startad.", 'warning');
+      }
+      else {    
+        $data['running'] = TRUE;
+        tcpdumpStart($_POST['max_file_size'], $_POST['ring_buffer_size'], $_POST['filter']);
+        $data['filename'] = getVar('siplogg_filename', '');
+        $data['start_time'] = getVar('siplogg_start_time', 0);
+      }
       break;
     case 'stop' :
       phpShellExec('kill_tcpdump');
       break;
     case 'getstatus' :
-      //$size = getSize();
-      $data['ts'] = $hdd[0]['total']; //$size['ts'];
-      $data['fs'] = $hdd[0]['used']; //$size['fs'];
-      $data['tp'] = $hdd[0]['percentage'] . '%'; //$size['tp'] . '%';
+      $data['ts'] = $hdd[0]['total']; 
+      $data['fs'] = $hdd[0]['used'];
+      $data['tp'] = $hdd[0]['percentage'] . '%';
       $data['running'] = tcpdumpIsRunning();
       $data['filename'] = getVar('siplogg_filename', '');
-      $data['start_time'] = getVar('siplogg_start_time', 0);
+      $data['log_duration'] = time() - getVar('siplogg_start_time', 0);
+      
       break;
+    case 'updatestatus' :
+      $data['ts'] = $hdd[0]['total']; 
+      $data['fs'] = $hdd[0]['used'];
+      $data['tp'] = $hdd[0]['percentage'] . '%';
+      $data['running'] = tcpdumpIsRunning();
+      break;      
   }
 }
 

@@ -19,7 +19,7 @@
 
 /* settings.php */
 #show-ip-btn { padding-top: 0;}
-#extip { padding-top: 0; }
+#extip { padding: 0; }
 
 /* hardware.php */
 .hardware [class^="icon-"], .hardware [class*=" icon-"] { vertical-align: baseline; }
@@ -29,9 +29,12 @@
 .infos div .popover-content { margin-bottom: 0px; }
 .popover-content table { margin-bottom: 0px; }
 
-
-
-
+/* Footer och förstasida för mobiler */
+@media (max-width: 767px) {
+  .hero-unit h1 { font-size: 30px; }
+  .hero-unit { padding: 10px; }
+  #footer { margin-left: -20px; margin-right: -20px; }
+}
 
 /* Logga in
 -------------------------------------------------- */

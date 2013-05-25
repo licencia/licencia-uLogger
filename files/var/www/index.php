@@ -11,7 +11,7 @@
     <div class="container">
     <?php include("ulogger/templates/messages.tpl.php"); ?>        
     <!-- START CONTENT --> 
-    
+
       <?php if ($logged_in): ?>
       <div class="hero-unit logged-in">
         <h1>Licencia uLogger</h1>
@@ -27,7 +27,7 @@
 
       <div class="row">
             
-        <div class="span2">
+        <div class="span2 hidden-phone">
           <div>
             <a class="thumbnail top-buffer" href="#lightbox1" data-toggle="lightbox">
               <img alt="Click to view the lightbox" src="img/ulogger-01-small.png">
@@ -52,7 +52,7 @@
 
         <div class="span5">
           <h2>Fjärrstyr med VNC</h2>
-          <div>
+          <div class="hidden-phone">
             <a class="thumbnail vnc1-image" href="#lightbox3" data-toggle="lightbox">
               <img alt="Click to view the lightbox" src="img/vnc-01-small.png">
             </a>
