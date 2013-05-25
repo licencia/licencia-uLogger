@@ -7,6 +7,12 @@ $(document).ready(function(){
 
   //Hantera knapptryckningar
   $(".login-button, .logout-button").click(handleLogin);
+  
+  $(document).keypress(function(e) {
+    if(e.which == 13) {
+        handleLogin();
+    }
+  });
 
   // Initiera/visa bootstrap tooltip för länkar.
   $("a").tooltip();

@@ -32,6 +32,14 @@ $(document).ready(function(){
       return $("#popover-cpu-body").html();
     }
   });
+  
+  function getDate(offset){
+    var now = new Date();
+    var hour = 60*60*1000;
+    var min = 60*1000;
+    return new Date(now.getTime() + (now.getTimezoneOffset() * min) + (offset * hour));
+  }
+  $("#client-date").html(getDate(2));
 
 });
 
