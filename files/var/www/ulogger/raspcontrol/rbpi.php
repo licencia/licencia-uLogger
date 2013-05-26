@@ -63,6 +63,14 @@ class Rbpi {
   public static function printdns() {
     return trim(shell_exec('/bin/cat /etc/resolv.conf'));
   }  
+  
+  public static function printif() {
+    return trim(shell_exec('/bin/cat /etc/network/interfaces'));
+  } 
+
+  public static function printifd() {
+    return trim(shell_exec('/bin/cat /home/ulogger/interfaces.d'));
+  }  
 
 }
 

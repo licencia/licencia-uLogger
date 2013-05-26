@@ -65,6 +65,10 @@
               <label class="input-small">Gateway: </label>
               <input type="text" id="ip_gateway" value="<?php echo getVar('ulogger_ip_gateway', ""); ?>">
             </div>  
+            <div class="form-inline control-group">
+              <label class="input-small">DNS: </label>
+              <input type="text" id="ip_dns" value="<?php echo getVar('ulogger_ip_dns', ""); ?>">
+            </div>  
           </div>
           <button id="changeip" class="btn">Ändra IP-adress</button>     
         </fieldset>        

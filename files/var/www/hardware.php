@@ -103,7 +103,13 @@ function shell_to_html_table_result($shellExecOutput) {
             <p id="extip-holder">External IP: <button id="extip" class="btn btn-link">Försök detektera extern IP ...</button></p>            
             <p>Received: <strong><?php echo $net_eth['down']; ?>Mb</strong> &middot; Sent: <strong><?php echo $net_eth['up']; ?>Mb</strong> &middot; Total: <?php echo $net_eth['total']; ?>Mb</p>
             <p>Connections: <?php echo $net_connections['connections']; ?></p>
-            <div id='show-ip' class="hidden well alert-success pre"><h4>ifconfig</h4><?php echo Rbpi::ifconfig(); ?><h4>routes</h4><?php echo Rbpi::route(); ?><h4>dns</h4><?php echo Rbpi::printdns(); ?>              </div>
+            <div id='show-ip' class="hidden well alert-success">
+              <h4>ifconfig</h4><div class="pre"><?php echo Rbpi::ifconfig(); ?></div>
+              <h4>routes</h4><div class="pre"><?php echo Rbpi::route(); ?></div>
+              <h4>dns</h4><div class="pre"><?php echo Rbpi::printdns(); ?></div>            
+              <h4>interfaces</h4><div class="pre"><?php echo Rbpi::printif(); ?></div>
+              <h4>interfaces.d</h4><div class="pre"><?php echo Rbpi::printifd(); ?></div>
+            </div>
           </div>
         </fieldset>             
        

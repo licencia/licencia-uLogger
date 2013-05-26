@@ -64,7 +64,8 @@ function handleButtonClicks(){
       password: $('#password').val(),
       ip_address: $('#ip_address').val(),
       ip_gateway: $('#ip_gateway').val(),
-      ip_netmask: $('#ip_netmask').val()
+      ip_netmask: $('#ip_netmask').val(),
+      ip_dns: $('#ip_dns').val()
     },
     beforeSend: function(){$("#" + id).button('loading');},
   })

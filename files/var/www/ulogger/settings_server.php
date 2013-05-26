@@ -27,23 +27,31 @@ function setIP($dhcp, $ip_address = '', $ip_gateway = '', $ip_netmask = '') {
     $ip_address = $_POST['ip_address'];
     $ip_gateway = $_POST['ip_gateway'];
     $ip_netmask = $_POST['ip_netmask'];
+    $ip_dns = $_POST['ip_dns'];
     if (!filter_var($ip_address, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) { $error .= "IP-adress "; }
     if (!filter_var($ip_gateway, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) { $error .= "gateway "; }
-    if (!filter_var($ip_netmask, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) { $error .= "nätmask "; }
+    if (!filter_var($ip_netmask, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) { $error .= "nätmask "; }    
+    if ($ip_dns == "") {
+      $ip_dns = $ip_gateway;
+    } 
+    else {
+      if (!filter_var($ip_dns, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) { $error .= "dns "; }
+    }
     // Set static IP
     if (empty($error)) {
       setVar('ulogger_ip_dhcp', 'false');
       setVar('ulogger_ip_address', $ip_address);
       setVar('ulogger_ip_gateway', $ip_gateway);
       setVar('ulogger_ip_netmask', $ip_netmask);
-      $config = "iface eth0 inet static\naddress $ip_address\ngateway $ip_gateway\nnetmask $ip_netmask\n";
+      setVar('ulogger_ip_dns', $ip_dns);
+      $config = "iface eth0 inet static\naddress $ip_address\ngateway $ip_gateway\nnetmask $ip_netmask\ndns-nameservers $ip_gateway 8.8.8.8 8.8.4.4\n";
     }
     else {
       throw new Exception("Felaktig: " . $error);
     }
-  }
+  }  
   file_put_contents("/home/ulogger/interfaces.d", $config);
-  file_put_contents("/etc/resolv.conf", "nameserver $ip_gateway\nnameserver 8.8.8.8\nnameserver 8.8.4.4\n");
+  #file_put_contents("/etc/resolv.conf", "nameserver $ip_gateway\nnameserver 8.8.8.8\nnameserver 8.8.4.4\n");
   
   return true;
 }
