@@ -19,7 +19,7 @@ $logged_in = isset($_SESSION['logged_in']) && ($_SESSION['logged_in'] == 'yes');
 // uLogger
 define('UNKNOWN', 'Unknown');
 define('ULOGGER_VERSION_STRING', 'Licencia uLogger version %s, &copy; 2013.');
-define('VNC_PORT', '5091');
+define('VNC_PORT', '5901');
 define('VNC_PASS', 'ulogger');
 define('UPGRADE_FILE_MASK', '/var/www/FILES/uploads/*.tar.gz');
 define('UPLOAD_DIR', '/var/www/FILES/uploads');
