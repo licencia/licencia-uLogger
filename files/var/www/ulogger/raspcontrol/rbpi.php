@@ -53,12 +53,16 @@ class Rbpi {
   }*/
 
   public static function ifconfig() {
-    return shell_exec('/sbin/ifconfig');
+    return trim(shell_exec('/sbin/ifconfig'));
   }
 
   public static function route() {
-    return shell_exec('/sbin/route -n');
+    return trim(shell_exec('/sbin/route -n'));
   }
+  
+  public static function printdns() {
+    return trim(shell_exec('/bin/cat /etc/resolv.conf'));
+  }  
 
 }
 
