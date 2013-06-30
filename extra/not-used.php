@@ -1,5 +1,12 @@
 <?php
 
+//Timer
+$start = time();
+// Do stuff
+$stop = time();
+$diff = $stop - $start;
+set_message($diff, 'success');
+
 
 if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 20)) {
   session_unset();     // unset $_SESSION variable for the run-time 
