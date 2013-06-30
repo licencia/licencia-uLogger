@@ -67,6 +67,7 @@ function printFileTable() {
             <option value="0">Obegränsad</option>
             <option value="1">1 Mbyte</option>
             <option value="10">10 Mbyte</option>
+            <option value="25">25 Mbyte</option>
             <option value="100">100 Mbyte</option>
           </select>
           </label>                       
